@@ -22015,10 +22015,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "c:\\users\\dtrest\\documents\\visual studio 2017\\Projects\\piggy-bank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
+      "projectUniqueName": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
       "projectName": "piggy-bank-uwp",
-      "projectPath": "c:\\users\\dtrest\\documents\\visual studio 2017\\Projects\\piggy-bank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
-      "outputPath": "c:\\users\\dtrest\\documents\\visual studio 2017\\Projects\\piggy-bank\\piggy-bank-uwp\\obj\\",
+      "projectPath": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
+      "outputPath": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "uap10.0.10586"
@@ -22032,11 +22032,18 @@
     "dependencies": {
       "Microsoft.NETCore.UniversalWindowsPlatform": {
         "target": "Package",
-        "version": "[5.2.3, )"
+        "version": "5.2.3"
       }
     },
     "frameworks": {
-      "uap10.0.10586": {}
+      "uap10.0.10586": {
+        "dependencies": {
+          "Microsoft.NETCore.UniversalWindowsPlatform": {
+            "target": "Package",
+            "version": "5.2.3"
+          }
+        }
+      }
     },
     "runtimes": {
       "win10-arm": {

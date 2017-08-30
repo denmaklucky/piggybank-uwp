@@ -1,0 +1,2 @@
+MainPackage=C:\Users\dTrest\Documents\Visual Studio 2017\Projects\piggy-bank\piggybank\piggy-bank-uwp\bin\x64\Release\piggy-bank-uwp_1.0.0.0_x64.appx
+SymbolPackage=C:\Users\dTrest\Documents\Visual Studio 2017\Projects\piggy-bank\piggybank\piggy-bank-uwp\AppPackages\piggy-bank-uwp_1.0.0.0_Test\piggy-bank-uwp_1.0.0.0_x64.appxsym
