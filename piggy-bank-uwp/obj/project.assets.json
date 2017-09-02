@@ -22015,10 +22015,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
+      "projectUniqueName": "C:\\disk_z\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
       "projectName": "piggy-bank-uwp",
-      "projectPath": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
-      "outputPath": "C:\\Users\\dTrest\\Documents\\Visual Studio 2017\\Projects\\piggy-bank\\piggybank\\piggy-bank-uwp\\obj\\",
+      "projectPath": "C:\\disk_z\\piggybank\\piggy-bank-uwp\\piggy-bank-uwp.csproj",
+      "outputPath": "C:\\disk_z\\piggybank\\piggy-bank-uwp\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "uap10.0.10586"
