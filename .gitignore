@@ -2,3 +2,5 @@ Debug
 Release
 AppPackages
 *.suo
+.vs/
+obj
