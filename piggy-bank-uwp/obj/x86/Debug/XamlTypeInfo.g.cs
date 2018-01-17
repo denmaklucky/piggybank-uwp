@@ -132,15 +132,27 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
-            _typeNameTable[0] = "piggy_bank_uwp.MainPage";
+            _typeNameTable = new string[9];
+            _typeNameTable[0] = "piggy_bank_uwp.View.Costs.CostPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "piggy_bank_uwp.View.Costs.EditCostPage";
+            _typeNameTable[4] = "piggy_bank_uwp.View.DiagramPage";
+            _typeNameTable[5] = "piggy_bank_uwp.View.DonatePage";
+            _typeNameTable[6] = "piggy_bank_uwp.View.EditBalancePage";
+            _typeNameTable[7] = "piggy_bank_uwp.View.MainPage";
+            _typeNameTable[8] = "piggy_bank_uwp.View.SettingPage";
 
-            _typeTable = new global::System.Type[3];
-            _typeTable[0] = typeof(global::piggy_bank_uwp.MainPage);
+            _typeTable = new global::System.Type[9];
+            _typeTable[0] = typeof(global::piggy_bank_uwp.View.Costs.CostPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::piggy_bank_uwp.View.Costs.EditCostPage);
+            _typeTable[4] = typeof(global::piggy_bank_uwp.View.DiagramPage);
+            _typeTable[5] = typeof(global::piggy_bank_uwp.View.DonatePage);
+            _typeTable[6] = typeof(global::piggy_bank_uwp.View.EditBalancePage);
+            _typeTable[7] = typeof(global::piggy_bank_uwp.View.MainPage);
+            _typeTable[8] = typeof(global::piggy_bank_uwp.View.SettingPage);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -175,7 +187,13 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_MainPage() { return new global::piggy_bank_uwp.MainPage(); }
+        private object Activate_0_CostPage() { return new global::piggy_bank_uwp.View.Costs.CostPage(); }
+        private object Activate_3_EditCostPage() { return new global::piggy_bank_uwp.View.Costs.EditCostPage(); }
+        private object Activate_4_DiagramPage() { return new global::piggy_bank_uwp.View.DiagramPage(); }
+        private object Activate_5_DonatePage() { return new global::piggy_bank_uwp.View.DonatePage(); }
+        private object Activate_6_EditBalancePage() { return new global::piggy_bank_uwp.View.EditBalancePage(); }
+        private object Activate_7_MainPage() { return new global::piggy_bank_uwp.View.MainPage(); }
+        private object Activate_8_SettingPage() { return new global::piggy_bank_uwp.View.SettingPage(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -187,9 +205,9 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  piggy_bank_uwp.MainPage
+            case 0:   //  piggy_bank_uwp.View.Costs.CostPage
                 userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_MainPage;
+                userType.Activator = Activate_0_CostPage;
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -200,6 +218,48 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
 
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 3:   //  piggy_bank_uwp.View.Costs.EditCostPage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_3_EditCostPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  piggy_bank_uwp.View.DiagramPage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_4_DiagramPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 5:   //  piggy_bank_uwp.View.DonatePage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_5_DonatePage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 6:   //  piggy_bank_uwp.View.EditBalancePage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_6_EditBalancePage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 7:   //  piggy_bank_uwp.View.MainPage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_7_MainPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 8:   //  piggy_bank_uwp.View.SettingPage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_8_SettingPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
                 break;
             }
             return xamlType;
