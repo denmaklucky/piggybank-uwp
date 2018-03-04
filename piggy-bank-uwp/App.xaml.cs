@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,7 +33,6 @@ namespace piggy_bank_uwp
 		{
 			this.InitializeComponent();
 			this.Suspending += OnSuspending;
-
 		}
 
 		/// <summary>
@@ -43,7 +43,6 @@ namespace piggy_bank_uwp
 		protected override void OnLaunched(LaunchActivatedEventArgs e)
 		{
 			Frame rootFrame = Window.Current.Content as Frame;
-
 
 			// Do not repeat app initialization when the Window already has content,
 			// just ensure that the window is active
@@ -76,8 +75,8 @@ namespace piggy_bank_uwp
 				Window.Current.Activate();
 			}
 
-			rootFrame.Navigated += RootFrameNavigated;
-			SystemNavigationManager.GetForCurrentView().BackRequested += AppBackRequested;
+			//Back button is visible always
+			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 		}
 
 		/// <summary>
@@ -102,31 +101,6 @@ namespace piggy_bank_uwp
 			var deferral = e.SuspendingOperation.GetDeferral();
 			//TODO: Save application state and stop any background activity
 			deferral.Complete();
-		}
-
-		private void AppBackRequested(object sender, BackRequestedEventArgs e)
-		{
-			Frame rootFrame = Window.Current.Content as Frame;
-
-			if (rootFrame.CanGoBack)
-			{
-				rootFrame.GoBack();
-				e.Handled = true;
-			}
-		}
-
-		private void RootFrameNavigated(object sender, NavigationEventArgs e)
-		{
-			Frame rootFrame = Window.Current.Content as Frame;
-
-			if (rootFrame.CanGoBack)
-			{
-				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-			}
-			else
-			{
-				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
-			}
 		}
 	}
 }

@@ -133,26 +133,26 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
         private void InitTypeTables()
         {
             _typeNameTable = new string[9];
-            _typeNameTable[0] = "piggy_bank_uwp.View.Costs.CostPage";
-            _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
-            _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
-            _typeNameTable[3] = "piggy_bank_uwp.View.Costs.EditCostPage";
-            _typeNameTable[4] = "piggy_bank_uwp.View.DiagramPage";
-            _typeNameTable[5] = "piggy_bank_uwp.View.DonatePage";
-            _typeNameTable[6] = "piggy_bank_uwp.View.EditBalancePage";
-            _typeNameTable[7] = "piggy_bank_uwp.View.MainPage";
-            _typeNameTable[8] = "piggy_bank_uwp.View.SettingPage";
+            _typeNameTable[0] = "piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView";
+            _typeNameTable[1] = "Windows.UI.Xaml.Controls.ContentControl";
+            _typeNameTable[2] = "piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState";
+            _typeNameTable[3] = "System.Enum";
+            _typeNameTable[4] = "System.ValueType";
+            _typeNameTable[5] = "Object";
+            _typeNameTable[6] = "piggy_bank_uwp.MainPage";
+            _typeNameTable[7] = "Windows.UI.Xaml.Controls.Page";
+            _typeNameTable[8] = "Windows.UI.Xaml.Controls.UserControl";
 
             _typeTable = new global::System.Type[9];
-            _typeTable[0] = typeof(global::piggy_bank_uwp.View.Costs.CostPage);
-            _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
-            _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
-            _typeTable[3] = typeof(global::piggy_bank_uwp.View.Costs.EditCostPage);
-            _typeTable[4] = typeof(global::piggy_bank_uwp.View.DiagramPage);
-            _typeTable[5] = typeof(global::piggy_bank_uwp.View.DonatePage);
-            _typeTable[6] = typeof(global::piggy_bank_uwp.View.EditBalancePage);
-            _typeTable[7] = typeof(global::piggy_bank_uwp.View.MainPage);
-            _typeTable[8] = typeof(global::piggy_bank_uwp.View.SettingPage);
+            _typeTable[0] = typeof(global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView);
+            _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.ContentControl);
+            _typeTable[2] = typeof(global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState);
+            _typeTable[3] = typeof(global::System.Enum);
+            _typeTable[4] = typeof(global::System.ValueType);
+            _typeTable[5] = typeof(global::System.Object);
+            _typeTable[6] = typeof(global::piggy_bank_uwp.MainPage);
+            _typeTable[7] = typeof(global::Windows.UI.Xaml.Controls.Page);
+            _typeTable[8] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -187,13 +187,8 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
             return -1;
         }
 
-        private object Activate_0_CostPage() { return new global::piggy_bank_uwp.View.Costs.CostPage(); }
-        private object Activate_3_EditCostPage() { return new global::piggy_bank_uwp.View.Costs.EditCostPage(); }
-        private object Activate_4_DiagramPage() { return new global::piggy_bank_uwp.View.DiagramPage(); }
-        private object Activate_5_DonatePage() { return new global::piggy_bank_uwp.View.DonatePage(); }
-        private object Activate_6_EditBalancePage() { return new global::piggy_bank_uwp.View.EditBalancePage(); }
-        private object Activate_7_MainPage() { return new global::piggy_bank_uwp.View.MainPage(); }
-        private object Activate_8_SettingPage() { return new global::piggy_bank_uwp.View.SettingPage(); }
+        private object Activate_0_MasterDetailView() { return new global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView(); }
+        private object Activate_6_MainPage() { return new global::piggy_bank_uwp.MainPage(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -205,18 +200,52 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
             switch (typeIndex)
             {
 
-            case 0:   //  piggy_bank_uwp.View.Costs.CostPage
-                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
-                userType.Activator = Activate_0_CostPage;
+            case 0:   //  piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.ContentControl"));
+                userType.Activator = Activate_0_MasterDetailView;
+                userType.AddMemberName("CurrentState");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
 
-            case 1:   //  Windows.UI.Xaml.Controls.Page
+            case 1:   //  Windows.UI.Xaml.Controls.ContentControl
                 xamlType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
-            case 2:   //  Windows.UI.Xaml.Controls.UserControl
+            case 2:   //  piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.Enum"));
+                userType.AddEnumValue("Narrow", global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState.Narrow);
+                userType.AddEnumValue("Wide", global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState.Wide);
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 3:   //  System.Enum
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("System.ValueType"));
+                xamlType = userType;
+                break;
+
+            case 4:   //  System.ValueType
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                xamlType = userType;
+                break;
+
+            case 5:   //  Object
+                xamlType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 6:   //  piggy_bank_uwp.MainPage
+                userType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType.Activator = Activate_6_MainPage;
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 7:   //  Windows.UI.Xaml.Controls.Page
+                xamlType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
+
+            case 8:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
 
@@ -266,11 +295,26 @@ namespace piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo
         }
 
 
+        private object get_0_MasterDetailView_CurrentState(object instance)
+        {
+            var that = (global::piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView)instance;
+            return that.CurrentState;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView.CurrentState":
+                userType = (global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlUserType)GetXamlTypeByName("piggy_bank_uwp.Controls.MasterDetailView.MasterDetailView");
+                xamlMember = new global::piggy_bank_uwp.piggy_bank_uwp_XamlTypeInfo.XamlMember(this, "CurrentState", "piggy_bank_uwp.Controls.MasterDetailView.MasterDetailState");
+                xamlMember.Getter = get_0_MasterDetailView_CurrentState;
+                xamlMember.SetIsReadOnly();
+                break;
+            }
             return xamlMember;
         }
     }

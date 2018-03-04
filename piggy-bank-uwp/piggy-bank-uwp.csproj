@@ -99,6 +99,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Constants.cs" />
+    <Compile Include="Controls\MasterDetailView\MasterDetailState.cs" />
+    <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
     <Compile Include="Convertes\CSVConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="View\Costs\CostPage.xaml.cs">
