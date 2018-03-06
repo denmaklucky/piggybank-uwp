@@ -4,95 +4,59 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:piggy_bank_uwp.Controls.MasterDetailView"
     mc:Ignorable="d"
     Loaded="PageLoaded">
 
-   
-    <RelativePanel x:Name="MainRelativePanel" SizeChanged="RelativePanelSizeChanged">
-        <VisualStateManager.VisualStateGroups>
+    <Page.Resources>
+        <Style TargetType="Controls:MasterDetailView">
+            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Controls:MasterDetailView">
+                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="AdaptiveStates">
+                                    <VisualState x:Name="WideState">
+                                        <VisualState.StateTriggers>
+                                            <AdaptiveTrigger MinWindowWidth="820"/>
+                                        </VisualState.StateTriggers>
+                                        <VisualState.Setters>
+                                            <Setter Target="MasterColumn.Width" Value="260*" />
+                                            <Setter Target="DetailColumn.Width" Value="540*" />
+                                            <Setter Target="MasterColumn.MinWidth" Value="72" />
+                                            <Setter Target="MasterColumn.MaxWidth" Value="540" />
+                                            <Setter Target="DetailPresenter.(Grid.Column)" Value="1"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    <VisualState x:Name="NarrowState">
+                                        <VisualState.StateTriggers>
+                                            <AdaptiveTrigger MinWindowWidth="0"/>
+                                        </VisualState.StateTriggers>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="MasterColumn"/>
+                                <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="MasterPresenter"
+                                          Content="{TemplateBinding Content}"
+                                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                                          ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+                                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                                          DataContext="{TemplateBinding DataContext}"
+                                          HorizontalContentAlignment="Stretch"
+                                          VerticalContentAlignment="Stretch"/>
 
-            <VisualStateGroup x:Name="Windows10Mobile">
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ButtonCommandBar.(RelativePanel.AlignBottomWithPanel)" Value="True"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-
-            <VisualStateGroup x:Name="Windows10">
-                <VisualState>
-                    <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
-                    </VisualState.StateTriggers>
-                    <VisualState.Setters>
-                        <Setter Target="ButtonCommandBar.(RelativePanel.AlignTopWithPanel)" Value="True"/>
-                    </VisualState.Setters>
-                </VisualState>
-            </VisualStateGroup>
-        </VisualStateManager.VisualStateGroups>
-
-        <ListView x:Name="CostsListView" IsItemClickEnabled="True" ItemClick="NavigateCostPage">
-            <ListView.Header>
-                    <!--<Image Source="Assets/charter.png" Height="200" Width="200"/>-->
-                <TextBlock Text="This is a balance diagram" Padding="50" HorizontalAlignment="Center" FontSize="32" Tapped="NavigateDiagramPage"/>
-            </ListView.Header>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-            <ListViewItem>Hello</ListViewItem>
-        </ListView>
-
-        <CommandBar x:Name="ButtonCommandBar">
-            <AppBarButton Icon="Emoji2" Label="Donate" ToolTipService.ToolTip="Thanks" Click="NavigateDonatePage"/>
-            <AppBarButton Icon="Setting" Label="Setting" ToolTipService.ToolTip="Setting" Click="NavigateSettingPage"/>
-            <AppBarButton Icon="Add" Label="Add" ToolTipService.ToolTip="Add" Click="AddNewCost"/>
-
-            <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Edit Balance" Click="NavigateEditBalancePage"/>
-            </CommandBar.SecondaryCommands>
-            
-        </CommandBar>
-    </RelativePanel>
+                            <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
+                                <TextBlock Text="Ничего не выбрано, пожалуйста выберите" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                            </Frame>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Page.Resources>
 
 </Page>
