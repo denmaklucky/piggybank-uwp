@@ -1,6 +1,5 @@
 ﻿using piggy_bank_uwp.View.Costs;
 using piggy_bank_uwp.ViewModel;
-using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
@@ -25,16 +24,7 @@ namespace piggy_bank_uwp.View
 
 		private void PageLoaded(object sender, RoutedEventArgs e)
 		{
-			//check that acrylic is avaliable
-			if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.Xaml.Media.XamlCompositionBrushBase"))
-			{
-				Windows.UI.Xaml.Media.AcrylicBrush myBrush = new Windows.UI.Xaml.Media.AcrylicBrush();
-				myBrush.BackgroundSource = Windows.UI.Xaml.Media.AcrylicBackgroundSource.HostBackdrop;
-				myBrush.TintColor = Color.FromArgb(255, 202, 24, 37);
-				myBrush.FallbackColor = Color.FromArgb(255, 202, 24, 37);
-				myBrush.TintOpacity = 0.3;
-				MainRelativePanel.Background = myBrush;
-			}
+			
 		}
 
 		private void NavigateSettingPage(object sender, RoutedEventArgs e)
@@ -66,12 +56,5 @@ namespace piggy_bank_uwp.View
 		{
 			Frame.Navigate(typeof(CostPage));
 		}
-
-		private void RelativePanelSizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			ButtonCommandBar.Width = e.NewSize.Width;
-			CostsListView.Width = e.NewSize.Width;
-		}
-
 	}
 }

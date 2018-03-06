@@ -101,7 +101,6 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailState.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
-    <Compile Include="Convertes\CSVConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="View\Costs\CostPage.xaml.cs">
       <DependentUpon>CostPage.xaml</DependentUpon>
@@ -138,6 +137,8 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="piggy-bank-uwp_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\ru-RU\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\charter.png">
@@ -191,7 +192,9 @@
       <Version>5.2.3</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Convertes\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
