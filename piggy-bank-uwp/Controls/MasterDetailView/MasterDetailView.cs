@@ -21,7 +21,7 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
 			Unloaded += OnUnloaded;
 		}
 
-		public void Navigate(Type pageTyep, object parameter)
+		public void Navigate(Type pageTyep, object parameter = null)
 		{
 			_detailPresenter.Navigate(pageTyep, parameter);
 			UpdateView();
@@ -57,12 +57,12 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
 
 		private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
 		}
 
 		private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
 		{
-			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 		}
 
 		private void OnBackRequested(object sender, BackRequestedEventArgs e)
@@ -85,8 +85,9 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
 				}
 				else
 				{
-					UpdateView();
 					_detailPresenter.BackStack.Clear();
+					_detailPresenter.Content = null;
+					UpdateView();
 				}
 			}
 		}

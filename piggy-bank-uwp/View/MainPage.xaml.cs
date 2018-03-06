@@ -1,16 +1,14 @@
-﻿using piggy_bank_uwp.View.Costs;
+﻿using piggy_bank_uwp.Controls.MasterDetailView;
+using piggy_bank_uwp.View.Costs;
 using piggy_bank_uwp.ViewModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace piggy_bank_uwp.View
-{
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
+{	
 	public sealed partial class MainPage : Page
 	{
 		private MainViewModel mainViewModel;
@@ -22,39 +20,78 @@ namespace piggy_bank_uwp.View
 			mainViewModel = new MainViewModel();
 		}
 
-		private void PageLoaded(object sender, RoutedEventArgs e)
+		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
-			
+			mainViewModel.Init();
+
+			DataContext = mainViewModel;
+			ShowStart();
+			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+		}
+
+		private void OnUnloaded(object sender, RoutedEventArgs e)
+		{
+			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
 		}
 
 		private void NavigateSettingPage(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(SettingPage));
+			ShowSetting();
 		}
 
 		private void AddNewCost(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(EditCostPage));
+			MainContainer.Navigate(typeof(EditCostPage), null);
 		}
 
 		private void NavigateDonatePage(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(DonatePage));
+			MainContainer.Navigate(typeof(DonatePage), null);
 		}
 
 		private void NavigateEditBalancePage(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(EditBalancePage));
+			MainContainer.Navigate(typeof(EditBalancePage), null);
 		}
 
 		private void NavigateDiagramPage(object sender, TappedRoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(DiagramPage));
+			MainContainer.Navigate(typeof(DiagramPage), null);
 		}
 
 		private void NavigateCostPage(object sender, ItemClickEventArgs e)
 		{
-			Frame.Navigate(typeof(CostPage));
+			MainContainer.Navigate(typeof(CostPage), null);
+		}
+
+		private void OnStateChanged(object sender, MasterDetailState e)
+		{
+
+		}
+
+		private void ShowStart()
+		{
+			StartGrid.Visibility = Visibility.Visible;
+			Setting.Visibility = Visibility.Collapsed;
+		}
+
+		private void ShowSetting()
+		{
+			StartGrid.Visibility = Visibility.Collapsed;
+			Setting.Visibility = Visibility.Visible;
+		}
+
+		private void OnBackRequested(object sender, BackRequestedEventArgs e)
+		{
+			if(StartGrid.Visibility == Visibility.Collapsed)
+			{
+				ShowStart();
+			}
+		}
+
+		private void OnCostItemClick(object sender, ItemClickEventArgs e)
+		{
+			MainContainer.Navigate(typeof(CostPage));
 		}
 	}
 }
