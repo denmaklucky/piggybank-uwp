@@ -1,10 +1,6 @@
 ﻿using piggy_bank_uwp.Model;
 using piggy_bank_uwp.ViewModel.Tag;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace piggy_bank_uwp.ViewModel.Cost
 {
@@ -52,18 +48,16 @@ namespace piggy_bank_uwp.ViewModel.Cost
 			}
 		}
 
-		public ulong Cost
+		public string Cost
 		{
 			get
 			{
-				return Model.Cost;
+				return $"{Model.Cost} ₽";
 			}
 			set
 			{
-				if(Model.Cost != value)
-				{
-					Model.Cost = value;
-				}
+				
+					Model.Cost = ulong.Parse(value);
 			}
 		}
 

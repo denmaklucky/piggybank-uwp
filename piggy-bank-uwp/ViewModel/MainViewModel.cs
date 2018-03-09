@@ -1,6 +1,5 @@
-﻿using piggy_bank_uwp.Model;
+﻿using piggy_bank_uwp.Fabrics;
 using piggy_bank_uwp.ViewModel.Cost;
-using System;
 using System.Collections.Generic;
 
 namespace piggy_bank_uwp.ViewModel
@@ -15,12 +14,10 @@ namespace piggy_bank_uwp.ViewModel
 
 		public void Init()
 		{
-			TagModel tag = new TagModel { Title = "тусэ", HexColor = "#F27464" };
-			CostModel costModel = new CostModel { Comment = "Сходили в кино", Cost = 1000, Date = DateTime.Now, Tag = tag };
-
-			CostViewModel cost = new CostViewModel(costModel);
-
-			Costs.Add(cost);
+			foreach (var cost in CostFactory.GetCosts())
+			{
+				Costs.Add(cost);
+			}
 		}
 
 		public string CurrentBalance { get; }

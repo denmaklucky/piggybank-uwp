@@ -1,5 +1,8 @@
 ﻿using piggy_bank_uwp.Controls.MasterDetailView;
+using piggy_bank_uwp.View.Balance;
 using piggy_bank_uwp.View.Costs;
+using piggy_bank_uwp.View.Diagram;
+using piggy_bank_uwp.View.Donate;
 using piggy_bank_uwp.ViewModel;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -25,7 +28,7 @@ namespace piggy_bank_uwp.View
 			mainViewModel.Init();
 
 			DataContext = mainViewModel;
-			ShowStart();
+			OnStateChanged(null, MainContainer.CurrentState);
 			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 		}
 
@@ -34,39 +37,13 @@ namespace piggy_bank_uwp.View
 			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
 		}
 
-		private void NavigateSettingPage(object sender, RoutedEventArgs e)
+		#region Navigation
+
+		#region Setting
+
+		private void OnSettingClick(object sender, RoutedEventArgs e)
 		{
 			ShowSetting();
-		}
-
-		private void AddNewCost(object sender, RoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(EditCostPage), null);
-		}
-
-		private void NavigateDonatePage(object sender, RoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(DonatePage), null);
-		}
-
-		private void NavigateEditBalancePage(object sender, RoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(EditBalancePage), null);
-		}
-
-		private void NavigateDiagramPage(object sender, TappedRoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(DiagramPage), null);
-		}
-
-		private void NavigateCostPage(object sender, ItemClickEventArgs e)
-		{
-			MainContainer.Navigate(typeof(CostPage), null);
-		}
-
-		private void OnStateChanged(object sender, MasterDetailState e)
-		{
-
 		}
 
 		private void ShowStart()
@@ -81,17 +58,58 @@ namespace piggy_bank_uwp.View
 			Setting.Visibility = Visibility.Visible;
 		}
 
+		#endregion
+
+		private void OnNavigateEditCost(object sender, RoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(EditCostPage));
+		}
+
+		private void OnNavigateDonate(object sender, RoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(DonatePage));
+		}
+
+		private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(EditBalancePage));
+		}
+
+		private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(DiagramPage));
+		}
+
+		private void OnNavigateCost(object sender, ItemClickEventArgs e)
+		{
+			MainContainer.Navigate(typeof(CostPage));
+		}
+
+		#endregion
+
+		private void OnStateChanged(object sender, MasterDetailState e)
+		{
+			if(e == MasterDetailState.Narrow)
+			{
+				Separator.Visibility = Visibility.Collapsed;
+			}
+			else
+			{
+				Separator.Visibility = Visibility.Visible;
+			}
+		}
+
 		private void OnBackRequested(object sender, BackRequestedEventArgs e)
 		{
+			if (MainContainer.CanGoBack)
+				return;
+
 			if(StartGrid.Visibility == Visibility.Collapsed)
 			{
 				ShowStart();
 			}
-		}
 
-		private void OnCostItemClick(object sender, ItemClickEventArgs e)
-		{
-			MainContainer.Navigate(typeof(CostPage));
+			e.Handled = true;
 		}
 	}
 }

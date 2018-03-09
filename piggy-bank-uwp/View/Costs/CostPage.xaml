@@ -15,7 +15,7 @@
 
         <CommandBar Grid.Row="1">
             <AppBarButton Icon="Delete" Label="Delete"/>
-            <AppBarButton Icon="Edit" Label="Edit"/>
+            <AppBarButton Icon="Edit" Label="Edit" Click="OnNavigateEditCost"/>
         </CommandBar>
     </Grid>
 </Page>

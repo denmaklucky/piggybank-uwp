@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MainContainer="using:piggy_bank_uwp.Controls.MasterDetailView"
+    xmlns:View ="using:piggy_bank_uwp.View.Default"
     mc:Ignorable="d"
     Loaded="OnLoaded"
     Unloaded="OnUnloaded">
@@ -27,10 +28,7 @@
                                             <Setter Target="DetailColumn.Width" Value="540*" />
                                             <Setter Target="MasterColumn.MinWidth" Value="72" />
                                             <Setter Target="MasterColumn.MaxWidth" Value="540" />
-                                            <Setter Target="BorderColumn.Width" Value="2"/>
-                                            <Setter Target="Separator.IsHitTestVisible" Value="True"/>
-                                            <Setter Target="Separator.(Grid.Column)" Value="1"/>
-                                            <Setter Target="DetailPresenter.(Grid.Column)" Value="2"/>
+                                            <Setter Target="DetailPresenter.(Grid.Column)" Value="1"/>
                                         </VisualState.Setters>
                                     </VisualState>
                                     <VisualState x:Name="NarrowState">
@@ -42,7 +40,6 @@
                             </VisualStateManager.VisualStateGroups>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="MasterColumn"/>
-                                <ColumnDefinition x:Name="BorderColumn"/>
                                 <ColumnDefinition x:Name="DetailColumn" Width="0"/>
                             </Grid.ColumnDefinitions>
                             <ContentPresenter x:Name="MasterPresenter"
@@ -54,11 +51,8 @@
                                           HorizontalContentAlignment="Stretch"
                                           VerticalContentAlignment="Stretch"/>
 
-                            <Border x:Name="Separator" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="2"
-                                    IsHitTestVisible="False" HorizontalAlignment="Right" VerticalAlignment="Stretch"/>
-
                             <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
-                                <TextBlock Text="Ничего не выбрано, пожалуйста выберите" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                <View:DefaultPage/>
                             </Frame>
                         </Grid>
                     </ControlTemplate>
@@ -67,10 +61,10 @@
         </Style>
     </Page.Resources>
 
-    <MainContainer:MasterDetailView x:Name="MainContainer">
+    <MainContainer:MasterDetailView x:Name="MainContainer" StateChanged="OnStateChanged">
         <Grid>
-            
-            <Grid x:Name="StartGrid">
+
+            <Grid x:Name="StartGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="Auto"/>
@@ -79,23 +73,25 @@
                 <!--Costs-->
                 <ListView Grid.Row="0" ItemsSource="{Binding Path=Costs, Mode=OneWay}"
                           ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
-                          IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnCostItemClick">
+                          IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateCost">
                     <ListView.Header>
-                        <TextBlock Text="{Binding Path=CurrentBalance, Mode=OneWay}" FontSize="24" HorizontalAlignment="Center" Padding="10"/>
+                        <StackPanel Tapped="OnNavigateDiagram" Height="150">
+                            <TextBlock Text="{Binding Path=CurrentBalance, Mode=OneWay}" FontSize="24" HorizontalAlignment="Center" Padding="10"/>
+                        </StackPanel>
                     </ListView.Header>
                 </ListView>
 
                 <CommandBar Grid.Row="1">
-                    <AppBarButton Icon="Emoji2" Click="NavigateDonatePage"/>
-                    <AppBarButton Icon="Setting" Click="NavigateSettingPage"/>
-                    <AppBarButton Icon="Add" Click="AddNewCost"/>
+                    <AppBarButton Icon="Emoji2" Click="OnNavigateDonate"/>
+                    <AppBarButton Icon="Setting" Click="OnSettingClick"/>
+                    <AppBarButton Icon="Add" Click="OnNavigateEditCost"/>
                     <CommandBar.SecondaryCommands>
-                        <AppBarButton Label="Изменить текущий баланс"/>
+                        <AppBarButton Label="Изменить текущий баланс" Click="OnNavigateEditBalance"/>
                     </CommandBar.SecondaryCommands>
                 </CommandBar>
             </Grid>
 
-            <Pivot x:Name="Setting" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <Pivot x:Name="Setting" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="Collapsed">
                 <!--Tags-->
                 <PivotItem Header="Tag">
 
@@ -110,7 +106,10 @@
                 </PivotItem>
             </Pivot>
 
-        </Grid>        
-    </MainContainer:MasterDetailView>    
+            <Border x:Name="Separator" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="1"
+                   IsHitTestVisible="False" HorizontalAlignment="Right" Visibility="Collapsed" VerticalAlignment="Stretch"/>
+
+        </Grid>
+    </MainContainer:MasterDetailView>
 
 </Page>
