@@ -1,22 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using piggy_bank_uwp.View;
-using Windows.UI.Core;
+using Windows.ApplicationModel.Core;
+using System.Threading.Tasks;
 
 namespace piggy_bank_uwp
 {
@@ -79,6 +70,11 @@ namespace piggy_bank_uwp
 			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 		}
 
+		public async void RunUIAsync(DispatchedHandler agileCallback)
+		{
+			await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Low, agileCallback);
+		}
+
 		/// <summary>
 		/// Invoked when Navigation to a certain page fails
 		/// </summary>
@@ -102,5 +98,7 @@ namespace piggy_bank_uwp
 			//TODO: Save application state and stop any background activity
 			deferral.Complete();
 		}
+
+
 	}
 }
