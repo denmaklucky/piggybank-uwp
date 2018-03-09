@@ -26,5 +26,10 @@ namespace piggy_bank_uwp.View.Costs
 		{
 			this.InitializeComponent();
 		}
+
+		private void OnNavigateEditCost(object sender, RoutedEventArgs e)
+		{
+			Frame.Navigate(typeof(EditCostPage));
+		}
 	}
 }

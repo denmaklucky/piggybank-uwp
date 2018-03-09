@@ -15,14 +15,14 @@ using Windows.UI.Xaml.Navigation;
 
 // Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace piggy_bank_uwp.View
+namespace piggy_bank_uwp.View.Balance
 {
 	/// <summary>
 	/// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
 	/// </summary>
-	public sealed partial class SettingPage : Page
+	public sealed partial class EditBalancePage : Page
 	{
-		public SettingPage()
+		public EditBalancePage()
 		{
 			this.InitializeComponent();
 		}

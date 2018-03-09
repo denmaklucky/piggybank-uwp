@@ -1,13 +1,27 @@
-﻿using System;
+﻿using piggy_bank_uwp.Fabrics;
+using piggy_bank_uwp.ViewModel.Cost;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace piggy_bank_uwp.ViewModel
 {
-	internal class MainViewModel : BaseViewModel
+	public class MainViewModel : BaseViewModel
 	{
+		public MainViewModel()
+		{
+			Costs = new List<CostViewModel>();
+			CurrentBalance = "45000 Р";
+		}
 
+		public void Init()
+		{
+			foreach (var cost in CostFactory.GetCosts())
+			{
+				Costs.Add(cost);
+			}
+		}
+
+		public string CurrentBalance { get; }
+
+		public List<CostViewModel> Costs { get; }
 	}
 }

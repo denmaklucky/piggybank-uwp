@@ -4,16 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Controls="using:piggy_bank_uwp.Controls.MasterDetailView"
+    xmlns:MainContainer="using:piggy_bank_uwp.Controls.MasterDetailView"
+    xmlns:View ="using:piggy_bank_uwp.View.Default"
     mc:Ignorable="d"
-    Loaded="PageLoaded">
+    Loaded="OnLoaded"
+    Unloaded="OnUnloaded">
 
     <Page.Resources>
-        <Style TargetType="Controls:MasterDetailView">
+        <Style TargetType="MainContainer:MasterDetailView">
             <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Controls:MasterDetailView">
+                    <ControlTemplate TargetType="MainContainer:MasterDetailView">
                         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                             <VisualStateManager.VisualStateGroups>
                                 <VisualStateGroup x:Name="AdaptiveStates">
@@ -50,7 +52,7 @@
                                           VerticalContentAlignment="Stretch"/>
 
                             <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
-                                <TextBlock Text="Ничего не выбрано, пожалуйста выберите" HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                                <View:DefaultPage/>
                             </Frame>
                         </Grid>
                     </ControlTemplate>
@@ -58,5 +60,56 @@
             </Setter>
         </Style>
     </Page.Resources>
+
+    <MainContainer:MasterDetailView x:Name="MainContainer" StateChanged="OnStateChanged">
+        <Grid>
+
+            <Grid x:Name="StartGrid" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <!--Costs-->
+                <ListView Grid.Row="0" ItemsSource="{Binding Path=Costs, Mode=OneWay}"
+                          ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
+                          IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateCost">
+                    <ListView.Header>
+                        <StackPanel Tapped="OnNavigateDiagram" Height="150">
+                            <TextBlock Text="{Binding Path=CurrentBalance, Mode=OneWay}" FontSize="24" HorizontalAlignment="Center" Padding="10"/>
+                        </StackPanel>
+                    </ListView.Header>
+                </ListView>
+
+                <CommandBar Grid.Row="1">
+                    <AppBarButton Icon="Emoji2" Click="OnNavigateDonate"/>
+                    <AppBarButton Icon="Setting" Click="OnSettingClick"/>
+                    <AppBarButton Icon="Add" Click="OnNavigateEditCost"/>
+                    <CommandBar.SecondaryCommands>
+                        <AppBarButton Label="Изменить текущий баланс" Click="OnNavigateEditBalance"/>
+                    </CommandBar.SecondaryCommands>
+                </CommandBar>
+            </Grid>
+
+            <Pivot x:Name="Setting" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="Collapsed">
+                <!--Tags-->
+                <PivotItem Header="Tag">
+
+                </PivotItem>
+                <!--Curency-->
+                <PivotItem Header="Cutency">
+
+                </PivotItem>
+                <!--Sincranization-->
+                <PivotItem Header="Sincranization">
+
+                </PivotItem>
+            </Pivot>
+
+            <Border x:Name="Separator" BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}" BorderThickness="1"
+                   IsHitTestVisible="False" HorizontalAlignment="Right" Visibility="Collapsed" VerticalAlignment="Stretch"/>
+
+        </Grid>
+    </MainContainer:MasterDetailView>
 
 </Page>

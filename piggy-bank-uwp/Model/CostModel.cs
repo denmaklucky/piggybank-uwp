@@ -4,6 +4,7 @@ namespace piggy_bank_uwp.Model
 {
 	public sealed class CostModel
 	{
+		//To ulong
 		public DateTime Date { get; set; }
 		
 		public ulong Cost { get; set; }

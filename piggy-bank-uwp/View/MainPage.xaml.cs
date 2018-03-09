@@ -1,16 +1,17 @@
-﻿using piggy_bank_uwp.View.Costs;
+﻿using piggy_bank_uwp.Controls.MasterDetailView;
+using piggy_bank_uwp.View.Balance;
+using piggy_bank_uwp.View.Costs;
+using piggy_bank_uwp.View.Diagram;
+using piggy_bank_uwp.View.Donate;
 using piggy_bank_uwp.ViewModel;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace piggy_bank_uwp.View
-{
-	/// <summary>
-	/// An empty page that can be used on its own or navigated to within a Frame.
-	/// </summary>
+{	
 	public sealed partial class MainPage : Page
 	{
 		private MainViewModel mainViewModel;
@@ -22,39 +23,93 @@ namespace piggy_bank_uwp.View
 			mainViewModel = new MainViewModel();
 		}
 
-		private void PageLoaded(object sender, RoutedEventArgs e)
+		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
-			
+			mainViewModel.Init();
+
+			DataContext = mainViewModel;
+			OnStateChanged(null, MainContainer.CurrentState);
+			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 		}
 
-		private void NavigateSettingPage(object sender, RoutedEventArgs e)
+		private void OnUnloaded(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(SettingPage));
+			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
 		}
 
-		private void AddNewCost(object sender, RoutedEventArgs e)
+		#region Navigation
+
+		#region Setting
+
+		private void OnSettingClick(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(EditCostPage));
+			ShowSetting();
 		}
 
-		private void NavigateDonatePage(object sender, RoutedEventArgs e)
+		private void ShowStart()
 		{
-			Frame.Navigate(typeof(DonatePage));
+			StartGrid.Visibility = Visibility.Visible;
+			Setting.Visibility = Visibility.Collapsed;
 		}
 
-		private void NavigateEditBalancePage(object sender, RoutedEventArgs e)
+		private void ShowSetting()
 		{
-			Frame.Navigate(typeof(EditBalancePage));
+			StartGrid.Visibility = Visibility.Collapsed;
+			Setting.Visibility = Visibility.Visible;
 		}
 
-		private void NavigateDiagramPage(object sender, TappedRoutedEventArgs e)
+		#endregion
+
+		private void OnNavigateEditCost(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(DiagramPage));
+			MainContainer.Navigate(typeof(EditCostPage));
 		}
 
-		private void NavigateCostPage(object sender, ItemClickEventArgs e)
+		private void OnNavigateDonate(object sender, RoutedEventArgs e)
 		{
-			Frame.Navigate(typeof(CostPage));
+			MainContainer.Navigate(typeof(DonatePage));
+		}
+
+		private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(EditBalancePage));
+		}
+
+		private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
+		{
+			MainContainer.Navigate(typeof(DiagramPage));
+		}
+
+		private void OnNavigateCost(object sender, ItemClickEventArgs e)
+		{
+			MainContainer.Navigate(typeof(CostPage));
+		}
+
+		#endregion
+
+		private void OnStateChanged(object sender, MasterDetailState e)
+		{
+			if(e == MasterDetailState.Narrow)
+			{
+				Separator.Visibility = Visibility.Collapsed;
+			}
+			else
+			{
+				Separator.Visibility = Visibility.Visible;
+			}
+		}
+
+		private void OnBackRequested(object sender, BackRequestedEventArgs e)
+		{
+			if (MainContainer.CanGoBack)
+				return;
+
+			if(StartGrid.Visibility == Visibility.Collapsed)
+			{
+				ShowStart();
+			}
+
+			e.Handled = true;
 		}
 	}
 }

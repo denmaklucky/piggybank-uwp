@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace piggy_bank_uwp.ViewModel
 {
-	internal abstract class BaseViewModel : INotifyPropertyChanged
+	public abstract class BaseViewModel : INotifyPropertyChanged
 	{
 		internal virtual void RaisePropertyChanged(string propertyName)
 		{

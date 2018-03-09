@@ -101,20 +101,26 @@
     <Compile Include="Constants.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailState.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
+    <Compile Include="Fabrics\CostFactory.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\Cost\CostViewModel.cs" />
+    <Compile Include="ViewModel\Tag\TagViewModel.cs" />
     <Compile Include="View\Costs\CostPage.xaml.cs">
       <DependentUpon>CostPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\Costs\EditCostPage.xaml.cs">
       <DependentUpon>EditCostPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DiagramPage.xaml.cs">
+    <Compile Include="View\Default\DefaultPage.xaml.cs">
+      <DependentUpon>DefaultPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\Diagram\DiagramPage.xaml.cs">
       <DependentUpon>DiagramPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\DonatePage.xaml.cs">
+    <Compile Include="View\Donate\DonatePage.xaml.cs">
       <DependentUpon>DonatePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\EditBalancePage.xaml.cs">
+    <Compile Include="View\Balance\EditBalancePage.xaml.cs">
       <DependentUpon>EditBalancePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\MainPage.xaml.cs">
@@ -128,9 +134,6 @@
     <Compile Include="Utilities\SettingsUtility.cs" />
     <Compile Include="Utilities\SystemUtility.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
-    <Compile Include="View\SettingPage.xaml.cs">
-      <DependentUpon>SettingPage.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -158,6 +161,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Styles\AppStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Templates\AppTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="View\Costs\CostPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -166,25 +179,25 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DiagramPage.xaml">
+    <Page Include="View\Default\DefaultPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\DonatePage.xaml">
+    <Page Include="View\Diagram\DiagramPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EditBalancePage.xaml">
+    <Page Include="View\Donate\DonatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\Balance\EditBalancePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\SettingPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -194,6 +207,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Convertes\" />
+    <Folder Include="Interface\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
