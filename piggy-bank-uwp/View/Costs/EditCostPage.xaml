@@ -4,9 +4,43 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ViewModels="using:piggy_bank_uwp.ViewModel.Tag"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="EditCostPage" FontSize="48"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <!--Tag-->
+                <ComboBox x:Name="TagsComboBox" Header="Tag" Margin="15" Background="{Binding ElementName=TagsComboBox, Path=SelectedItem.Color}"
+                          HorizontalAlignment="Stretch">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="ViewModels:TagViewModel">
+                            <Grid>
+                                <Rectangle Fill="{x:Bind Color}"/>
+                                <TextBlock Text="{x:Bind Title}" Foreground="White" FontSize="20"/>
+                            </Grid>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--Date-->
+                <DatePicker Header="Data" Date="{x:Bind _cost.DateOffset, Mode=TwoWay}" FontSize="20" Margin="15"/>
+                <!--Cost-->
+                <TextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" FontSize="20" Margin="15"/>
+                <!--Comment-->
+                <TextBox Header="Comment" Text="{x:Bind _cost.Comment, Mode=TwoWay}" FontSize="20"
+                         Height="200" Margin="15"/>
+
+            </StackPanel>
+        </ScrollViewer>
+
+        <CommandBar Grid.Row="1">
+            <AppBarButton Icon="Save" Label="Save" Click="OnSaveClick"/>
+        </CommandBar>
     </Grid>
+
 </Page>

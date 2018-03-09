@@ -33,6 +33,18 @@ namespace piggy_bank_uwp.ViewModel.Cost
 			}
 		}
 
+		public DateTimeOffset DateOffset
+		{
+			get
+			{
+				return new DateTimeOffset(Date);
+			}
+			set
+			{
+				Model.Date = value.Date;
+			}
+		}
+
 		public string Comment
 		{
 			get
@@ -48,16 +60,26 @@ namespace piggy_bank_uwp.ViewModel.Cost
 			}
 		}
 
-		public string Cost
+		public ulong Cost
 		{
 			get
 			{
-				return $"{Model.Cost} ₽";
+				return Model.Cost;
 			}
 			set
 			{
-				
-					Model.Cost = ulong.Parse(value);
+				if(Model.Cost != value)
+				{
+					Model.Cost = value;
+				}
+			}
+		}
+
+		public string CostWithCurrency
+		{
+			get
+			{
+				return Model.Cost + MainViewModel.Current.Currency;
 			}
 		}
 

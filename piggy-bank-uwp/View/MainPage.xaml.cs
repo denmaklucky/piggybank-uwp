@@ -20,7 +20,7 @@ namespace piggy_bank_uwp.View
 		{
 			this.InitializeComponent();
 
-			mainViewModel = new MainViewModel();
+			mainViewModel = MainViewModel.Current;
 		}
 
 		private void OnLoaded(object sender, RoutedEventArgs e)
@@ -82,7 +82,7 @@ namespace piggy_bank_uwp.View
 
 		private void OnNavigateCost(object sender, ItemClickEventArgs e)
 		{
-			MainContainer.Navigate(typeof(CostPage));
+			MainContainer.Navigate(typeof(CostPage), e.ClickedItem);
 		}
 
 		#endregion
