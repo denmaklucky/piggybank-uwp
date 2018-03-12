@@ -1,4 +1,6 @@
-﻿using piggy_bank_uwp.ViewModel;
+﻿using System;
+using piggy_bank_uwp.Interface;
+using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModel.Cost;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -11,7 +13,7 @@ namespace piggy_bank_uwp.View.Costs
 	/// <summary>
 	/// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
 	/// </summary>
-	public sealed partial class CostPage : Page
+	public sealed partial class CostPage : Page, IDetailPage
 	{
 		private CostViewModel _cost;
 
@@ -33,6 +35,10 @@ namespace piggy_bank_uwp.View.Costs
 		private void OnCostDeleted(object sender, RoutedEventArgs e)
 		{
 			MainViewModel.Current.DeleteCost(_cost);
+
+			GoBack?.Invoke(this, EventArgs.Empty);
 		}
+
+		public event EventHandler GoBack;
 	}
 }

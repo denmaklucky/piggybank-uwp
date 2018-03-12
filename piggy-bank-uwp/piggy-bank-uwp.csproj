@@ -103,6 +103,7 @@
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
     <Compile Include="Fabrics\CostFactory.cs" />
     <Compile Include="Fabrics\TagFactory.cs" />
+    <Compile Include="Interface\IDetailPage.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\Cost\CostViewModel.cs" />
     <Compile Include="ViewModel\Tag\TagViewModel.cs" />
@@ -208,7 +209,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Convertes\" />
-    <Folder Include="Interface\" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

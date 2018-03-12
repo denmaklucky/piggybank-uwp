@@ -26,7 +26,7 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
 		}
 
 		public void Navigate(Type pageTyep, object parameter = null)
-		{
+		{		
 			_detailPresenter.Navigate(pageTyep, parameter);
 			UpdateView();
 		}

@@ -8,6 +8,6 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock Text="Ничего не выбрано, пожалуйста выберите" HorizontalAlignment="Center"
-                   VerticalAlignment="Center" FontSize="20"/>
+                   VerticalAlignment="Center" FontSize="18"/>
     </Grid>
 </Page>

@@ -21,19 +21,18 @@
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="ViewModels:TagViewModel">
                             <Grid>
-                                <Rectangle Fill="{x:Bind Color}"/>
-                                <TextBlock Text="{x:Bind Title}" Foreground="White" FontSize="20"/>
+                                <TextBlock Text="{x:Bind Title}" FontSize="18"/>
                             </Grid>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <!--Date-->
-                <DatePicker Header="Data" Date="{x:Bind _cost.DateOffset, Mode=TwoWay}" FontSize="20" Margin="15"/>
+                <CalendarDatePicker Header="Data" FontSize="18" Margin="15"/>
                 <!--Cost-->
-                <TextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" FontSize="20" Margin="15"/>
+                <TextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" FontSize="18" Margin="15"/>
                 <!--Comment-->
-                <TextBox Header="Comment" Text="{x:Bind _cost.Comment, Mode=TwoWay}" FontSize="20"
-                         Height="200" Margin="15"/>
+                <TextBox Header="Comment" Text="{x:Bind _cost.Comment, Mode=TwoWay}" FontSize="18"
+                         MaxHeight="200" Margin="15"/>
 
             </StackPanel>
         </ScrollViewer>

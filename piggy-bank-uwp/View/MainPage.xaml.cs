@@ -14,20 +14,19 @@ namespace piggy_bank_uwp.View
 {	
 	public sealed partial class MainPage : Page
 	{
-		private MainViewModel mainViewModel;
+		private MainViewModel _mainViewModel;
 
 		public MainPage()
 		{
 			this.InitializeComponent();
 
-			mainViewModel = MainViewModel.Current;
+			_mainViewModel = MainViewModel.Current;
 		}
 
 		private void OnLoaded(object sender, RoutedEventArgs e)
 		{
-			mainViewModel.Init();
-
-			DataContext = mainViewModel;
+			_mainViewModel.Init();
+			DataContext = _mainViewModel;
 			OnStateChanged(null, MainContainer.CurrentState);
 			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
 		}
@@ -62,7 +61,8 @@ namespace piggy_bank_uwp.View
 
 		private void OnNavigateEditCost(object sender, RoutedEventArgs e)
 		{
-			MainContainer.Navigate(typeof(EditCostPage));
+			//MainContainer.Navigate(typeof(EditCostPage));
+			_mainViewModel.AddCost();
 		}
 
 		private void OnNavigateDonate(object sender, RoutedEventArgs e)

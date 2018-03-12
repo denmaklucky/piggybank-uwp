@@ -5,6 +5,13 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style x:Name="HeaderTextBlock" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Margin" Value="0 0 0 5"/>
+        </Style>
+    </Page.Resources>
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -13,19 +20,37 @@
         </Grid.RowDefinitions>
 
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="15">
                 <!--Tag-->
-                <TextBox Header="Tag" Text="{x:Bind _cost.Tag.Title, Mode=OneWay}"
-                         Background="{x:Bind _cost.Tag.Color}" IsReadOnly="True" FontSize="20" Margin="15"/>
-                <!--Date-->
-                <TextBox Header="Data" Text="{x:Bind _cost.Date, Mode=OneWay}" IsReadOnly="True" 
-                         FontSize="20" Margin="15"/>
-                <!--Cost-->
-                <TextBox Header="Cost" Text="{x:Bind _cost.CostWithCurrency}" IsReadOnly="True" FontSize="20" Margin="15"/>
-                <!--Comment-->
-                <TextBox Header="Comment" Text="{x:Bind _cost.Comment}" IsReadOnly="True" FontSize="20"
-                         MaxHeight="200" Margin="15"/>
+                <Grid Margin="15" HorizontalAlignment="Left">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
 
+                    <TextBlock Grid.Row="0" Text="Tag" Style="{StaticResource HeaderTextBlock}"/>
+                    <Rectangle Grid.Row="1" Fill="{x:Bind _cost.Tag.Color}"/>
+                    <TextBlock Grid.Row="1" Text="{x:Bind _cost.Tag.Title, Mode=OneWay}" FontSize="18"/>
+                </Grid>
+                
+                <!--Date-->
+                <StackPanel Orientation="Vertical" Margin="15">
+                    <TextBlock Text="Data" Style="{StaticResource HeaderTextBlock}"/>
+                    <TextBlock Text="{x:Bind _cost.Date, Mode=OneWay}" FontSize="18"/>
+                </StackPanel>
+
+                <!--Cost-->
+                <StackPanel Orientation="Vertical" Margin="15">
+                    <TextBlock Text="Cost" Style="{StaticResource HeaderTextBlock}"/>
+                    <TextBlock Text="{x:Bind _cost.CostWithCurrency, Mode=OneWay}" FontSize="18"/>
+                </StackPanel>
+
+                <!--Comment-->
+                <StackPanel Orientation="Vertical" Margin="15">
+                    <TextBlock Text="Comment" Style="{StaticResource HeaderTextBlock}"/>
+                    <TextBlock Text="{x:Bind _cost.Comment, Mode=OneWay}" MaxHeight="200" TextWrapping="WrapWholeWords" FontSize="18"/>
+                </StackPanel>
+                
             </StackPanel>
         </ScrollViewer>
 

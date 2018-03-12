@@ -6,20 +6,20 @@ namespace piggy_bank_uwp.ViewModel
 {
 	public abstract class BaseViewModel : INotifyPropertyChanged
 	{
-		internal virtual void RaisePropertyChanged(string propertyName)
+		internal async virtual void RaisePropertyChanged(string propertyName)
 		{
-			if (String.IsNullOrEmpty(propertyName))
-				return;
+			await App.RunUIAsync(() =>
+			{
+				if (String.IsNullOrEmpty(propertyName))
+					return;
 
-			PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+				PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+			});
 		}
 
-		internal virtual void RaisePropertyChanged(object obj)
+		internal virtual void RaisePropertiesChanged()
 		{
-			if (obj == null)
-				return;
-
-			var properties = obj.GetType().GetRuntimeProperties();
+			var properties = this.GetType().GetRuntimeProperties();
 
 			foreach (var property in properties)
 			{
