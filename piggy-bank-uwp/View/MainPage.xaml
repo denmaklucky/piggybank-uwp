@@ -11,38 +11,45 @@
     Unloaded="OnUnloaded">
 
     <Page.Resources>
-        <Style TargetType="MainContainer:MasterDetailView">
-            <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="MainContainer:MasterDetailView">
-                        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="AdaptiveStates">
-                                    <VisualState x:Name="WideState">
-                                        <VisualState.StateTriggers>
-                                            <AdaptiveTrigger MinWindowWidth="820"/>
-                                        </VisualState.StateTriggers>
-                                        <VisualState.Setters>
-                                            <Setter Target="MasterColumn.Width" Value="260*" />
-                                            <Setter Target="DetailColumn.Width" Value="540*" />
-                                            <Setter Target="MasterColumn.MinWidth" Value="72" />
-                                            <Setter Target="MasterColumn.MaxWidth" Value="540" />
-                                            <Setter Target="DetailPresenter.(Grid.Column)" Value="1"/>
-                                        </VisualState.Setters>
-                                    </VisualState>
-                                    <VisualState x:Name="NarrowState">
-                                        <VisualState.StateTriggers>
-                                            <AdaptiveTrigger MinWindowWidth="0"/>
-                                        </VisualState.StateTriggers>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition x:Name="MasterColumn"/>
-                                <ColumnDefinition x:Name="DetailColumn" Width="0"/>
-                            </Grid.ColumnDefinitions>
-                            <ContentPresenter x:Name="MasterPresenter"
+        <ResourceDictionary>
+            
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="ms-appx:///Styles/Colors.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+
+            <Style TargetType="MainContainer:MasterDetailView">
+                <Setter Property="BorderBrush" Value="{ThemeResource SystemControlForegroundBaseLowBrush}"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="MainContainer:MasterDetailView">
+                            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="AdaptiveStates">
+                                        <VisualState x:Name="WideState">
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="820"/>
+                                            </VisualState.StateTriggers>
+                                            <VisualState.Setters>
+                                                <Setter Target="MasterColumn.Width" Value="260*" />
+                                                <Setter Target="DetailColumn.Width" Value="540*" />
+                                                <Setter Target="MasterColumn.MinWidth" Value="72" />
+                                                <Setter Target="MasterColumn.MaxWidth" Value="540" />
+                                                <Setter Target="DetailPresenter.(Grid.Column)" Value="1"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="NarrowState">
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="0"/>
+                                            </VisualState.StateTriggers>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition x:Name="MasterColumn"/>
+                                    <ColumnDefinition x:Name="DetailColumn" Width="0"/>
+                                </Grid.ColumnDefinitions>
+                                <ContentPresenter x:Name="MasterPresenter"
                                           Content="{TemplateBinding Content}"
                                           ContentTemplate="{TemplateBinding ContentTemplate}"
                                           ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -51,19 +58,20 @@
                                           HorizontalContentAlignment="Stretch"
                                           VerticalContentAlignment="Stretch"/>
 
-                            <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
-                                <View:DefaultPage/>
-                            </Frame>
-                        </Grid>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
+                                    <View:DefaultPage/>
+                                </Frame>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
     </Page.Resources>
 
     <MainContainer:MasterDetailView x:Name="MainContainer" StateChanged="OnStateChanged">
-        <Grid>
-
+        <Grid Background="{StaticResource MasterBackgroundBrush}">
             <Grid x:Name="StartGrid" Visibility="Visible">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
@@ -91,7 +99,7 @@
                 </CommandBar>
             </Grid>
 
-            <Pivot x:Name="Setting" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Visibility="Collapsed">
+            <Pivot x:Name="Setting" Background="{StaticResource MasterBackgroundBrush}" Visibility="Collapsed">
                 <!--Tags-->
                 <PivotItem Header="Tag">
 
