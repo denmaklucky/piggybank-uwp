@@ -11,105 +11,104 @@ using Windows.UI.Xaml.Input;
 
 
 namespace piggy_bank_uwp.View
-{	
-	public sealed partial class MainPage : Page
-	{
-		private MainViewModel _mainViewModel;
+{
+    public sealed partial class MainPage : Page
+    {
+        private MainViewModel _mainViewModel;
 
-		public MainPage()
-		{
-			this.InitializeComponent();
+        public MainPage()
+        {
+            this.InitializeComponent();
 
-			_mainViewModel = MainViewModel.Current;
-		}
+            _mainViewModel = MainViewModel.Current;
+        }
 
-		private void OnLoaded(object sender, RoutedEventArgs e)
-		{
-			_mainViewModel.Init();
-			DataContext = _mainViewModel;
-			OnStateChanged(null, MainContainer.CurrentState);
-			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-		}
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            _mainViewModel.Init();
+            DataContext = _mainViewModel;
+            OnStateChanged(null, MainContainer.CurrentState);
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
 
-		private void OnUnloaded(object sender, RoutedEventArgs e)
-		{
-			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-		}
+        private void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+        }
 
-		#region Navigation
+        #region Navigation
 
-		#region Setting
+        #region Setting
 
-		private void OnSettingClick(object sender, RoutedEventArgs e)
-		{
-			ShowSetting();
-		}
+        private void OnSettingClick(object sender, RoutedEventArgs e)
+        {
+            ShowSetting();
+        }
 
-		private void ShowStart()
-		{
-			StartGrid.Visibility = Visibility.Visible;
-			Setting.Visibility = Visibility.Collapsed;
-		}
+        private void ShowStart()
+        {
+            StartGrid.Visibility = Visibility.Visible;
+            Setting.Visibility = Visibility.Collapsed;
+        }
 
-		private void ShowSetting()
-		{
-			StartGrid.Visibility = Visibility.Collapsed;
-			Setting.Visibility = Visibility.Visible;
-		}
+        private void ShowSetting()
+        {
+            StartGrid.Visibility = Visibility.Collapsed;
+            Setting.Visibility = Visibility.Visible;
+        }
 
-		#endregion
+        #endregion
 
-		private void OnNavigateEditCost(object sender, RoutedEventArgs e)
-		{
-			//MainContainer.Navigate(typeof(EditCostPage));
-			_mainViewModel.AddCost();
-		}
+        private void OnNavigateEditCost(object sender, RoutedEventArgs e)
+        {
+            MainContainer.Navigate(typeof(EditCostPage));
+        }
 
-		private void OnNavigateDonate(object sender, RoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(DonatePage));
-		}
+        private void OnNavigateDonate(object sender, RoutedEventArgs e)
+        {
+            MainContainer.Navigate(typeof(DonatePage));
+        }
 
-		private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(EditBalancePage));
-		}
+        private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
+        {
+            MainContainer.Navigate(typeof(EditBalancePage));
+        }
 
-		private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
-		{
-			MainContainer.Navigate(typeof(DiagramPage));
-		}
+        private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
+        {
+            MainContainer.Navigate(typeof(DiagramPage));
+        }
 
-		private void OnNavigateCost(object sender, ItemClickEventArgs e)
-		{
-			MainContainer.Navigate(typeof(CostPage), e.ClickedItem);
-		}
+        private void OnNavigateCost(object sender, ItemClickEventArgs e)
+        {
+            MainContainer.Navigate(typeof(CostPage), e.ClickedItem);
+        }
 
-		#endregion
+        #endregion
 
-		private void OnStateChanged(object sender, MasterDetailState e)
-		{
-			if(e == MasterDetailState.Narrow)
-			{
-				Separator.Visibility = Visibility.Collapsed;
-			}
-			else
-			{
-				Separator.Visibility = Visibility.Visible;
-			}
-		}
+        private void OnStateChanged(object sender, MasterDetailState e)
+        {
+            if (e == MasterDetailState.Narrow)
+            {
+                Separator.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                Separator.Visibility = Visibility.Visible;
+            }
+        }
 
-		private void OnBackRequested(object sender, BackRequestedEventArgs e)
-		{
-			if (MainContainer.CanGoBack)
-				return;
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (MainContainer.CanGoBack)
+                return;
 
-			if(StartGrid.Visibility == Visibility.Collapsed)
-			{
-				ShowStart();
-			}
+            if (StartGrid.Visibility == Visibility.Collapsed)
+            {
+                ShowStart();
+            }
 
-			e.Handled = true;
-		}
-	}
+            e.Handled = true;
+        }
+    }
 }
