@@ -3,6 +3,7 @@ using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
 
 namespace piggy_bank_uwp.ViewModel
 {
@@ -13,7 +14,7 @@ namespace piggy_bank_uwp.ViewModel
 			Costs = new List<CostViewModel>();
 			Tags = new List<TagViewModel>();
 			CurrentBalance = "45000 Р";
-			Currency= NumberFormatInfo.CurrentInfo.CurrencySymbol;
+			Currency = NumberFormatInfo.CurrentInfo.CurrencySymbol;
 		}
 
 		public void Init()
@@ -29,10 +30,23 @@ namespace piggy_bank_uwp.ViewModel
 			}
 		}
 
-		internal void DeleteCost(CostViewModel cost)
+		internal Task DeleteCost(CostViewModel cost)
 		{
-			Costs.Remove(cost);
-			RaisePropertyChanged(nameof(Cost));
+			return Task.Factory.StartNew(() =>
+			{
+				App.RunUIAsync(() =>
+				{
+					Costs.Remove(cost);
+				});
+				RaisePropertyChanged(nameof(Costs));
+			});
+		}
+
+		internal void AddCost()
+		{
+			Costs.Add(new CostViewModel());
+
+			RaisePropertiesChanged();
 		}
 
 		public string CurrentBalance { get; }
@@ -43,6 +57,6 @@ namespace piggy_bank_uwp.ViewModel
 
 		public string Currency { get; set; }
 
-		public static MainViewModel Current = new MainViewModel();		
+		public static MainViewModel Current = new MainViewModel();
 	}
 }

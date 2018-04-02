@@ -70,9 +70,12 @@ namespace piggy_bank_uwp
 			SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
 		}
 
-		public async void RunUIAsync(DispatchedHandler agileCallback)
-		{
-			await CoreApplication.MainView.Dispatcher.RunAsync(CoreDispatcherPriority.Low, agileCallback);
+		public static Task RunUIAsync(DispatchedHandler agileCallback)
+		{			
+			return Task.Factory.StartNew(async ()=>
+			{
+				await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(CoreDispatcherPriority.Low, agileCallback);
+			});
 		}
 
 		/// <summary>
