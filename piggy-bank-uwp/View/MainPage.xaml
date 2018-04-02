@@ -71,7 +71,7 @@
                 </Grid.RowDefinitions>
 
                 <!--Costs-->
-                <ListView Grid.Row="0" ItemsSource="{Binding Path=Costs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                <ListView Grid.Row="0" ItemsSource="{Binding Path=Costs}"
                           ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
                           IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateCost">
                     <ListView.Header>
