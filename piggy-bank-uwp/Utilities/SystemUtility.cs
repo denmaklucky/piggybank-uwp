@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace piggy_bank_uwp.Utilities
 {
@@ -16,6 +13,11 @@ namespace piggy_bank_uwp.Utilities
                 locale = Constants.DefaultLocale;
 
             return locale;
+        }
+
+        public static string GetGuid()
+        {
+            return Guid.NewGuid().ToString().Replace('-', ' ');
         }
     }
 }
