@@ -36,7 +36,7 @@
                 <!--Date-->
                 <StackPanel Orientation="Vertical" Margin="15">
                     <TextBlock Text="Data" Style="{StaticResource HeaderTextBlock}"/>
-                    <TextBlock Text="{x:Bind _cost.Date, Mode=OneWay}" FontSize="18"/>
+                    <!--<TextBlock Text="{x:Bind _cost.Date, Mode=OneWay}" FontSize="18"/>-->
                 </StackPanel>
 
                 <!--Cost-->
