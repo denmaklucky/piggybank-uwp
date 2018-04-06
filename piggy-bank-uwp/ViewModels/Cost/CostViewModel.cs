@@ -1,20 +1,33 @@
 ﻿using piggy_bank_uwp.Model;
+using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel.Tag;
+using piggy_bank_uwp.ViewModels.Interface;
+using System;
+using System.Linq;
 
 namespace piggy_bank_uwp.ViewModel.Cost
 {
-    public class CostViewModel : BaseViewModel
+    public class CostViewModel : BaseViewModel, IUpdateable
     {
         public CostViewModel()
         {
-
+            Model = new CostModel { Id = SystemUtility.GetGuid() };
+            IsNew = true;
         }
 
         internal CostViewModel(CostModel model)
-            : this()
         {
             Model = model;
+            Category = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == CategoryId);
+            IsNew = false;
         }
+
+        public void Update()
+        {
+            RaisePropertiesChanged();
+        }
+
+        public bool IsNew { get; private set; }
 
         public string Comment
         {
@@ -46,15 +59,54 @@ namespace piggy_bank_uwp.ViewModel.Cost
             }
         }
 
+        //TODO: throw Exception
+        public DateTimeOffset Date
+        {
+            get
+            {
+                return DateUtility.GetDateTime(Model.Date);
+            }
+            set
+            {
+                Model.Date = DateUtility.GetTimeUtc(value);
+            }
+        } 
+
         public string CostWithCurrency
         {
             get
             {
-                return Model.Cost + MainViewModel.Current.Currency;
+                return Model.Cost + MainViewModel.Current.Balance.Currency;
             }
         }
 
-        public TagViewModel Tag { get; }
+        public string Id
+        {
+            get
+            {
+                return Model.Id;
+            }
+        }
+
+        public string CategoryId
+        {
+            get
+            {
+                return Model.CategoryId;
+            }
+        }
+
+        public CategoryViewModel Category
+        {
+            get
+            {
+                return MainViewModel.Current.Categories.FirstOrDefault(c => c.Id == CategoryId);
+            }
+            set
+            {
+                Model.CategoryId = value.Id;
+            }
+        }
 
         internal CostModel Model { get; }
     }

@@ -12,7 +12,7 @@ namespace piggy_bank_uwp.Fabrics
 	{
 		public static IEnumerable<CostViewModel> GetCosts()
 		{
-			TagModel tag = new TagModel { Title = "Лишние расходы", HexColor = "#F27464" };
+			CategoryModel tag = new CategoryModel { Title = "Лишние расходы", HexColor = "#F27464" };
 			CostModel costModel = new CostModel
 			{
 				Comment = "Сходили в кино",
@@ -21,7 +21,7 @@ namespace piggy_bank_uwp.Fabrics
 			CostViewModel cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "Продукты. питания", HexColor = "#3C903C" };
+			tag = new CategoryModel { Title = "Продукты. питания", HexColor = "#3C903C" };
 			costModel = new CostModel
 			{
 				Comment = "Купил продукты в Спаре",
@@ -31,7 +31,7 @@ namespace piggy_bank_uwp.Fabrics
 			cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "Без категории", HexColor = "#241B9D" };
+			tag = new CategoryModel { Title = "Без категории", HexColor = "#241B9D" };
 			costModel = new CostModel
 			{
 				Comment = "Проезд до Глаба Успенского",
@@ -41,7 +41,7 @@ namespace piggy_bank_uwp.Fabrics
 			cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "тусэ", HexColor = "#EC6618" };
+			tag = new CategoryModel { Title = "тусэ", HexColor = "#EC6618" };
 			costModel = new CostModel
 			{
 				Comment = "Сходили в клуб на Грот",
@@ -51,7 +51,7 @@ namespace piggy_bank_uwp.Fabrics
 			cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "Квартира", HexColor = "#8C409C" };
+			tag = new CategoryModel { Title = "Квартира", HexColor = "#8C409C" };
 			costModel = new CostModel
 			{
 				Comment = "Оплатил комунальные услуги",
@@ -61,7 +61,7 @@ namespace piggy_bank_uwp.Fabrics
 			cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "Животные", HexColor = "#0A29F5" };
+			tag = new CategoryModel { Title = "Животные", HexColor = "#0A29F5" };
 			costModel = new CostModel
 			{
 				Comment = "Купил Софии корм",
@@ -71,7 +71,7 @@ namespace piggy_bank_uwp.Fabrics
 			cost = new CostViewModel(costModel);
 			yield return cost;
 
-			tag = new TagModel { Title = "Продукты. питания", HexColor = "#3C903C" };
+			tag = new CategoryModel { Title = "Продукты. питания", HexColor = "#3C903C" };
 			costModel = new CostModel
 			{
 				Comment = "Закупили продукты на недели в Ленте",

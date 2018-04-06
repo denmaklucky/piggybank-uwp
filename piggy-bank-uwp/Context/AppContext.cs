@@ -7,7 +7,6 @@ namespace piggy_bank_uwp.Context
     {
         public AppContext()
         {
-            //TODO:find out
             Database.EnsureCreated();
         }
 
@@ -18,6 +17,6 @@ namespace piggy_bank_uwp.Context
 
         public DbSet<CostModel> Costs { get; set; }
 
-        public DbSet<TagModel> Tags { get; set; }
+        public DbSet<CategoryModel> Categories { get; set; }
     }
 }

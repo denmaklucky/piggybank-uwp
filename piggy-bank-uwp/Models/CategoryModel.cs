@@ -2,7 +2,7 @@
 
 namespace piggy_bank_uwp.Model
 {
-    public sealed class TagModel : IBaseModel
+    public sealed class CategoryModel : IBaseModel
     {
         public string HexColor { get; set; }
 

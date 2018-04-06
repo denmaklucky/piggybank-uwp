@@ -4,6 +4,9 @@ using piggy_bank_uwp.View.Costs;
 using piggy_bank_uwp.View.Diagram;
 using piggy_bank_uwp.View.Donate;
 using piggy_bank_uwp.ViewModel;
+using piggy_bank_uwp.ViewModel.Cost;
+using piggy_bank_uwp.ViewModel.Tag;
+using piggy_bank_uwp.Views.Categories;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -61,7 +64,7 @@ namespace piggy_bank_uwp.View
 
         private void OnNavigateEditCost(object sender, RoutedEventArgs e)
         {
-            MainContainer.Navigate(typeof(EditCostPage));
+            MainContainer.Navigate(typeof(EditCostPage), new CostViewModel());
         }
 
         private void OnNavigateDonate(object sender, RoutedEventArgs e)
@@ -109,6 +112,16 @@ namespace piggy_bank_uwp.View
             }
 
             e.Handled = true;
+        }
+
+        private void OnAddedCategoryClick(object sender, RoutedEventArgs e)
+        {
+            MainContainer.Navigate(typeof(EditCategoryPage), new CategoryViewModel());
+        }
+
+        private void OnNavigateEditCategory(object sender, ItemClickEventArgs e)
+        {
+            MainContainer.Navigate(typeof(EditCategoryPage), e.ClickedItem);
         }
     }
 }

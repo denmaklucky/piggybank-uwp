@@ -10,7 +10,7 @@ namespace piggy_bank_uwp.Model
 
         public string Comment { get; set; }
 
-        public string TagId { get; set; }
+        public string CategoryId { get; set; }
 
         public string Id { get; set; }
     }

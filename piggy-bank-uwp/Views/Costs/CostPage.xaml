@@ -6,13 +6,6 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Page.Resources>
-        <Style x:Name="HeaderTextBlock" TargetType="TextBlock">
-            <Setter Property="FontSize" Value="18"/>
-            <Setter Property="Margin" Value="0 0 0 5"/>
-        </Style>
-    </Page.Resources>
-    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -22,17 +15,14 @@
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical" Margin="15">
                 <!--Tag-->
-                <Grid Margin="15" HorizontalAlignment="Left">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="Auto"/>
-                    </Grid.RowDefinitions>
+                <StackPanel Margin="15" HorizontalAlignment="Left" Orientation="Vertical">
+                    <TextBlock Grid.Row="0" Text="Category" Style="{StaticResource HeaderTextBlock}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Ellipse Height="18" Width="18" Fill="{x:Bind _cost.Category.Color}"/>
+                        <TextBlock Text="{x:Bind _cost.Category.Title, Mode=OneWay}" FontSize="18" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </StackPanel>
 
-                    <TextBlock Grid.Row="0" Text="Tag" Style="{StaticResource HeaderTextBlock}"/>
-                    <Rectangle Grid.Row="1" Fill="{x:Bind _cost.Tag.Color}"/>
-                    <TextBlock Grid.Row="1" Text="{x:Bind _cost.Tag.Title, Mode=OneWay}" FontSize="18"/>
-                </Grid>
-                
                 <!--Date-->
                 <StackPanel Orientation="Vertical" Margin="15">
                     <TextBlock Text="Data" Style="{StaticResource HeaderTextBlock}"/>
@@ -50,7 +40,7 @@
                     <TextBlock Text="Comment" Style="{StaticResource HeaderTextBlock}"/>
                     <TextBlock Text="{x:Bind _cost.Comment, Mode=OneWay}" MaxHeight="200" TextWrapping="WrapWholeWords" FontSize="18"/>
                 </StackPanel>
-                
+
             </StackPanel>
         </ScrollViewer>
 

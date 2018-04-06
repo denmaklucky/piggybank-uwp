@@ -1,9 +1,12 @@
 ﻿using piggy_bank_uwp.Fabrics;
+using piggy_bank_uwp.Model;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
+using piggy_bank_uwp.ViewModels.Balance;
+using piggy_bank_uwp.Workers;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Globalization;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace piggy_bank_uwp.ViewModel
@@ -13,24 +16,66 @@ namespace piggy_bank_uwp.ViewModel
         private MainViewModel()
         {
             Costs = new ObservableCollection<CostViewModel>();
-            Tags = new List<TagViewModel>();
-            CurrentBalance = "45000 Р";
-            Currency = NumberFormatInfo.CurrentInfo.CurrencySymbol;
+            Categories = new ObservableCollection<CategoryViewModel>();
+            DbWorker = DbWorker.Current;
+            Balance = new BalanceViewModel();
         }
 
         public void Init()
         {
-            foreach (var cost in CostFactory.GetCosts())
+            IsInit = false;
+
+            List<CategoryModel> categories = null;
+
+            //TOD: check other method a count 
+            if (DbWorker.GetCategories().Count == 0)
             {
-                Costs.Add(cost);
+                categories = CategoryFactory.GetCategories().ToList();
+                foreach (var category in categories)
+                {
+                    DbWorker.AddCategory(category);
+                }
+            }
+            else
+            {
+                categories = DbWorker.GetCategories();
             }
 
-            foreach (var tag in TagFactory.GetTags())
+            foreach (var category in categories)
             {
-                Tags.Add(tag);
+                Categories.Add(new CategoryViewModel(category));
             }
 
-            RaisePropertyChanged(nameof(Cost));
+            foreach (var cost in DbWorker.GetCosts())
+            {
+                Costs.Add(new CostViewModel(cost));
+            }
+
+            IsInit = true;
+        }
+
+        #region Costs
+
+        internal Task AddCost(CostViewModel newCost)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                App.RunUIAsync(() =>
+                {
+                    Costs.Insert(0, newCost);
+                });
+
+                DbWorker.AddCost(newCost.Model);
+            });
+        }
+
+        internal Task UpdateCost(CostViewModel updateCost)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                updateCost.Update();
+                DbWorker.UpdateCost(updateCost.Model);
+            });
         }
 
         internal Task DeleteCost(CostViewModel cost)
@@ -42,17 +87,59 @@ namespace piggy_bank_uwp.ViewModel
                     Costs.Remove(cost);
                 });
 
-                RaisePropertyChanged(nameof(Costs));
+                DbWorker.RemoveCost(cost.Model);
+            });
+        }
+        #endregion
+
+        #region Category
+
+        internal Task AddCategory(CategoryViewModel newCategory)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                App.RunUIAsync(() =>
+                {
+                    Categories.Add(newCategory);
+                });
+
+                DbWorker.AddCategory(newCategory.Model);
             });
         }
 
-        public string CurrentBalance { get; private set; }
+        internal Task UpdateCategory(CategoryViewModel updateTag)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                updateTag.Update();
+                DbWorker.UpdateCategory(updateTag.Model);
+            });
+        }
+
+        internal Task DeleteCategory(CategoryViewModel category)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                App.RunUIAsync(() =>
+                {
+                    Categories.Remove(category);
+                });
+
+                DbWorker.RemoveCategory(category.Model);
+            });
+        }
+
+        #endregion
+
+        public bool IsInit { get; private set; }
 
         public ObservableCollection<CostViewModel> Costs { get; }
 
-        public List<TagViewModel> Tags { get; }
+        public ObservableCollection<CategoryViewModel> Categories { get; }
 
-        public string Currency { get; set; }
+        public BalanceViewModel Balance { get; }
+
+        public DbWorker DbWorker { get; }
 
         public static MainViewModel Current = new MainViewModel();
     }

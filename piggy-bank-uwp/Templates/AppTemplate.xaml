@@ -19,18 +19,21 @@
                     <ColumnDefinition Width="0.3*"/>
                 </Grid.ColumnDefinitions>
                 <!--Tag-->
-                <Grid Grid.Column="0" DataContext="{Binding Path=Tag, Mode=OneWay}">
+                <Grid Grid.Column="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="15"/>
                         <ColumnDefinition Width="0.5*"/>
                     </Grid.ColumnDefinitions>
-                    
-                    <Ellipse Grid.Column="0" Fill="{Binding Path=Color, Mode=OneWay}" Height="54" Width="54" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    <Ellipse Grid.Column="0" Fill="White" Height="31" Width="31" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-                    <Ellipse Grid.Column="0" Fill="{Binding Path=Color, Mode=OneWay}" Height="27" Width="27" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
-                    <TextBlock Grid.Column="2" Text="{Binding Path=Title}" FontSize="18" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                    <Ellipse Grid.Column="0" Fill="{Binding Path=Category.Color, Mode=OneWay}" Height="54" Width="54" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <Ellipse Grid.Column="0" Fill="White" Height="31" Width="31" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    <Ellipse Grid.Column="0" Fill="{Binding Path=Category.Color, Mode=OneWay}" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+                    <StackPanel Grid.Column="2">
+                        <TextBlock Text="{Binding Path=Comment}" FontSize="12" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="{Binding Path=Category.Title}" FontSize="18" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+                    </StackPanel>
                 </Grid>
 
                 <!--Cost-->
@@ -39,7 +42,25 @@
                     <Run Text="{Binding Path=CostWithCurrency, Mode=OneWay}"/>
                 </TextBlock>
             </Grid>
+        </Grid>
+    </DataTemplate>
 
+    <DataTemplate x:Name="ListViewItemCategory">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Ellipse Grid.Column="0" Fill="{Binding Path=Color, Mode=OneWay}" Height="54" Width="54"
+                     HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            
+            <TextBlock Grid.Column="2" Text="{Binding Path=Title}" FontSize="18" 
+                       TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
+
+            <AppBarButton Grid.Column="3" Icon="Edit" IsEnabled="False" HorizontalAlignment="Right"/>
         </Grid>
     </DataTemplate>
 
