@@ -6,4 +6,9 @@
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
     </Style>
 
+    <Style x:Name="HeaderTextBlock" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Margin" Value="0 0 0 5"/>
+    </Style>
+
 </ResourceDictionary>

@@ -101,8 +101,21 @@
 
             <Pivot x:Name="Setting" Background="{StaticResource MasterBackgroundBrush}" Visibility="Collapsed">
                 <!--Tags-->
-                <PivotItem Header="Tag">
+                <PivotItem Header="Categories">
+                    <Grid Padding="-10 0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
 
+                        <ListView Grid.Row="0" ItemsSource="{Binding Path=Categories}"
+                          ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCategory}"
+                          IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateEditCategory"/>
+
+                        <CommandBar Grid.Row="1">
+                            <AppBarButton Icon="Add" Label="Add category" Click="OnAddedCategoryClick"/>
+                        </CommandBar>
+                    </Grid>
                 </PivotItem>
                 <!--Curency-->
                 <PivotItem Header="Cutency">
