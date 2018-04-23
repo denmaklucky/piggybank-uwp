@@ -84,7 +84,7 @@ namespace piggy_bank_uwp.View
 
         private void OnNavigateCost(object sender, ItemClickEventArgs e)
         {
-            MainContainer.Navigate(typeof(CostPage), e.ClickedItem);
+            MainContainer.Navigate(typeof(EditCostPage), e.ClickedItem);
         }
 
         #endregion
