@@ -63,5 +63,10 @@ namespace piggy_bank_uwp.View.Costs
         {
             _cost.Category = e.AddedItems[0] as CategoryViewModel;
         }
+
+        private void OnDeleteClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            MainViewModel.Current.DeleteCost(_cost);
+        }
     }
 }

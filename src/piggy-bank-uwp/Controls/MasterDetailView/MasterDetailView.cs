@@ -20,15 +20,23 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             DefaultStyleKey = typeof(MasterDetailView);
             _defaultPage = new DefaultPage();
 
-            Loaded += OnLoaded;
-            Unloaded += OnUnloaded;
             SizeChanged += OnSizeChanged;
         }
 
-        public void Navigate(Type pageTyep, object parameter = null)
+        public void Navigate(Type pageType, object parameter = null)
         {
-            _detailPresenter.Navigate(pageTyep, parameter);
+            _detailPresenter.Navigate(pageType, parameter);
             UpdateView();
+        }
+
+        public void Subscribe()
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
+
+        public void Unsubscribe()
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
         }
 
         protected override void OnApplyTemplate()
@@ -36,6 +44,8 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             _masterPresenter = (ContentPresenter)GetTemplateChild("MasterPresenter");
             _detailPresenter = (Frame)GetTemplateChild("DetailPresenter");
             _stateGroup = (VisualStateGroup)GetTemplateChild("AdaptiveStates");
+            //Set a default page
+            _detailPresenter.Navigate(typeof(DefaultPage));
 
             _stateGroup.CurrentStateChanged += OnCurrentStateChanged;
 
@@ -54,16 +64,6 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             UpdateView();
             //Get a current state
             StateChanged?.Invoke(this, CurrentState);
-        }
-
-        private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-        }
-
-        private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
