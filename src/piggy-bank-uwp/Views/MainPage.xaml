@@ -5,7 +5,6 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MainContainer="using:piggy_bank_uwp.Controls.MasterDetailView"
-    xmlns:View ="using:piggy_bank_uwp.View.Default"
     mc:Ignorable="d"
     Loaded="OnLoaded"
     Unloaded="OnUnloaded">
@@ -58,9 +57,7 @@
                                           HorizontalContentAlignment="Stretch"
                                           VerticalContentAlignment="Stretch"/>
 
-                                <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}">
-                                    <View:DefaultPage/>
-                                </Frame>
+                                <Frame x:Name="DetailPresenter" Background="{TemplateBinding Background}"/>
                             </Grid>
                         </ControlTemplate>
                     </Setter.Value>

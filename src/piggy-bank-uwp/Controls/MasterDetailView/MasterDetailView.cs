@@ -25,9 +25,9 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             SizeChanged += OnSizeChanged;
         }
 
-        public void Navigate(Type pageTyep, object parameter = null)
+        public void Navigate(Type pageType, object parameter = null)
         {
-            _detailPresenter.Navigate(pageTyep, parameter);
+            _detailPresenter.Navigate(pageType, parameter);
             UpdateView();
         }
 
@@ -36,6 +36,8 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             _masterPresenter = (ContentPresenter)GetTemplateChild("MasterPresenter");
             _detailPresenter = (Frame)GetTemplateChild("DetailPresenter");
             _stateGroup = (VisualStateGroup)GetTemplateChild("AdaptiveStates");
+            //Set a default page
+            _detailPresenter.Navigate(typeof(DefaultPage));
 
             _stateGroup.CurrentStateChanged += OnCurrentStateChanged;
 
