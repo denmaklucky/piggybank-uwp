@@ -12,3 +12,8 @@
     <br>    
   </p>
 </p>
+
+## Dependencies
+The app uses the following NuGet packages to work:
+* [Microsfot.EntityFrameworkCore.Sqlite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite/2.1.0-preview2-final)
+* [Microsfot.EntityFrameworkCore.Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/2.1.0-preview2-final)
