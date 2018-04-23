@@ -42,6 +42,7 @@
 
         <CommandBar Grid.Row="1">
             <AppBarButton Icon="Save" Label="Save" Click="OnSaveClick"/>
+            <AppBarButton Icon="Delete" Label="Delete" Click="OnDeleteClick"/>
             <AppBarButton Icon="Cancel" Label="Close" Click="OnCloseClick"/>
         </CommandBar>
     </Grid>
