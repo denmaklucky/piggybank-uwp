@@ -17,7 +17,7 @@ namespace piggy_bank_uwp.Utilities
 
         public static string GetGuid()
         {
-            return Guid.NewGuid().ToString().Replace('-', ' ');
+            return Guid.NewGuid().ToString().Replace("-", "");
         }
     }
 }
