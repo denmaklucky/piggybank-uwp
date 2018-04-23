@@ -1,12 +1,12 @@
 ﻿using piggy_bank_uwp.Models;
 
-namespace piggy_bank_uwp.Model
+namespace piggy_bank_uwp.Models
 {
     public sealed class CostModel : IBaseModel
     {
         public long Date { get; set; }
 
-        public ulong Cost { get; set; }
+        public int Cost { get; set; }
 
         public string Comment { get; set; }
 
