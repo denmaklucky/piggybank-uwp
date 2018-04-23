@@ -40,6 +40,7 @@ namespace piggy_bank_uwp.ViewModels.Balance
         {
             Balance += delta;
 
+            Finalization();
             RaisePropertyChanged(nameof(CurrentBalance));
         }
 

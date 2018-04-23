@@ -8,13 +8,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace piggy_bank_uwp.Views.Categories
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
+
     public sealed partial class EditCategoryPage : Page
     {
         private CategoryViewModel _category;
@@ -37,6 +33,11 @@ namespace piggy_bank_uwp.Views.Categories
         private void OnDeleteClick(object sender, RoutedEventArgs e)
         {
             MainViewModel.Current.DeleteCategory(_category);
+
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         private void OnSaveClick(object sender, RoutedEventArgs e)
@@ -48,6 +49,11 @@ namespace piggy_bank_uwp.Views.Categories
             else
             {
                 MainViewModel.Current.UpdateCategory(_category);
+            }
+
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
             }
         }
 

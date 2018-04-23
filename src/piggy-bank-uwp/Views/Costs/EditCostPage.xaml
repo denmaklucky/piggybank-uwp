@@ -35,7 +35,7 @@
                                          FontSize="18" Margin="15"/>
                 <!--Comment-->
                 <TextBox Header="Comment" Text="{x:Bind _cost.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18"
-                         MaxHeight="200" Margin="15"/>
+                         Height="200" Margin="15" TextWrapping="Wrap"/>
 
             </StackPanel>
         </ScrollViewer>
