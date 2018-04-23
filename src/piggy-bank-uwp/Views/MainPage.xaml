@@ -84,7 +84,8 @@
                           IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateCost">
                     <ListView.Header>
                         <StackPanel Tapped="OnNavigateDiagram" Height="150">
-                            <TextBlock Text="{Binding Path=CurrentBalance, Mode=OneWay}" FontSize="24" HorizontalAlignment="Center" Padding="10"/>
+                            <TextBlock Text="{Binding Path=Balance.CurrentBalance, Mode=OneWay}"
+                                       FontSize="24" HorizontalAlignment="Center" Padding="10"/>
                         </StackPanel>
                     </ListView.Header>
                 </ListView>
@@ -109,17 +110,14 @@
                         </Grid.RowDefinitions>
 
                         <ListView Grid.Row="0" ItemsSource="{Binding Path=Categories}"
-                          ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCategory}"
-                          IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateEditCategory"/>
+                                  ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}"
+                                  ItemTemplate="{StaticResource ResourceKey=ListViewItemCategory}"
+                                  IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateEditCategory"/>
 
                         <CommandBar Grid.Row="1">
                             <AppBarButton Icon="Add" Label="Add category" Click="OnAddedCategoryClick"/>
                         </CommandBar>
                     </Grid>
-                </PivotItem>
-                <!--Curency-->
-                <PivotItem Header="Cutency">
-
                 </PivotItem>
                 <!--Sincranization-->
                 <PivotItem Header="Sincranization">

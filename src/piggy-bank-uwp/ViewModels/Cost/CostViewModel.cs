@@ -1,4 +1,4 @@
-﻿using piggy_bank_uwp.Model;
+﻿using piggy_bank_uwp.Models;
 using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Interface;
@@ -44,7 +44,7 @@ namespace piggy_bank_uwp.ViewModel.Cost
             }
         }
 
-        public ulong Cost
+        public int Cost
         {
             get
             {

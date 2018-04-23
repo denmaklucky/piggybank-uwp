@@ -11,7 +11,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-
+using Windows.UI.Xaml.Navigation;
 
 namespace piggy_bank_uwp.View
 {
@@ -74,7 +74,7 @@ namespace piggy_bank_uwp.View
 
         private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
         {
-            MainContainer.Navigate(typeof(EditBalancePage));
+            MainContainer.Navigate(typeof(EditBalancePage), _mainViewModel.Balance);
         }
 
         private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
