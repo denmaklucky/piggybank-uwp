@@ -1,9 +1,10 @@
 ﻿using piggy_bank_uwp.Fabrics;
-using piggy_bank_uwp.Model;
+using piggy_bank_uwp.Models;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Balance;
 using piggy_bank_uwp.Workers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -51,7 +52,19 @@ namespace piggy_bank_uwp.ViewModel
                 Costs.Add(new CostViewModel(cost));
             }
 
+            Balance.Initialization();
+
             IsInit = true;
+        }
+
+        public void Finit()
+        {
+            Balance.Finalization();
+        }
+
+        internal void UpdateData()
+        {
+            RaisePropertyChanged(nameof(Balance));
         }
 
         #region Costs
@@ -65,7 +78,10 @@ namespace piggy_bank_uwp.ViewModel
                     Costs.Insert(0, newCost);
                 });
 
+                Balance.AddCost(newCost.Cost);
                 DbWorker.AddCost(newCost.Model);
+
+                RaisePropertyChanged(nameof(Balance));
             });
         }
 

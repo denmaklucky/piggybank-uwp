@@ -1,30 +1,46 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using piggy_bank_uwp.ViewModel;
+using piggy_bank_uwp.ViewModels.Balance;
+using System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace piggy_bank_uwp.View.Balance
 {
-	/// <summary>
-	/// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-	/// </summary>
-	public sealed partial class EditBalancePage : Page
-	{
-		public EditBalancePage()
-		{
-			this.InitializeComponent();
-		}
-	}
+    public sealed partial class EditBalancePage : Page
+    {
+        private BalanceViewModel _balance;
+
+        public EditBalancePage()
+        {
+            this.InitializeComponent();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            _balance = e.Parameter as BalanceViewModel;
+        }
+
+        private void OnSaveClick(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(ChangeBalanceTextBox.Text))
+            {
+                _balance.ChanngeBalance(Int32.Parse(ChangeBalanceTextBox.Text));
+                MainViewModel.Current.UpdateData();
+            }
+
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
+
+        private void OnCloseClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
+    }
 }

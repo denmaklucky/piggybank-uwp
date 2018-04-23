@@ -6,137 +6,138 @@ using Windows.UI.Xaml.Controls;
 
 namespace piggy_bank_uwp.Controls.MasterDetailView
 {
-	public class MasterDetailView : ContentControl
-	{
-		private const string NARROW_STATE = "NarrowState";
+    public class MasterDetailView : ContentControl
+    {
+        private const string NARROW_STATE = "NarrowState";
 
-		private ContentPresenter _masterPresenter;
-		private Frame _detailPresenter;
-		private VisualStateGroup _stateGroup;
-		private DefaultPage _defaultPage;
+        private ContentPresenter _masterPresenter;
+        private Frame _detailPresenter;
+        private VisualStateGroup _stateGroup;
+        private DefaultPage _defaultPage;
 
-		public MasterDetailView()
-		{
-			DefaultStyleKey = typeof(MasterDetailView);
-			_defaultPage = new DefaultPage();
+        public MasterDetailView()
+        {
+            DefaultStyleKey = typeof(MasterDetailView);
+            _defaultPage = new DefaultPage();
 
-			Loaded += OnLoaded;
-			Unloaded += OnUnloaded;
-			SizeChanged += OnSizeChanged;
-		}
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+            SizeChanged += OnSizeChanged;
+        }
 
-		public void Navigate(Type pageTyep, object parameter = null)
-		{		
-			_detailPresenter.Navigate(pageTyep, parameter);
-			UpdateView();
-		}
+        public void Navigate(Type pageTyep, object parameter = null)
+        {
+            _detailPresenter.Navigate(pageTyep, parameter);
+            UpdateView();
+        }
 
-		protected override void OnApplyTemplate()
-		{
-			_masterPresenter = (ContentPresenter)GetTemplateChild("MasterPresenter");
-			_detailPresenter = (Frame)GetTemplateChild("DetailPresenter");
-			_stateGroup = (VisualStateGroup)GetTemplateChild("AdaptiveStates");
+        protected override void OnApplyTemplate()
+        {
+            _masterPresenter = (ContentPresenter)GetTemplateChild("MasterPresenter");
+            _detailPresenter = (Frame)GetTemplateChild("DetailPresenter");
+            _stateGroup = (VisualStateGroup)GetTemplateChild("AdaptiveStates");
 
-			_stateGroup.CurrentStateChanged += OnCurrentStateChanged;
+            _stateGroup.CurrentStateChanged += OnCurrentStateChanged;
 
-			UpdateView();
-		}
+            UpdateView();
+        }
 
-		private void OnCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
-		{
-			UpdateView();
-			//Get a current state
-			StateChanged?.Invoke(this, CurrentState);
-		}
+        private void OnCurrentStateChanged(object sender, VisualStateChangedEventArgs e)
+        {
+            UpdateView();
+            //Get a current state
+            StateChanged?.Invoke(this, CurrentState);
+        }
 
-		private void OnSizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			UpdateView();
-			//Get a current state
-			StateChanged?.Invoke(this, CurrentState);
-		}
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateView();
+            //Get a current state
+            StateChanged?.Invoke(this, CurrentState);
+        }
 
-		private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-		{
-			SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-		}
+        private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+        }
 
-		private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-		{
-			SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-		}
+        private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
 
-		private void OnBackRequested(object sender, BackRequestedEventArgs e)
-		{
-			if (CurrentState == MasterDetailState.Wide)
-			{
-				if (_detailPresenter.CanGoBack)
-				{
-					_detailPresenter.GoBack();
-				}
-				else
-				{
-					_detailPresenter.Content = _defaultPage;
-				}
-			}
-			else
-			{
-				if (_detailPresenter.BackStack.Count > 1)
-				{
-					if (_detailPresenter.CanGoBack)
-					{
-						_detailPresenter.GoBack();
-					}
-				}
-				else
-				{
-					_detailPresenter.BackStack.Clear();
-					_detailPresenter.Content = _defaultPage;
-					UpdateView();
-				}
-			}
+        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if (CurrentState == MasterDetailState.Wide)
+            {
+                if (_detailPresenter.CanGoBack)
+                {
+                    _detailPresenter.GoBack();
+                }
+                else
+                {
+                    _detailPresenter.BackStack.Clear();
+                    _detailPresenter.Content = _defaultPage;
+                }
+            }
+            else
+            {
+                if (_detailPresenter.BackStack.Count > 1)
+                {
+                    if (_detailPresenter.CanGoBack)
+                    {
+                        _detailPresenter.GoBack();
+                    }
+                }
+                else
+                {
+                    _detailPresenter.BackStack.Clear();
+                    _detailPresenter.Content = _defaultPage;
+                    UpdateView();
+                }
+            }
 
-			e.Handled = true;
-		}
+            e.Handled = true;
+        }
 
-		private void UpdateView()
-		{
-			if (CurrentState == MasterDetailState.Wide)
-			{
-				_masterPresenter.Visibility = Visibility.Visible;
-				_detailPresenter.Visibility = Visibility.Visible;
-			}
+        private void UpdateView()
+        {
+            if (CurrentState == MasterDetailState.Wide)
+            {
+                _masterPresenter.Visibility = Visibility.Visible;
+                _detailPresenter.Visibility = Visibility.Visible;
+            }
 
-			if(CurrentState == MasterDetailState.Narrow && _detailPresenter.Content is DefaultPage)
-			{
-				_masterPresenter.Visibility = Visibility.Visible;
-				_detailPresenter.Visibility = Visibility.Collapsed;
-			}
+            if (CurrentState == MasterDetailState.Narrow && _detailPresenter.Content is DefaultPage)
+            {
+                _masterPresenter.Visibility = Visibility.Visible;
+                _detailPresenter.Visibility = Visibility.Collapsed;
+            }
 
-			if (CurrentState == MasterDetailState.Narrow && !(_detailPresenter.Content is DefaultPage))
-			{
-				_masterPresenter.Visibility = Visibility.Collapsed;
-				_detailPresenter.Visibility = Visibility.Visible;
-			}
-		}
+            if (CurrentState == MasterDetailState.Narrow && !(_detailPresenter.Content is DefaultPage))
+            {
+                _masterPresenter.Visibility = Visibility.Collapsed;
+                _detailPresenter.Visibility = Visibility.Visible;
+            }
+        }
 
-		public MasterDetailState CurrentState
-		{
-			get
-			{
-				return _stateGroup.CurrentState.Name == NARROW_STATE ? MasterDetailState.Narrow :
-					MasterDetailState.Wide;
-			}
-		}
+        public MasterDetailState CurrentState
+        {
+            get
+            {
+                return _stateGroup.CurrentState.Name == NARROW_STATE ? MasterDetailState.Narrow :
+                    MasterDetailState.Wide;
+            }
+        }
 
-		public bool CanGoBack
-		{
-			get
-			{
-				return !(_detailPresenter.Content is DefaultPage);
-			}
-		}
+        public bool CanGoBack
+        {
+            get
+            {
+                return !(_detailPresenter.Content is DefaultPage);
+            }
+        }
 
-		public event EventHandler<MasterDetailState> StateChanged;
-	}
+        public event EventHandler<MasterDetailState> StateChanged;
+    }
 }
