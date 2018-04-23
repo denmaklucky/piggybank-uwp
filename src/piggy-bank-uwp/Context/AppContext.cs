@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using piggy_bank_uwp.Model;
+using piggy_bank_uwp.Models;
 
 namespace piggy_bank_uwp.Context
 {
@@ -18,5 +18,7 @@ namespace piggy_bank_uwp.Context
         public DbSet<CostModel> Costs { get; set; }
 
         public DbSet<CategoryModel> Categories { get; set; }
+
+        public DbSet<BalanceModel> Balance { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using piggy_bank_uwp.Model;
+﻿using piggy_bank_uwp.Models;
 using piggy_bank_uwp.Utilities;
 using System.Collections.Generic;
 

@@ -1,6 +1,6 @@
 ﻿using piggy_bank_uwp.Models;
 
-namespace piggy_bank_uwp.Model
+namespace piggy_bank_uwp.Models
 {
     public sealed class CategoryModel : IBaseModel
     {

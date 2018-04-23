@@ -101,7 +101,5 @@ namespace piggy_bank_uwp
             //TODO: Save application state and stop any background activity
             deferral.Complete();
         }
-
-
     }
 }
