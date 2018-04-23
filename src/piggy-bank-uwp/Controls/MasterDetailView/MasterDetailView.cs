@@ -20,8 +20,6 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             DefaultStyleKey = typeof(MasterDetailView);
             _defaultPage = new DefaultPage();
 
-            Loaded += OnLoaded;
-            Unloaded += OnUnloaded;
             SizeChanged += OnSizeChanged;
         }
 
@@ -29,6 +27,16 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
         {
             _detailPresenter.Navigate(pageType, parameter);
             UpdateView();
+        }
+
+        public void Subscribe()
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+        }
+
+        public void Unsubscribe()
+        {
+            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
         }
 
         protected override void OnApplyTemplate()
@@ -56,16 +64,6 @@ namespace piggy_bank_uwp.Controls.MasterDetailView
             UpdateView();
             //Get a current state
             StateChanged?.Invoke(this, CurrentState);
-        }
-
-        private void OnUnloaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-        }
-
-        private void OnLoaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)

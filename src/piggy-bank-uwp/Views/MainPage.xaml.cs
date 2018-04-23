@@ -32,11 +32,13 @@ namespace piggy_bank_uwp.View
             DataContext = _mainViewModel;
             OnStateChanged(null, MainContainer.CurrentState);
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+            MainContainer.Subscribe();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
+            MainContainer.Unsubscribe();
         }
 
         #region Navigation
