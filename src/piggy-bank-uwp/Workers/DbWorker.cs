@@ -103,27 +103,33 @@ namespace piggy_bank_uwp.Workers
             return balance;
         }
 
-        internal void UpdateCost(CostModel model)
+        internal void UpdateCost(CostModel updateCost)
         {
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                dbContext.Entry(model).CurrentValues.SetValues(model);
+                CostModel currentCost = dbContext.Costs.FirstOrDefault(c => c.Id == updateCost.Id);
+                dbContext.Entry(currentCost).CurrentValues.SetValues(updateCost);
+                dbContext.SaveChanges();
             }
         }
 
-        internal void UpdateCategory(CategoryModel model)
+        internal void UpdateCategory(CategoryModel updateCategory)
         {
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                dbContext.Entry(model).CurrentValues.SetValues(model);
+                CategoryModel currentCategory = dbContext.Categories.FirstOrDefault(c => c.Id == updateCategory.Id);
+                dbContext.Entry(currentCategory).CurrentValues.SetValues(updateCategory);
+                dbContext.SaveChanges();
             }
         }
 
-        internal void UpdateBalance(BalanceModel model)
+        internal void UpdateBalance(BalanceModel updateBalance)
         {
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                dbContext.Entry(model).CurrentValues.SetValues(model);
+                BalanceModel currentBalance = dbContext.Balance.FirstOrDefault(b => b.Id == updateBalance.Id);
+                dbContext.Entry(currentBalance).CurrentValues.SetValues(updateBalance);
+                dbContext.SaveChanges();
             }
         }
 
