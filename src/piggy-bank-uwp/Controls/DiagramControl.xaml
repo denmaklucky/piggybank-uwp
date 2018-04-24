@@ -1,0 +1,22 @@
+﻿<UserControl
+    x:Class="piggy_bank_uwp.Controls.DiagramControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"    
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Chart"
+    mc:Ignorable="d"
+    d:DesignHeight="300"
+    d:DesignWidth="400"
+    DataContextChanged="OnDataContextChanged">
+
+    <Grid>
+        <telerik:RadPieChart x:Name="Diagram">
+            <telerik:PieSeries ShowLabels="False">
+                <telerik:PieSeries.ValueBinding>
+                    <telerik:PropertyNameDataPointBinding PropertyName="Value"/>
+                </telerik:PieSeries.ValueBinding>
+            </telerik:PieSeries>
+        </telerik:RadPieChart>
+    </Grid>
+</UserControl>

@@ -5,6 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:MainContainer="using:piggy_bank_uwp.Controls.MasterDetailView"
+    xmlns:Controls="using:piggy_bank_uwp.Controls"
     mc:Ignorable="d"
     Loaded="OnLoaded"
     Unloaded="OnUnloaded">
@@ -77,10 +78,12 @@
 
                 <!--Costs-->
                 <ListView Grid.Row="0" ItemsSource="{Binding Path=Costs}"
-                          ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
+                          ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" 
+                          ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
                           IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnNavigateCost">
                     <ListView.Header>
                         <StackPanel Tapped="OnNavigateDiagram" Height="150">
+                            <Controls:DiagramControl DataContext="{Binding Path=Diagram}"/>
                             <TextBlock Text="{Binding Path=Balance.CurrentBalance, Mode=OneWay}"
                                        FontSize="24" HorizontalAlignment="Center" Padding="10"/>
                         </StackPanel>
