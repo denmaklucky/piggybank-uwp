@@ -4,9 +4,37 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:telerik="using:Telerik.UI.Xaml.Controls.Chart"
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <TextBlock Text="DiagramPage" FontSize="48"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <!--Chart-->
+        <telerik:RadPieChart x:Name="Diagram" Grid.Row="0" Height="500" Width="500" Padding="10">
+            <telerik:PieSeries ShowLabels="True">
+                <telerik:PieSeries.ValueBinding>
+                    <telerik:PropertyNameDataPointBinding PropertyName="Value"/>
+                </telerik:PieSeries.ValueBinding>
+            </telerik:PieSeries>
+        </telerik:RadPieChart>
+
+        <ListView x:Name="LabelsListView" Grid.Row="1" SelectionMode="None" IsItemClickEnabled="False">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid  Orientation="Horizontal"/>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <Rectangle Height="15" Width="15" Fill="{Binding Path=Color}"/>
+                        <TextBlock Text="{Binding Path=Title}" Margin="5 0 0 0" TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>

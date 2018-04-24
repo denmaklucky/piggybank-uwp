@@ -81,7 +81,7 @@ namespace piggy_bank_uwp.View
 
         private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
         {
-            MainContainer.Navigate(typeof(DiagramPage));
+            MainContainer.Navigate(typeof(DiagramPage), _mainViewModel.Diagram);
         }
 
         private void OnNavigateCost(object sender, ItemClickEventArgs e)

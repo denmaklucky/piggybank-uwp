@@ -100,6 +100,9 @@
     </Compile>
     <Compile Include="Constants.cs" />
     <Compile Include="Context\AppContext.cs" />
+    <Compile Include="Controls\DiagramControl.xaml.cs">
+      <DependentUpon>DiagramControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MasterDetailView\MasterDetailState.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
     <Compile Include="Controls\PatternTextBox.cs" />
@@ -115,6 +118,8 @@
     <Compile Include="ViewModels\Balance\BalanceViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Cost\CostViewModel.cs" />
+    <Compile Include="ViewModels\Diagram\DataDiagramViewModel.cs" />
+    <Compile Include="ViewModels\Diagram\DiagramViewModel.cs" />
     <Compile Include="ViewModels\Interface\IInitialization.cs" />
     <Compile Include="ViewModels\Interface\IUpdateable.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -213,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\DiagramControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Styles\AppStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,6 +274,9 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Telerik.UI.for.UniversalWindowsPlatform">
+      <Version>1.0.0.9</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

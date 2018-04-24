@@ -1,24 +1,25 @@
 ﻿using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModels.Diagram;
 using Telerik.UI.Xaml.Controls.Chart;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
-namespace piggy_bank_uwp.View.Diagram
+
+namespace piggy_bank_uwp.Controls
 {
-    public sealed partial class DiagramPage : Page
+    public sealed partial class DiagramControl : UserControl
     {
         private DiagramViewModel _diagram;
 
-        public DiagramPage()
+        public DiagramControl()
         {
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        private void OnDataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            _diagram = e.Parameter as DiagramViewModel;
+            _diagram = args.NewValue as DiagramViewModel;
 
             Diagram.Series[0].ItemsSource = _diagram.Datas;
 
@@ -30,7 +31,6 @@ namespace piggy_bank_uwp.View.Diagram
             }
 
             Diagram.Palette = palette;
-            LabelsListView.ItemsSource = _diagram.Datas;
         }
     }
 }

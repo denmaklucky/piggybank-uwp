@@ -3,8 +3,8 @@ using piggy_bank_uwp.Models;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Balance;
+using piggy_bank_uwp.ViewModels.Diagram;
 using piggy_bank_uwp.Workers;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -20,6 +20,7 @@ namespace piggy_bank_uwp.ViewModel
             Categories = new ObservableCollection<CategoryViewModel>();
             DbWorker = DbWorker.Current;
             Balance = new BalanceViewModel();
+            Diagram = new DiagramViewModel();
         }
 
         public void Init()
@@ -53,6 +54,7 @@ namespace piggy_bank_uwp.ViewModel
             }
 
             Balance.Initialization();
+            Diagram.Initialization();
 
             IsInit = true;
         }
@@ -154,6 +156,8 @@ namespace piggy_bank_uwp.ViewModel
         public ObservableCollection<CategoryViewModel> Categories { get; }
 
         public BalanceViewModel Balance { get; }
+
+        public DiagramViewModel Diagram { get; set; }
 
         public DbWorker DbWorker { get; }
 
