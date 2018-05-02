@@ -124,6 +124,7 @@
     <Compile Include="ViewModels\Interface\IUpdateable.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\Services\OneDriveViewModel.cs" />
     <Compile Include="Views\Balance\EditBalancePage.xaml.cs">
       <DependentUpon>EditBalancePage.xaml</DependentUpon>
     </Compile>
@@ -303,6 +304,12 @@
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.0.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.OneDriveSDK">
+      <Version>2.0.7</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.OneDriveSDK.Authentication">
+      <Version>1.0.10</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Services.Store.Engagement">
       <Version>10.1711.28001</Version>

@@ -1,30 +1,77 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using piggy_bank_uwp.ViewModel;
+using piggy_bank_uwp.ViewModels.Services;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace piggy_bank_uwp.Views.Sync
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class SyncPage : Page
     {
+        private OneDriveViewModel _oneDrive;
         public SyncPage()
         {
             this.InitializeComponent();
+        }
+
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _oneDrive = MainViewModel.Current.OneDrive;
+
+            await _oneDrive.ResotreAuthenticateUser();
+
+            if (_oneDrive.IsAuthenticated)
+            {
+                ShowLogoutButton();
+            }
+            else
+            {
+                ShowLoginButton();
+            }
+        }
+
+        private void ShowLoginButton()
+        {
+            LoginButton.Visibility = Visibility.Visible;
+            LogoutButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void ShowLogoutButton()
+        {
+            LoginButton.Visibility = Visibility.Collapsed;
+            LogoutButton.Visibility = Visibility.Visible;
+        }
+
+        private async void OnLoginClick(object sender, RoutedEventArgs e)
+        {
+            await _oneDrive.Login();
+
+            if (_oneDrive.IsAuthenticated)
+            {
+                ShowLogoutButton();
+                _oneDrive.SaveCacheBlod();
+                await _oneDrive.CreateData();
+            }
+            else
+            {
+                ShowLoginButton();
+            }
+        }
+
+        private async void OnLogoutClick(object sender, RoutedEventArgs e)
+        {
+             await _oneDrive.Logout();
+
+            if (_oneDrive.IsAuthenticated)
+            {
+                ShowLogoutButton();
+            }
+            else
+            {
+                ShowLoginButton();
+                _oneDrive.ClrearCacheBlod();
+            }
         }
     }
 }

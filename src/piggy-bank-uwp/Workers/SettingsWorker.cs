@@ -6,6 +6,8 @@ namespace piggy_bank_uwp.Workers
     public sealed class SettingsWorker
     {
         private const string RequestedTheme = "RequestedTheme";
+        private const string CacheBlod = "CacheBlod";
+        private const string FolderId = "FolderId";
 
         private ApplicationDataContainer _localSettings;
 
@@ -27,6 +29,28 @@ namespace piggy_bank_uwp.Workers
                 theme = ApplicationTheme.Light;
 
             return (ApplicationTheme)theme;
+        }
+
+        public void SaveCacheBlod(byte[] cacheBlod)
+        {
+            SaveValue(CacheBlod, cacheBlod);
+        }
+
+        public byte[] GetCahceBlod()
+        {
+            var cacheBlod = GetValue(CacheBlod);
+
+            return cacheBlod as byte[];
+        }
+
+        public void SaveFolderId(string id)
+        {
+            SaveValue(FolderId, id);
+        }
+
+        public string GetFolderId()
+        {
+            return GetValue(FolderId) as string;
         }
 
         private void SaveValue(string key, object value)
