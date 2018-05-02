@@ -20,6 +20,8 @@ namespace piggy_bank_uwp.View.Diagram
         {
             _diagram = e.Parameter as DiagramViewModel;
 
+            _diagram.Initialization();
+
             Diagram.Series[0].ItemsSource = _diagram.Datas;
 
             ChartPalette palette = new ChartPalette { Name = "CustomsDark" };

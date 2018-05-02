@@ -1,17 +1,15 @@
-﻿using piggy_bank_uwp.Controls.MasterDetailView;
-using piggy_bank_uwp.View.Balance;
-using piggy_bank_uwp.View.Costs;
-using piggy_bank_uwp.View.Diagram;
+﻿using piggy_bank_uwp.View.Diagram;
 using piggy_bank_uwp.View.Donate;
 using piggy_bank_uwp.ViewModel;
-using piggy_bank_uwp.ViewModel.Cost;
-using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.Views.Categories;
+using piggy_bank_uwp.Views.Costs;
+using piggy_bank_uwp.Views.SettingsPage;
+using piggy_bank_uwp.Views.Sync;
+using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Navigation;
+using System;
 
 namespace piggy_bank_uwp.View
 {
@@ -30,100 +28,78 @@ namespace piggy_bank_uwp.View
         {
             _mainViewModel.Init();
             DataContext = _mainViewModel;
-            OnStateChanged(null, MainContainer.CurrentState);
             SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
-            MainContainer.Subscribe();
         }
 
         private void OnUnloaded(object sender, RoutedEventArgs e)
         {
             SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-            MainContainer.Unsubscribe();
-        }
-
-        #region Navigation
-
-        #region Setting
-
-        private void OnSettingClick(object sender, RoutedEventArgs e)
-        {
-            ShowSetting();
-        }
-
-        private void ShowStart()
-        {
-            StartGrid.Visibility = Visibility.Visible;
-            Setting.Visibility = Visibility.Collapsed;
-        }
-
-        private void ShowSetting()
-        {
-            StartGrid.Visibility = Visibility.Collapsed;
-            Setting.Visibility = Visibility.Visible;
-        }
-
-        #endregion
-
-        private void OnNavigateEditCost(object sender, RoutedEventArgs e)
-        {
-            MainContainer.Navigate(typeof(EditCostPage), new CostViewModel());
-        }
-
-        private void OnNavigateDonate(object sender, RoutedEventArgs e)
-        {
-            MainContainer.Navigate(typeof(DonatePage));
-        }
-
-        private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
-        {
-            MainContainer.Navigate(typeof(EditBalancePage), _mainViewModel.Balance);
-        }
-
-        private void OnNavigateDiagram(object sender, TappedRoutedEventArgs e)
-        {
-            MainContainer.Navigate(typeof(DiagramPage), _mainViewModel.Diagram);
-        }
-
-        private void OnNavigateCost(object sender, ItemClickEventArgs e)
-        {
-            MainContainer.Navigate(typeof(EditCostPage), e.ClickedItem);
-        }
-
-        #endregion
-
-        private void OnStateChanged(object sender, MasterDetailState e)
-        {
-            if (e == MasterDetailState.Narrow)
-            {
-                Separator.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                Separator.Visibility = Visibility.Visible;
-            }
         }
 
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            if (MainContainer.CanGoBack)
-                return;
-
-            if (StartGrid.Visibility == Visibility.Collapsed)
+            if (ContentFrame.CanGoBack)
             {
-                ShowStart();
+                ContentFrame.GoBack();
+
+                e.Handled = true;
             }
-
-            e.Handled = true;
         }
 
-        private void OnAddedCategoryClick(object sender, RoutedEventArgs e)
+        private void OnItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
-            MainContainer.Navigate(typeof(EditCategoryPage), new CategoryViewModel());
+            if (args.IsSettingsInvoked)
+            {
+                ContentFrame.Navigate(typeof(SettingsPage));
+                NavView.Header = "Settings";
+            }
+            else
+            {
+                var item = sender.MenuItems.OfType<NavigationViewItem>().First(x => (string)x.Content == (string)args.InvokedItem);
+                NavViewNavigate(item as NavigationViewItem);
+            }
         }
 
-        private void OnNavigateEditCategory(object sender, ItemClickEventArgs e)
+        private void NavViewNavigate(NavigationViewItem navigationViewItem)
         {
-            MainContainer.Navigate(typeof(EditCategoryPage), e.ClickedItem);
+            switch (navigationViewItem.Tag)
+            {
+                case Constants.costs:
+                    ContentFrame.Navigate(typeof(CostsPage));
+                    NavView.Header = "Costs";
+                    break;
+                case Constants.categories:
+                    ContentFrame.Navigate(typeof(CategoriesPage));
+                    NavView.Header = "Categories";
+                    break;
+                case Constants.diagrams:
+                    ContentFrame.Navigate(typeof(DiagramPage), _mainViewModel.Diagram);
+                    NavView.Header = "Diagrams";
+                    break;
+                case Constants.synchronization:
+                    ContentFrame.Navigate(typeof(SyncPage));
+                    NavView.Header = "Synchronization";
+                    break;
+                case Constants.donate:
+                    ContentFrame.Navigate(typeof(DonatePage));
+                    NavView.Header = "Donate";
+                    break;
+            }
+        }
+
+        private void OnNavViewLoaded(object sender, RoutedEventArgs e)
+        {
+            var item = NavView.MenuItems.OfType<NavigationViewItem>().First();
+            NavViewNavigate(item as NavigationViewItem);
+        }
+
+        private async void OnFeedbackTapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        {
+            if (Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.IsSupported())
+            {
+                var launcher = Microsoft.Services.Store.Engagement.StoreServicesFeedbackLauncher.GetDefault();
+                await launcher.LaunchAsync();
+            }
         }
     }
 }

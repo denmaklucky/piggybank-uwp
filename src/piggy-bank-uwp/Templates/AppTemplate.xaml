@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <DataTemplate x:Name="ListViewItemCost">
-        <Grid Background="White" Margin="-15 10 -15 0">
+        <Grid Margin="-15 10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="15"/>
                 <ColumnDefinition Width="*"/>
@@ -43,7 +43,7 @@
                 </Grid>
 
                 <!--Cost-->
-                <TextBlock Grid.Column="2" FontSize="18" Foreground="Black" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" TextTrimming="CharacterEllipsis">
+                <TextBlock Grid.Column="2" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Center" FontWeight="SemiBold" TextTrimming="CharacterEllipsis">
                     <Run Text="-"/>
                     <Run Text="{Binding Path=CostWithCurrency, Mode=OneWay}"/>
                 </TextBlock>

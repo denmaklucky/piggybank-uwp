@@ -54,7 +54,6 @@ namespace piggy_bank_uwp.ViewModel
             }
 
             Balance.Initialization();
-            Diagram.Initialization();
 
             IsInit = true;
         }

@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Navigation;
 using piggy_bank_uwp.View;
 using Windows.ApplicationModel.Core;
 using System.Threading.Tasks;
+using Windows.UI;
+using Windows.UI.ViewManagement;
+using piggy_bank_uwp.Workers;
 
 namespace piggy_bank_uwp
 {
@@ -24,6 +27,8 @@ namespace piggy_bank_uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            App.Current.RequestedTheme = SettingsWorker.Current.GetRequestedTheme();
         }
 
         /// <summary>
@@ -64,10 +69,20 @@ namespace piggy_bank_uwp
                 }
                 // Ensure the current window is active
                 Window.Current.Activate();
+
+                ExtendAcrylicIntoTitleBar();
             }
 
             //Back button is visible always
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+        }
+
+        private void ExtendAcrylicIntoTitleBar()
+        {
+            CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+            ApplicationViewTitleBar titleBar = ApplicationView.GetForCurrentView().TitleBar;
+            titleBar.ButtonBackgroundColor = Colors.Transparent;
+            titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
         }
 
         public static Task RunUIAsync(Action agileCallback)

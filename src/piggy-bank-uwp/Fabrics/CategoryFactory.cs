@@ -8,16 +8,16 @@ namespace piggy_bank_uwp.Fabrics
     {
         public static IEnumerable<CategoryModel> GetCategories()
         {
-            CategoryModel category = new CategoryModel { Title = "Foods", HexColor = "#107c10", Id = SystemUtility.GetGuid() };
+            CategoryModel category = new CategoryModel { Title = "Foods", HexColor = "#ff107c10", Id = SystemUtility.GetGuid() };
             yield return category;
 
-            category = new CategoryModel { Title = "Extra costs", HexColor = "#e81123", Id = SystemUtility.GetGuid() };
+            category = new CategoryModel { Title = "Extra costs", HexColor = "#ffe81123", Id = SystemUtility.GetGuid() };
             yield return category;
 
-            category = new CategoryModel { Title = "Home", HexColor = "#ffb900", Id = SystemUtility.GetGuid() };
+            category = new CategoryModel { Title = "Home", HexColor = "#ffffb900", Id = SystemUtility.GetGuid() };
             yield return category;
 
-            category = new CategoryModel { Title = "Work", HexColor = "#0078d7", Id = SystemUtility.GetGuid() };
+            category = new CategoryModel { Title = "Work", HexColor = "#ff0078d7", Id = SystemUtility.GetGuid() };
             yield return category;
         }
     }

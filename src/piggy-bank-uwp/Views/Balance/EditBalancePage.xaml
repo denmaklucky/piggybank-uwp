@@ -21,8 +21,6 @@
                     <TextBlock Text="{x:Bind _balance.CurrentBalance, Mode=OneWay}" FontSize="18"/>
                 </StackPanel>
                 
-                <!--Date-->
-                <CalendarDatePicker Header="Data" FontSize="18" Margin="15"/>
                 <!--Change balance-->
                 <Controls:PatternTextBox x:Name="ChangeBalanceTextBox" Header="Change balance" Pattern="-0123456789"
                                          FontSize="18" Margin="15"/>

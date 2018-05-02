@@ -16,6 +16,8 @@ namespace piggy_bank_uwp.ViewModels.Diagram
         {
             AllCosts = MainViewModel.Current.Costs.Sum(c => c.Cost);
 
+            Datas.Clear();
+
             foreach (var category in MainViewModel.Current.Categories)
             {
                 var costs = MainViewModel.Current.Costs.Where(c => c.CategoryId == category.Id);

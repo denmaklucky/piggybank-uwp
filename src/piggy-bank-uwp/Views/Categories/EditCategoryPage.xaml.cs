@@ -62,5 +62,13 @@ namespace piggy_bank_uwp.Views.Categories
             var selectedItemBrush = (e.AddedItems[0] as Ellipse).Fill as SolidColorBrush;
             _category.Color = selectedItemBrush.ToColor();
         }
+
+        private void OnCloseClick(object sender, RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
     }
 }
