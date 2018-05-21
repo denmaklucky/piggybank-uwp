@@ -6,7 +6,23 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="20 33 0 0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" MaxWidth="700" HorizontalAlignment="Left">
+            <TextBlock Text="Synchronization in Cloud" FontSize="28" FontWeight="SemiBold"/>
+            <TextBlock Text="Синхранизуйте историю своих затрат, что не потерять данные после смены устройства на базе Windows 10 или переустановки приложения." FontSize="18" TextWrapping="WrapWholeWords"/>
+        </StackPanel>
+
+        <StackPanel Grid.Row="2">
+            <PersonPicture  HorizontalAlignment="Left"/>
+            <Button x:Name="LoginButton" Content="Login" Margin="20 10 0 0" Click="OnLoginClick"/>
+            <Button x:Name="LogoutButton" Content="Logout" Visibility="Collapsed" Margin="20 10 0 0" Click="OnLogoutClick"/>
+        </StackPanel>
 
     </Grid>
 </Page>

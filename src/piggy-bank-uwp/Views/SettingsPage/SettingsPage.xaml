@@ -7,7 +7,7 @@
     mc:Ignorable="d"
     Loaded="OnLoaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="10">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0 33 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
