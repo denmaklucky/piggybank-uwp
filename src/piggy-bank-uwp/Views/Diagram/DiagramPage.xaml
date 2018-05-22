@@ -11,13 +11,17 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <!--Chart-->
-        <telerik:RadPieChart x:Name="Diagram" Grid.Row="0" Height="500" Width="500" Padding="10">
-            <telerik:PieSeries ShowLabels="True">
+        <telerik:RadPieChart x:Name="Diagram" Grid.Row="0" Height="500" Width="500">
+            <telerik:PieSeries ShowLabels="True" RadiusFactor="0.8">
                 <telerik:PieSeries.ValueBinding>
                     <telerik:PropertyNameDataPointBinding PropertyName="Value"/>
                 </telerik:PieSeries.ValueBinding>
+                <telerik:PieSeries.LabelDefinitions>
+                    <telerik:ChartSeriesLabelDefinition Margin="-15"/>
+                </telerik:PieSeries.LabelDefinitions>
             </telerik:PieSeries>
         </telerik:RadPieChart>
 
@@ -36,5 +40,39 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+
+        <CommandBar Grid.Row="2">
+            <AppBarButton Label="Filter" Icon="Filter" Click="OnFilterClick">
+                <AppBarButton.Flyout>
+                    <Flyout x:Name="FilterFlyout">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="0.5*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <DatePicker x:Name="StartDatePicker" Grid.Row="0" Header="Start"/>
+
+                            <DatePicker x:Name="EndDatePicker" Grid.Row="1" Header="End"/>
+
+                            <Grid Grid.Row="2">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition Width="0.5*"/>
+                                </Grid.ColumnDefinitions>
+                                <!--I don't now why I can't find a "CheckMark" icon-->
+                                <AppBarButton Grid.Column="0" Click="OnCheckMarkClick" HorizontalAlignment="Stretch">
+                                    <AppBarButton.Icon>
+                                        <FontIcon Glyph="&#xE73E;"/>
+                                    </AppBarButton.Icon>
+                                </AppBarButton>
+                                <AppBarButton Grid.Column="1" Icon="Cancel" HorizontalAlignment="Stretch" Click="OnCancelClick"/>
+                            </Grid>
+                        </Grid>
+                    </Flyout>
+                </AppBarButton.Flyout>
+            </AppBarButton>
+        </CommandBar>
     </Grid>
 </Page>
