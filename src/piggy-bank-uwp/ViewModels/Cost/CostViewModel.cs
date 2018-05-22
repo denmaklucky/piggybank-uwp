@@ -60,7 +60,7 @@ namespace piggy_bank_uwp.ViewModel.Cost
         }
 
         //TODO: throw Exception
-        public DateTimeOffset Date
+        public DateTimeOffset DateOffset
         {
             get
             {
@@ -70,7 +70,16 @@ namespace piggy_bank_uwp.ViewModel.Cost
             {
                 Model.Date = DateUtility.GetTimeUtc(value);
             }
-        } 
+        }
+
+        public string Date
+        {
+            get
+            {
+                string format = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;                
+                return DateUtility.GetDateTime(Model.Date).Date.ToString(format);
+            }
+        }
 
         public string CostWithCurrency
         {

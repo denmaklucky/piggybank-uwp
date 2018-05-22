@@ -81,7 +81,7 @@ namespace piggy_bank_uwp.View
                     NavView.Header = "Synchronization";
                     break;
                 case Constants.donate:
-                    ContentFrame.Navigate(typeof(DonatePage));
+                    ContentFrame.Navigate(typeof(DonatePage), _mainViewModel.Donate);
                     NavView.Header = "Donate";
                     break;
             }

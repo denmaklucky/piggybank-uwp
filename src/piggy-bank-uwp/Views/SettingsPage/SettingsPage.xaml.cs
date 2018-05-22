@@ -1,4 +1,6 @@
 ﻿using piggy_bank_uwp.Workers;
+using System;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -43,6 +45,16 @@ namespace piggy_bank_uwp.Views.SettingsPage
             }
 
             _isLoaded = true;
+        }
+
+        private async void OnHyperlinkButtonClick(object sender, RoutedEventArgs e)
+        {
+            string url = (sender as HyperlinkButton).Tag?.ToString();
+
+            if (string.IsNullOrEmpty(url))
+                return;
+
+            await Launcher.LaunchUriAsync(new Uri(url));
         }
     }
 }

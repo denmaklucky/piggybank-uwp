@@ -106,9 +106,11 @@
     <Compile Include="Controls\MasterDetailView\MasterDetailState.cs" />
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
     <Compile Include="Controls\PatternTextBox.cs" />
+    <Compile Include="Convertes\ConvertDateTimeOffsetToDateTime.cs" />
     <Compile Include="ExtensionMethods\SolidColorBrushExtension.cs" />
     <Compile Include="Fabrics\CostFactory.cs" />
     <Compile Include="Fabrics\CategoryFactory.cs" />
+    <Compile Include="Fabrics\DonateFactory.cs" />
     <Compile Include="Interface\IDetailPage.cs" />
     <Compile Include="Models\BalanceModel.cs" />
     <Compile Include="Models\CostModel.cs" />
@@ -120,7 +122,9 @@
     <Compile Include="ViewModels\Cost\CostViewModel.cs" />
     <Compile Include="ViewModels\Diagram\DataDiagramViewModel.cs" />
     <Compile Include="ViewModels\Diagram\DiagramViewModel.cs" />
-    <Compile Include="ViewModels\Interface\IInitialization.cs" />
+    <Compile Include="ViewModels\Donate\DonateItemViewModel.cs" />
+    <Compile Include="ViewModels\Donate\DonateViewModel.cs" />
+    <Compile Include="ViewModels\Interface\IBaseViewModel.cs" />
     <Compile Include="ViewModels\Interface\IUpdateable.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryViewModel.cs" />
@@ -318,9 +322,7 @@
       <Version>1.0.0.9</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Convertes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <SDKReference Include="Microsoft.Services.Store.Engagement, Version=10.0">
       <Name>Microsoft Engagement Framework</Name>

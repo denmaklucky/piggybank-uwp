@@ -4,6 +4,7 @@ using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Balance;
 using piggy_bank_uwp.ViewModels.Diagram;
+using piggy_bank_uwp.ViewModels.Donate;
 using piggy_bank_uwp.ViewModels.Services;
 using piggy_bank_uwp.Workers;
 using System.Collections.Generic;
@@ -23,6 +24,7 @@ namespace piggy_bank_uwp.ViewModel
             Balance = new BalanceViewModel();
             Diagram = new DiagramViewModel();
             OneDrive = new OneDriveViewModel();
+            Donate = new DonateViewModel();
         }
 
         public void Init()
@@ -56,6 +58,7 @@ namespace piggy_bank_uwp.ViewModel
             }
 
             Balance.Initialization();
+            Donate.Initialization();
 
             IsInit = true;
         }
@@ -161,6 +164,8 @@ namespace piggy_bank_uwp.ViewModel
         public OneDriveViewModel OneDrive { get;}
 
         public DiagramViewModel Diagram { get; }
+
+        public DonateViewModel Donate { get; }
 
         public DbWorker DbWorker { get; }
 

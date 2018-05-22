@@ -7,7 +7,7 @@
     xmlns:Controls ="using:piggy_bank_uwp.Controls"
     xmlns:ViewModels="using:piggy_bank_uwp.ViewModel.Tag"
     mc:Ignorable="d">
-
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0 33 0 0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -29,7 +29,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <!--Date-->
-                <CalendarDatePicker Header="Data" Date="{x:Bind _cost.Date, Mode=TwoWay}" FontSize="18" Margin="15"/>
+                <CalendarDatePicker Header="Data" Date="{x:Bind Path=_cost.DateOffset, Mode=TwoWay}" FontSize="18" Margin="15"/>
                 <!--Cost-->
                 <Controls:PatternTextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" Pattern="0123456789"
                                          FontSize="18" Margin="15"/>
