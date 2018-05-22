@@ -3,7 +3,6 @@ using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModels.Interface;
 using piggy_bank_uwp.Workers;
-using System;
 using System.Globalization;
 
 namespace piggy_bank_uwp.ViewModels.Balance
