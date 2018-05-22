@@ -70,4 +70,25 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Name="ListViewItemDonate">
+        <Grid  Padding="0 10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="15"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Column="0" Source="ms-appx:///Assets/Square44x44Logo.scale-100.png" Height="54" Width="54"/>
+
+            <TextBlock Grid.Column="2" Text="{Binding Path=Title}" FontFamily="18"
+                       VerticalAlignment="Center"/>
+
+            <TextBlock Grid.Column="4" Text="{Binding Path=Price}" FontFamily="18"
+                       VerticalAlignment="Center"/>
+
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>
