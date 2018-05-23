@@ -16,6 +16,7 @@ namespace piggy_bank_uwp.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+        private const int TOTAL_COUNT_COSTS = 10;
         private MainViewModel()
         {
             Costs = new ObservableCollection<CostViewModel>();
@@ -52,7 +53,7 @@ namespace piggy_bank_uwp.ViewModel
                 Categories.Add(new CategoryViewModel(category));
             }
 
-            foreach (var cost in DbWorker.GetCosts())
+            foreach (var cost in DbWorker.GetCosts().Take(TOTAL_COUNT_COSTS))
             {
                 Costs.Add(new CostViewModel(cost));
             }
@@ -71,6 +72,19 @@ namespace piggy_bank_uwp.ViewModel
         internal void UpdateData()
         {
             RaisePropertyChanged(nameof(Balance));
+        }
+
+        internal async Task FetchCosts()
+        {
+            foreach (CostModel item in DbWorker.Current.GetCosts(Costs.Count))
+            {
+                await Task.Delay(600);
+
+                await App.RunUIAsync(() =>
+                {
+                    Costs.Add(new CostViewModel(item));
+                });
+            }
         }
 
         #region Costs
@@ -161,7 +175,7 @@ namespace piggy_bank_uwp.ViewModel
 
         public BalanceViewModel Balance { get; }
 
-        public OneDriveViewModel OneDrive { get;}
+        public OneDriveViewModel OneDrive { get; }
 
         public DiagramViewModel Diagram { get; }
 

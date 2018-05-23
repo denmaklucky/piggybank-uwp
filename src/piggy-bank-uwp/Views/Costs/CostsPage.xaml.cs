@@ -40,5 +40,18 @@ namespace piggy_bank_uwp.Views.Costs
         {
             Frame.Navigate(typeof(EditBalancePage), MainViewModel.Current.Balance);
         }
+
+        private void OnRefreshClick(object sender, RoutedEventArgs e)
+        {
+            RefreshContainer.RequestRefresh();
+        }
+
+        private async void OnRefreshRequested(RefreshContainer sender, RefreshRequestedEventArgs args)
+        {
+            using (var complion = args.GetDeferral())
+            {
+                await MainViewModel.Current.FetchCosts();
+            }
+        }
     }
 }

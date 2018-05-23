@@ -11,12 +11,18 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
-        <ListView x:Name="CostsListView"
+
+        <RefreshContainer x:Name="RefreshContainer" RefreshRequested="OnRefreshRequested"
+                          PullDirection="BottomToTop">
+            <ListView x:Name="CostsListView"
                   ItemContainerStyle="{StaticResource ResourceKey=ListViewStretch}" 
                   ItemTemplate="{StaticResource ResourceKey=ListViewItemCost}"
                   IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnCostItemClick">
-        </ListView>
+            </ListView>
+        </RefreshContainer>
+        
         <CommandBar Grid.Row="1">
+            <AppBarButton Icon="Refresh" AccessKey="R" Label="Refresh" Click="OnRefreshClick"/>
             <AppBarButton Icon="Add" Label="Add category" Click="OnAddedCategoryClick"/>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="Изменить текущий баланс" Click="OnNavigateEditBalance"/>
