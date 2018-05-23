@@ -1,5 +1,8 @@
-﻿using piggy_bank_uwp.ViewModel;
+﻿using piggy_bank_uwp.Models;
+using piggy_bank_uwp.Utilities;
+using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModels.Interface;
+using piggy_bank_uwp.Workers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,17 +18,18 @@ namespace piggy_bank_uwp.ViewModels.Diagram
 
         public void Initialization()
         {
-            AllCosts = MainViewModel.Current.Costs.Sum(c => c.Cost);
+            List<CostModel> costs = DbWorker.Current.GetCosts();
+            AllCosts = costs.Sum(c => c.Cost);
 
             Datas.Clear();
 
             foreach (var category in MainViewModel.Current.Categories)
             {
-                var costs = MainViewModel.Current.Costs.Where(c => c.CategoryId == category.Id);
+                var costsByCategory = costs.Where(c => c.CategoryId == category.Id);
 
-                if(costs.Count() > 0)
+                if(costsByCategory.Count() > 0)
                 {
-                    double sumInCategory = costs.Sum(c => c.Cost);
+                    double sumInCategory = costsByCategory.Sum(c => c.Cost);
                     Datas.Add(
                         new DataDiagramViewModel
                         {
@@ -44,7 +48,7 @@ namespace piggy_bank_uwp.ViewModels.Diagram
 
         public void ApplyFilter(DateTime startDate, DateTime endDate)
         {
-            var costs = MainViewModel.Current.Costs.Where(c => c.DateOffset > startDate && c.DateOffset < endDate);
+            var costs =  DbWorker.Current.GetCosts().Where(c => DateUtility.GetDateTime(c.Date) > startDate && DateUtility.GetDateTime(c.Date) < endDate);
 
             Datas.Clear();
 

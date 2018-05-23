@@ -6,6 +6,8 @@ namespace piggy_bank_uwp.Workers
 {
     public sealed class DbWorker
     {
+        private const int COSTS_COUNT = 5;
+
         private DbWorker() { }
 
         public void AddCost(CostModel cost)
@@ -74,6 +76,23 @@ namespace piggy_bank_uwp.Workers
             using (Context.AppContext dbContext = new Context.AppContext())
             {
                 costs = new List<CostModel>(dbContext.Costs);
+            }
+
+            return costs;
+        }
+
+        /// <summary>
+        /// Return a cost begin with count
+        /// </summary>
+        /// <param name="count">Count is a start index</param>
+        /// <returns></returns>
+        internal IEnumerable<CostModel> GetCosts(int count)
+        {
+            List<CostModel> costs = null;
+
+            using (Context.AppContext dbContext = new Context.AppContext())
+            {
+                costs = new List<CostModel>(dbContext.Costs.Skip(count).Take(COSTS_COUNT));
             }
 
             return costs;
