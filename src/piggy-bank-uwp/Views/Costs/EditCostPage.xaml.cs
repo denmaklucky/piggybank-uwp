@@ -20,6 +20,7 @@ namespace piggy_bank_uwp.View.Costs
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _cost = e.Parameter as CostViewModel;
+            DatePicker.Date = _cost.DateOffset;
             TagsComboBox.ItemsSource = MainViewModel.Current.Categories;
 
             if (_cost.IsNew)
@@ -72,6 +73,14 @@ namespace piggy_bank_uwp.View.Costs
             {
                 Frame.GoBack();
             }
+        }
+
+        private void OnDateChanged(CalendarDatePicker sender, CalendarDatePickerDateChangedEventArgs args)
+        {
+            if (args.NewDate == null)
+                return;
+
+            _cost.DateOffset = args.NewDate.Value;
         }
     }
 }

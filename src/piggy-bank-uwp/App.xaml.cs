@@ -72,9 +72,6 @@ namespace piggy_bank_uwp
 
                 ExtendAcrylicIntoTitleBar();
             }
-
-            //Back button is visible always
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
         }
 
         private void ExtendAcrylicIntoTitleBar()

@@ -28,21 +28,13 @@ namespace piggy_bank_uwp.View
         {
             _mainViewModel.Init();
             DataContext = _mainViewModel;
-            SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
         }
 
-        private void OnUnloaded(object sender, RoutedEventArgs e)
-        {
-            SystemNavigationManager.GetForCurrentView().BackRequested -= OnBackRequested;
-        }
-
-        private void OnBackRequested(object sender, BackRequestedEventArgs e)
+        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             if (ContentFrame.CanGoBack)
             {
                 ContentFrame.GoBack();
-
-                e.Handled = true;
             }
         }
 
