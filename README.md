@@ -21,3 +21,4 @@ The app uses the following NuGet packages to work:
 * [Microsoft.Services.Store.Engagement](https://docs.microsoft.com/en-us/windows/uwp/monetize/microsoft-store-services-sdk#install-the-sdk)
 * [Microsoft.OneDriveSDK](https://www.nuget.org/packages/Microsoft.OneDriveSDK/)
 * [Microsoft.OneDriveSDK.Authentication](https://www.nuget.org/packages/Microsoft.OneDriveSDK.Authentication/)
+* [Microsoft.Toolkit.Uwp.Notifications](https://www.nuget.org/packages/Microsoft.Toolkit.Uwp.Notifications/3.0.0-preview)
