@@ -33,6 +33,9 @@ namespace piggy_bank_uwp.View.Diagram
 
             Diagram.Palette = palette;
             LabelsListView.ItemsSource = _diagram.Datas;
+
+            if (!_diagram.IsEmpty)
+                _diagram.UpdateTile();
         }
 
         private void OnFilterClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

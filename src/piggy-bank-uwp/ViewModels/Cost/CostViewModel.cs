@@ -59,7 +59,6 @@ namespace piggy_bank_uwp.ViewModel.Cost
             }
         }
 
-        //TODO: throw Exception
         public DateTimeOffset DateOffset
         {
             get

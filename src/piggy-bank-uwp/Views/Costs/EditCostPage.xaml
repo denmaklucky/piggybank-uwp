@@ -29,7 +29,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <!--Date-->
-                <CalendarDatePicker Header="Data" Date="{x:Bind Path=_cost.DateOffset, Mode=TwoWay}" FontSize="18" Margin="15"/>
+                <CalendarDatePicker x:Name="DatePicker" Header="Data" FontSize="18" Margin="15" DateChanged="OnDateChanged"/>
                 <!--Cost-->
                 <Controls:PatternTextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" Pattern="0123456789"
                                          FontSize="18" Margin="15"/>
