@@ -127,6 +127,7 @@
     <Compile Include="ViewModels\Donate\DonateItemViewModel.cs" />
     <Compile Include="ViewModels\Donate\DonateViewModel.cs" />
     <Compile Include="ViewModels\Interface\IBaseViewModel.cs" />
+    <Compile Include="ViewModels\Interface\IToastViewModel.cs" />
     <Compile Include="ViewModels\Interface\IUpdateable.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryViewModel.cs" />

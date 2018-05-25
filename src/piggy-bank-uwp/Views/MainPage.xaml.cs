@@ -30,7 +30,7 @@ namespace piggy_bank_uwp.View
             DataContext = _mainViewModel;
         }
 
-        private void NavView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        private void OnBackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
         {
             if (ContentFrame.CanGoBack)
             {

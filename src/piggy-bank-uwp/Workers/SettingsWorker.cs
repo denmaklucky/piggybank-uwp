@@ -1,4 +1,6 @@
-﻿using Windows.Storage;
+﻿using piggy_bank_uwp.Utilities;
+using System;
+using Windows.Storage;
 using Windows.UI.Xaml;
 
 namespace piggy_bank_uwp.Workers
@@ -8,6 +10,7 @@ namespace piggy_bank_uwp.Workers
         private const string RequestedTheme = "RequestedTheme";
         private const string CacheBlod = "CacheBlod";
         private const string FolderId = "FolderId";
+        private const string LastTimeShow = "LastTimeShow";
 
         private ApplicationDataContainer _localSettings;
 
@@ -51,6 +54,23 @@ namespace piggy_bank_uwp.Workers
         public string GetFolderId()
         {
             return GetValue(FolderId) as string;
+        }
+
+        public void SaveLastTimeShow(DateTime utcNow)
+        {
+            SaveValue(LastTimeShow, DateUtility.GetTimeUtc(utcNow));
+        }
+
+        public DateTime? GetLastTimeShow()
+        {
+            var lastTimeShow = GetValue(LastTimeShow);
+
+            if (lastTimeShow == null)
+                return null;
+
+            long utcTime = (long)lastTimeShow;
+
+            return DateUtility.GetDateTime(utcTime).Date;
         }
 
         private void SaveValue(string key, object value)
