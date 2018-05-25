@@ -18,7 +18,16 @@ namespace piggy_bank_uwp.Views.Costs
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            CostsListView.ItemsSource = MainViewModel.Current.Costs;
+
+            if (MainViewModel.Current.Costs.GetEnumerator().MoveNext())
+            {
+                CostsListView.ItemsSource = MainViewModel.Current.Costs;
+                StupCollapsed();
+            }
+            else
+            {
+                StupVisible();
+            }
 
             if (MainViewModel.Current.CanShowToast)
             {
@@ -53,6 +62,18 @@ namespace piggy_bank_uwp.Views.Costs
             {
                 await MainViewModel.Current.FetchCosts();
             }
+        }
+
+        private void StupVisible()
+        {
+            RefreshContainer.Visibility = Visibility.Collapsed;
+            StupTextBlock.Visibility = Visibility.Visible;
+        }
+
+        private void StupCollapsed()
+        {
+            RefreshContainer.Visibility = Visibility.Visible;
+            StupTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }

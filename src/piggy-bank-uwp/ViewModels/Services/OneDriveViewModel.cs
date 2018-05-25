@@ -1,13 +1,10 @@
 ﻿using Microsoft.OneDrive.Sdk;
 using Microsoft.OneDrive.Sdk.Authentication;
-using Microsoft.Toolkit.Uwp.Notifications;
-using piggy_bank_uwp.Services;
 using piggy_bank_uwp.Workers;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
-using Windows.UI.Notifications;
 
 namespace piggy_bank_uwp.ViewModels.Services
 {
@@ -80,6 +77,11 @@ namespace piggy_bank_uwp.ViewModels.Services
             catch { }
         }
 
+        internal void SaveNotificationSetting(bool isOn)
+        {
+            SettingsWorker.Current.SaveNotificationSetting(isOn);
+        }
+
         public async Task CreateData()
         {
             var folder = new Item { Name = Constants.appName, Folder = new Folder() };
@@ -97,7 +99,7 @@ namespace piggy_bank_uwp.ViewModels.Services
                         PutAsync<Item>(contentStream);
                 }
             }
-            catch {}
+            catch { }
         }
 
         public async Task UpdateData()
@@ -132,30 +134,39 @@ namespace piggy_bank_uwp.ViewModels.Services
             catch { }
         }
 
-        public async Task DonwloadData()
+        public async Task<bool> DonwloadData()
         {
-            Item item = await _oneDriveClient
-             .Drive
-             .Root
-             .ItemWithPath("PiggyBank/Costs.db")
-             .Request()
-             .GetAsync();
-
-            using (Stream contentStream = await _oneDriveClient
-                               .Drive
-                               .Items[item.Id]
-                               .Content
-                               .Request()
-                               .GetAsync())
+            bool haveData = false;
+            try
             {
-                StorageFile file = await ApplicationData.Current.LocalFolder.
-                                                    CreateFileAsync("Costs.db", CreationCollisionOption.OpenIfExists);
+                Item item = await _oneDriveClient
+                 .Drive
+                 .Root
+                 .ItemWithPath("PiggyBank/Costs.db")
+                 .Request()
+                 .GetAsync();
 
-                using (Stream outputstream = await file.OpenStreamForWriteAsync())
+                using (Stream contentStream = await _oneDriveClient
+                                   .Drive
+                                   .Items[item.Id]
+                                   .Content
+                                   .Request()
+                                   .GetAsync())
                 {
-                    await contentStream.CopyToAsync(outputstream);
+                    StorageFile file = await ApplicationData.Current.LocalFolder.
+                                                        CreateFileAsync("Costs.db", CreationCollisionOption.OpenIfExists);
+
+                    using (Stream outputstream = await file.OpenStreamForWriteAsync())
+                    {
+                        await contentStream.CopyToAsync(outputstream);
+                    }
                 }
+                haveData = true;
             }
+            ///TODO:
+            catch{ }
+
+            return haveData;
         }
 
         public void SaveCacheBlod() => SettingsWorker.Current.SaveCacheBlod(_credentialCache?.GetCacheBlob());
@@ -179,5 +190,7 @@ namespace piggy_bank_uwp.ViewModels.Services
                 return "https://api.onedrive.com/v1.0";
             }
         }
+
+        public bool IsNotificationOn => SettingsWorker.Current.GetNotificatinsSetting();
     }
 }

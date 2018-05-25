@@ -78,6 +78,8 @@ namespace piggy_bank_uwp.Workers
                 costs = new List<CostModel>(dbContext.Costs);
             }
 
+            costs.Reverse();
+
             return costs;
         }
 

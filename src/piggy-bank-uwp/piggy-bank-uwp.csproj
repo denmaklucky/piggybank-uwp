@@ -107,6 +107,8 @@
     <Compile Include="Controls\MasterDetailView\MasterDetailView.cs" />
     <Compile Include="Controls\PatternTextBox.cs" />
     <Compile Include="Convertes\ConvertDateTimeOffsetToDateTime.cs" />
+    <Compile Include="Convertes\ValueToCollapsedConverter.cs" />
+    <Compile Include="Convertes\ValueToVisibilityConverter.cs" />
     <Compile Include="ExtensionMethods\SolidColorBrushExtension.cs" />
     <Compile Include="Fabrics\CostFactory.cs" />
     <Compile Include="Fabrics\CategoryFactory.cs" />

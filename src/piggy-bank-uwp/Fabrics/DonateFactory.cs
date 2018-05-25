@@ -9,7 +9,7 @@ namespace piggy_bank_uwp.Fabrics
         {
             DonateItemViewModel item = new DonateItemViewModel
             {
-                Title = "Не плохо",
+                Title = "Not bad!",
                 Price = "1$"
             };
 
@@ -17,32 +17,32 @@ namespace piggy_bank_uwp.Fabrics
 
             item = new DonateItemViewModel
             {
-                Title = "Хорошо",
+                Title = "Good!",
+                Price = "2$"
+            };
+
+            yield return item;
+
+            item = new DonateItemViewModel
+            {
+                Title = "Very good!",
+                Price = "3$"
+            };
+
+            yield return item;
+
+            item = new DonateItemViewModel
+            {
+                Title = "Excellently!",
+                Price = "4$"
+            };
+
+            yield return item;
+
+            item = new DonateItemViewModel
+            {
+                Title = "OMG!",
                 Price = "5$"
-            };
-
-            yield return item;
-
-            item = new DonateItemViewModel
-            {
-                Title = "Ммм..вкусно",
-                Price = "10$"
-            };
-
-            yield return item;
-
-            item = new DonateItemViewModel
-            {
-                Title = "Велеколепно",
-                Price = "100$"
-            };
-
-            yield return item;
-
-            item = new DonateItemViewModel
-            {
-                Title = "Я объелся х_х",
-                Price = "1000$"
             };
 
             yield return item;
