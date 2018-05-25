@@ -22,6 +22,7 @@ namespace piggy_bank_uwp.ViewModel
     public class MainViewModel : BaseViewModel, IToastViewModel
     {
         private const int TOTAL_COUNT_COSTS = 10;
+        private const int DAY_REMINDER = 5;
         private MainViewModel()
         {
             Costs = new ObservableCollection<CostViewModel>();
@@ -199,7 +200,7 @@ namespace piggy_bank_uwp.ViewModel
 
         public DbWorker DbWorker { get; }
 
-        public bool CanShowToast => (DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days > 5;
+        public bool CanShowToast => SettingsWorker.Current.GetCahceBlod() != null && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER+1)> DAY_REMINDER;
 
         public static MainViewModel Current = new MainViewModel();
     }
