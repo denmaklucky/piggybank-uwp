@@ -1,20 +1,25 @@
-﻿using piggy_bank_uwp.Fabrics;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using piggy_bank_uwp.Fabrics;
 using piggy_bank_uwp.Models;
+using piggy_bank_uwp.Services;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Balance;
 using piggy_bank_uwp.ViewModels.Diagram;
 using piggy_bank_uwp.ViewModels.Donate;
+using piggy_bank_uwp.ViewModels.Interface;
 using piggy_bank_uwp.ViewModels.Services;
 using piggy_bank_uwp.Workers;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI.Notifications;
 
 namespace piggy_bank_uwp.ViewModel
 {
-    public class MainViewModel : BaseViewModel
+    public class MainViewModel : BaseViewModel, IToastViewModel
     {
         private const int TOTAL_COUNT_COSTS = 10;
         private MainViewModel()
@@ -67,6 +72,17 @@ namespace piggy_bank_uwp.ViewModel
         public void Finit()
         {
             Balance.Finalization();
+        }
+
+        public void ShowToast()
+        {
+            ToastContent content = ToastService.GenerateToastContent();
+            ToastNotificationManager.CreateToastNotifier().Show(new ToastNotification(content.GetXml()));
+        }
+
+        public void SaveLastTimeShow()
+        {
+            SettingsWorker.Current.SaveLastTimeShow(DateTime.UtcNow);
         }
 
         internal void UpdateData()
@@ -182,6 +198,8 @@ namespace piggy_bank_uwp.ViewModel
         public DonateViewModel Donate { get; }
 
         public DbWorker DbWorker { get; }
+
+        public bool CanShowToast => (DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days > 5;
 
         public static MainViewModel Current = new MainViewModel();
     }

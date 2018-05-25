@@ -1,9 +1,13 @@
-﻿using piggy_bank_uwp.Models;
+﻿using Microsoft.Toolkit.Uwp.Notifications;
+using piggy_bank_uwp.Models;
+using piggy_bank_uwp.Services;
 using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Interface;
+using piggy_bank_uwp.Workers;
 using System;
 using System.Linq;
+using Windows.UI.Notifications;
 
 namespace piggy_bank_uwp.ViewModel.Cost
 {
@@ -117,5 +121,6 @@ namespace piggy_bank_uwp.ViewModel.Cost
         }
 
         internal CostModel Model { get; }
+
     }
 }

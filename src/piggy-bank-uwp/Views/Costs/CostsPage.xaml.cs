@@ -6,13 +6,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-// Документацию по шаблону элемента "Пустая страница" см. по адресу https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace piggy_bank_uwp.Views.Costs
 {
-    /// <summary>
-    /// Пустая страница, которую можно использовать саму по себе или для перехода внутри фрейма.
-    /// </summary>
     public sealed partial class CostsPage : Page
     {
         public CostsPage()
@@ -24,6 +19,12 @@ namespace piggy_bank_uwp.Views.Costs
         {
             base.OnNavigatedTo(e);
             CostsListView.ItemsSource = MainViewModel.Current.Costs;
+
+            if (MainViewModel.Current.CanShowToast)
+            {
+                MainViewModel.Current.ShowToast();
+                MainViewModel.Current.SaveLastTimeShow();
+            }
         }
 
         private void OnCostItemClick(object sender, ItemClickEventArgs e)
