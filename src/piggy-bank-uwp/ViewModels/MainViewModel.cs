@@ -200,7 +200,7 @@ namespace piggy_bank_uwp.ViewModel
 
         public DbWorker DbWorker { get; }
 
-        public bool CanShowToast => SettingsWorker.Current.GetCahceBlod() != null && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER+1)> DAY_REMINDER;
+        public bool CanShowToast => SettingsWorker.Current.GetNotificatinsSetting() && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER+1)> DAY_REMINDER;
 
         public static MainViewModel Current = new MainViewModel();
     }

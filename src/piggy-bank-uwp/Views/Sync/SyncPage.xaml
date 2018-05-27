@@ -6,22 +6,38 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="20 0 0 0">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="20"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" MaxWidth="700" HorizontalAlignment="Left">
+        <StackPanel Grid.Row="0" MaxWidth="700" Margin="20 0 0 0" HorizontalAlignment="Left">
             <TextBlock Text="Синхранизуйте историю своих затрат, что не потерять данные после смены устройства на базе Windows 10 или переустановки приложения." FontSize="18" TextWrapping="WrapWholeWords"/>
         </StackPanel>
 
-        <StackPanel Grid.Row="2">
-            <PersonPicture  HorizontalAlignment="Left"/>
-            <Button x:Name="LoginButton" Content="Login" Margin="20 10 0 0" Click="OnLoginClick"/>
-            <Button x:Name="LogoutButton" Content="Logout" Visibility="Collapsed" Margin="20 10 0 0" Click="OnLogoutClick"/>
+        <StackPanel Grid.Row="2" Orientation="Horizontal">
+            <StackPanel>
+                <Button x:Name="LoginButton" Content="Login" Margin="20 0 0 0" Click="OnLoginClick"/>
+                <Button x:Name="LogoutButton" Content="Logout" Margin="20 0 0 0" Visibility="Collapsed" Click="OnLogoutClick"/>
+            </StackPanel>
+            <ProgressRing x:Name="AuthorizationRing" Margin="10 0 0 0"/>
         </StackPanel>
+
+        <StackPanel x:Name="NotificationBlock" Grid.Row="4" MaxWidth="700" Margin="20 0 0 0"
+                    HorizontalAlignment="Left">
+            <ToggleSwitch x:Name="NotificationSwitch" Header="Напоминание о синхранизации" VerticalAlignment="Top" Toggled="OnToggled"/>
+            <TextBlock Text="Напомание приходит в виде уведомлений. Рекомендуется синхразировать данные по крайне мере каждые 5 дней, чтобы избежать потери данных" FontSize="16" TextWrapping="WrapWholeWords" />
+        </StackPanel>
+
+        <CommandBar Grid.Row="5">
+            <AppBarButton Icon="Upload" Label="Update" Click="OnUploadClick"/>
+            <AppBarButton Icon="Download" Label="Download" Click="OnDownloadClick"/>
+        </CommandBar>
 
     </Grid>
 </Page>

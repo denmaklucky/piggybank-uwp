@@ -9,6 +9,8 @@ namespace piggy_bank_uwp.Views.Sync
     public sealed partial class SyncPage : Page
     {
         private OneDriveViewModel _oneDrive;
+        private bool _isLoaded;
+
         public SyncPage()
         {
             this.InitializeComponent();
@@ -21,13 +23,21 @@ namespace piggy_bank_uwp.Views.Sync
 
             await _oneDrive.ResotreAuthenticateUser();
 
+            EditVisualMode();
+            _isLoaded = true;
+        }
+
+        private void EditVisualMode()
+        {
             if (_oneDrive.IsAuthenticated)
             {
                 ShowLogoutButton();
+                EnableNotificationBlock();
             }
             else
             {
                 ShowLoginButton();
+                DisableNotifactionBlock();
             }
         }
 
@@ -43,35 +53,74 @@ namespace piggy_bank_uwp.Views.Sync
             LogoutButton.Visibility = Visibility.Visible;
         }
 
+        private void EnableNotificationBlock()
+        {
+            NotificationBlock.IsHitTestVisible = true;
+            NotificationSwitch.IsOn = _oneDrive.IsNotificationOn;
+        }
+
+        private void DisableNotifactionBlock()
+        {
+            NotificationBlock.IsHitTestVisible = false;
+            NotificationSwitch.IsOn = false;
+        }
+
         private async void OnLoginClick(object sender, RoutedEventArgs e)
         {
+            AuthorizationRing.IsActive = true;
+
             await _oneDrive.Login();
 
             if (_oneDrive.IsAuthenticated)
             {
-                ShowLogoutButton();
                 _oneDrive.SaveCacheBlod();
-                await _oneDrive.CreateData();
+                _oneDrive.SaveNotificationSetting(isOn:true);
+                MainViewModel.Current.SaveLastTimeShow();
+
+                bool haveData = await _oneDrive.DonwloadData();
+
+                if(!haveData)
+                    await _oneDrive.CreateData();
             }
-            else
-            {
-                ShowLoginButton();
-            }
+
+            EditVisualMode();
+
+            AuthorizationRing.IsActive = false;
         }
 
         private async void OnLogoutClick(object sender, RoutedEventArgs e)
         {
-             await _oneDrive.Logout();
+            AuthorizationRing.IsActive = true;
 
-            if (_oneDrive.IsAuthenticated)
+            await _oneDrive.Logout();
+
+            if (!_oneDrive.IsAuthenticated)
             {
-                ShowLogoutButton();
-            }
-            else
-            {
-                ShowLoginButton();
                 _oneDrive.ClrearCacheBlod();
+                _oneDrive.SaveNotificationSetting(isOn:false);
             }
+
+            EditVisualMode();
+
+            AuthorizationRing.IsActive = false;
+        }
+
+        private void OnToggled(object sender, RoutedEventArgs e)
+        {
+            if (!_isLoaded)
+                return;
+
+            _oneDrive.SaveNotificationSetting(NotificationSwitch.IsOn);
+        }
+
+        private async void OnUploadClick(object sender, RoutedEventArgs e)
+        {
+           await _oneDrive.UpdateData();
+        }
+
+        private async void OnDownloadClick(object sender, RoutedEventArgs e)
+        {
+            await _oneDrive.DonwloadData();
         }
     }
 }

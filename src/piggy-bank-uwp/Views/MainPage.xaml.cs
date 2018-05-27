@@ -10,6 +10,7 @@ using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System;
+using Windows.UI.Xaml.Navigation;
 
 namespace piggy_bank_uwp.View
 {
@@ -24,7 +25,7 @@ namespace piggy_bank_uwp.View
             _mainViewModel = MainViewModel.Current;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _mainViewModel.Init();
             DataContext = _mainViewModel;

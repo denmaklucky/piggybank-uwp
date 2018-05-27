@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="0 33 0 0">
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="Auto"/>
@@ -14,7 +14,7 @@
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <!--Title-->
-            <TextBox Header="Title" Text="{x:Bind _category.Title, Mode=TwoWay}" FontSize="18" Margin="15"/>
+            <TextBox Header="Title" Text="{x:Bind _category.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" Margin="15"/>
             
             <!--Description-->
             <TextBox Header="Description" FontSize="18" Margin="15"/>

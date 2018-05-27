@@ -11,6 +11,7 @@ namespace piggy_bank_uwp.Workers
         private const string CacheBlod = "CacheBlod";
         private const string FolderId = "FolderId";
         private const string LastTimeShow = "LastTimeShow";
+        private const string NotificationSetting = "NotifactionSetting";
 
         private ApplicationDataContainer _localSettings;
 
@@ -71,6 +72,21 @@ namespace piggy_bank_uwp.Workers
             long utcTime = (long)lastTimeShow;
 
             return DateUtility.GetDateTime(utcTime).Date;
+        }
+
+        public void SaveNotificationSetting(bool isOn)
+        {
+            SaveValue(NotificationSetting, isOn);
+        }
+
+        public bool GetNotificatinsSetting()
+        {
+            var result = GetValue(NotificationSetting);
+
+            if (result == null)
+                return false;
+
+            return (bool)result;
         }
 
         private void SaveValue(string key, object value)
