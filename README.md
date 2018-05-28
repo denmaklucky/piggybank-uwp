@@ -22,3 +22,4 @@ The app uses the following NuGet packages to work:
 * [Microsoft.OneDriveSDK](https://www.nuget.org/packages/Microsoft.OneDriveSDK/)
 * [Microsoft.OneDriveSDK.Authentication](https://www.nuget.org/packages/Microsoft.OneDriveSDK.Authentication/)
 * [Microsoft.Toolkit.Uwp.Notifications](https://www.nuget.org/packages/Microsoft.Toolkit.Uwp.Notifications/3.0.0-preview)
+* [HockeySDK.UWP](https://www.nuget.org/packages/HockeySDK.UWP/)

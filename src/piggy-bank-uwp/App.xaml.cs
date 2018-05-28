@@ -12,6 +12,7 @@ using Windows.UI;
 using Windows.UI.ViewManagement;
 using piggy_bank_uwp.Workers;
 using Windows.Storage;
+using Microsoft.HockeyApp;
 
 namespace piggy_bank_uwp
 {
@@ -80,6 +81,10 @@ namespace piggy_bank_uwp
 
                 ExtendAcrylicIntoTitleBar();
             }
+
+#if RELEASE
+            InitHockeyApp();
+#endif
         }
 
         private void ExtendAcrylicIntoTitleBar()
@@ -143,6 +148,22 @@ namespace piggy_bank_uwp
             }
 
             deferral.Complete();
+        }
+
+        private void InitHockeyApp()
+        {
+            try
+            {
+                HockeyClient.Current.Configure("e4d002033ba2405683fe9b3e4b202604",
+                new TelemetryConfiguration
+                {
+                    EnableDiagnostics = true,
+                    Collectors = WindowsCollectors.Metadata |
+                                 WindowsCollectors.Session |
+                                 WindowsCollectors.UnhandledException
+                });
+            }
+            catch { }
         }
     }
 }
