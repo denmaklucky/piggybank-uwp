@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Windows.UI;
 using Windows.UI.ViewManagement;
 using piggy_bank_uwp.Workers;
+using Windows.Storage;
 
 namespace piggy_bank_uwp
 {
@@ -51,7 +52,14 @@ namespace piggy_bank_uwp
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
-                    //TODO: Load state from previously suspended application
+                    try
+                    {
+                        if (ApplicationData.Current.LocalSettings.Values.ContainsKey("navigationState"))
+                        {
+                            rootFrame.SetNavigationState((string)ApplicationData.Current.LocalSettings.Values["navigationState"]);
+                        }
+                    }
+                    catch { }
                 }
 
                 // Place the frame in the current Window
@@ -90,6 +98,13 @@ namespace piggy_bank_uwp
             }).AsTask();
         }
 
+        private string GetDefaultNavigationState()
+        {
+            Frame frame = new Frame();
+            frame.Navigate(typeof(MainPage));
+            return frame.GetNavigationState();
+        }
+
         /// <summary>
         /// Invoked when Navigation to a certain page fails
         /// </summary>
@@ -110,7 +125,23 @@ namespace piggy_bank_uwp
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: Save application state and stop any background activity
+
+            string navigationState = default(string);
+
+            try
+            {
+                Frame rootFrame = Window.Current.Content as Frame;
+                navigationState = rootFrame.GetNavigationState();
+            }
+            catch
+            {
+                navigationState = GetDefaultNavigationState();
+            }
+            finally
+            {
+                ApplicationData.Current.LocalSettings.Values["navigationState"] = navigationState;
+            }
+
             deferral.Complete();
         }
     }
