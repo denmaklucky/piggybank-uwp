@@ -21,14 +21,14 @@
             </ListView>
         </RefreshContainer>
 
-        <TextBlock x:Name="StupTextBlock" Grid.Row="0" Text="To start use an app, change a balance and create costs"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+        <TextBlock x:Name="StubTextBlock" x:Uid="StubCostsTextBlock" Grid.Row="0"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="WrapWholeWords"/>
 
         <CommandBar Grid.Row="1">
-            <AppBarButton Icon="Refresh" AccessKey="R" Label="Refresh" Click="OnRefreshClick"/>
-            <AppBarButton Icon="Add" Label="Add category" Click="OnAddedCategoryClick"/>
+            <AppBarButton x:Uid="RefreshCostsAppBarButton" Icon="Refresh" AccessKey="R" Click="OnRefreshClick"/>
+            <AppBarButton x:Name="AddCostAppBarButton" x:Uid="AddCostAppBarButton" Icon="Add" Click="OnAddedCostClick"/>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="Изменить текущий баланс" Click="OnNavigateEditBalance"/>
+                <AppBarButton x:Uid="ChangeBalanceAppBarButton" Click="OnNavigateEditBalance"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Grid>

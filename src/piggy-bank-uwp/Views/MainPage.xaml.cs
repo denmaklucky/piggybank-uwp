@@ -44,7 +44,7 @@ namespace piggy_bank_uwp.View
             if (args.IsSettingsInvoked)
             {
                 ContentFrame.Navigate(typeof(SettingsPage));
-                NavView.Header = "Settings";
+                NavView.Header = Localize.GetTranslateByKey(Localize.Settings);
             }
             else
             {
@@ -59,23 +59,23 @@ namespace piggy_bank_uwp.View
             {
                 case Constants.costs:
                     ContentFrame.Navigate(typeof(CostsPage));
-                    NavView.Header = "Costs";
+                    NavView.Header = Localize.GetTranslateByKey(Localize.Costs);
                     break;
                 case Constants.categories:
                     ContentFrame.Navigate(typeof(CategoriesPage));
-                    NavView.Header = "Categories";
+                    NavView.Header = Localize.GetTranslateByKey(Localize.Categories);
                     break;
                 case Constants.diagrams:
                     ContentFrame.Navigate(typeof(DiagramPage), _mainViewModel.Diagram);
-                    NavView.Header = "Diagrams";
+                    NavView.Header = Localize.GetTranslateByKey(Localize.Diagrama);
                     break;
                 case Constants.synchronization:
                     ContentFrame.Navigate(typeof(SyncPage));
-                    NavView.Header = "Synchronization";
+                    NavView.Header = Localize.GetTranslateByKey(Localize.Synchronization);
                     break;
                 case Constants.donate:
                     ContentFrame.Navigate(typeof(DonatePage), _mainViewModel.Donate);
-                    NavView.Header = "Donate";
+                    NavView.Header = Localize.Donate;
                     break;
             }
         }

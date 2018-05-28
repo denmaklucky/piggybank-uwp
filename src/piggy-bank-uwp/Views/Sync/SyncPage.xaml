@@ -17,26 +17,26 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" MaxWidth="700" Margin="20 0 0 0" HorizontalAlignment="Left">
-            <TextBlock Text="Синхранизуйте историю своих затрат, что не потерять данные после смены устройства на базе Windows 10 или переустановки приложения." FontSize="18" TextWrapping="WrapWholeWords"/>
+            <TextBlock x:Uid="SyncTitleTextBlock" FontSize="18" TextWrapping="WrapWholeWords"/>
         </StackPanel>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal">
             <StackPanel>
-                <Button x:Name="LoginButton" Content="Login" Margin="20 0 0 0" Click="OnLoginClick"/>
-                <Button x:Name="LogoutButton" Content="Logout" Margin="20 0 0 0" Visibility="Collapsed" Click="OnLogoutClick"/>
+                <Button x:Name="LoginButton" x:Uid="LoginButton" Margin="20 0 0 0" Click="OnLoginClick"/>
+                <Button x:Name="LogoutButton" x:Uid="LogoutButton" Margin="20 0 0 0" Visibility="Collapsed" Click="OnLogoutClick"/>
             </StackPanel>
             <ProgressRing x:Name="AuthorizationRing" Margin="10 0 0 0"/>
         </StackPanel>
 
         <StackPanel x:Name="NotificationBlock" Grid.Row="4" MaxWidth="700" Margin="20 0 0 0"
                     HorizontalAlignment="Left">
-            <ToggleSwitch x:Name="NotificationSwitch" Header="Напоминание о синхранизации" VerticalAlignment="Top" Toggled="OnToggled"/>
-            <TextBlock Text="Напомание приходит в виде уведомлений. Рекомендуется синхразировать данные по крайне мере каждые 5 дней, чтобы избежать потери данных" FontSize="16" TextWrapping="WrapWholeWords" />
+            <ToggleSwitch x:Name="NotificationSwitch" x:Uid="SyncToggleSwitch" VerticalAlignment="Top" Toggled="OnToggled"/>
+            <TextBlock x:Uid="DesctiptionNotifiTextBlock" FontSize="16" TextWrapping="WrapWholeWords" />
         </StackPanel>
 
         <CommandBar Grid.Row="5">
-            <AppBarButton Icon="Upload" Label="Update" Click="OnUploadClick"/>
-            <AppBarButton Icon="Download" Label="Download" Click="OnDownloadClick"/>
+            <AppBarButton x:Uid="UpdateAppBarButton" Icon="Upload" Click="OnUploadClick"/>
+            <AppBarButton x:Uid="DownloadAppBarButton" Icon="Download" Click="OnDownloadClick"/>
         </CommandBar>
 
     </Grid>

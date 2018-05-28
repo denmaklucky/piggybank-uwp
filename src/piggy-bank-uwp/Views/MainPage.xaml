@@ -25,25 +25,25 @@
 
         <NavigationView.MenuItems>
 
-            <NavigationViewItem Content="Costs" Tag="costs">
+            <NavigationViewItem x:Uid="CostsHeader" Tag="costs">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xEADF;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <NavigationViewItem Content="Categories" Tag="categories">
+            <NavigationViewItem x:Uid="CategoriesHeader" Tag="categories">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE1CB;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <NavigationViewItem Content="Diagrams" Tag="diagrams">
+            <NavigationViewItem x:Uid="DiagramHeader" Tag="diagrams">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xEB05;"/>
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <NavigationViewItem Content="Synchronization" Tag="synchronization">
+            <NavigationViewItem x:Uid="SynchronizationHeader" Tag="synchronization">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE13D;"/>
                 </NavigationViewItem.Icon>

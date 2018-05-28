@@ -5,6 +5,8 @@ using piggy_bank_uwp.ViewModel.Cost;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System;
+using piggy_bank_uwp.Services;
 
 namespace piggy_bank_uwp.Views.Costs
 {
@@ -41,8 +43,20 @@ namespace piggy_bank_uwp.Views.Costs
             Frame.Navigate(typeof(EditCostPage), e.ClickedItem);
         }
 
-        private void OnAddedCategoryClick(object sender, RoutedEventArgs e)
+        private async void OnAddedCostClick(object sender, RoutedEventArgs e)
         {
+            if (!MainViewModel.Current.HaveCategories)
+            {
+                ContentDialog contentDialog = new ContentDialog
+                {
+                    Content = Localize.GetTranslateByKey(Localize.WarringCategoriesContent),
+                    PrimaryButtonText = Localize.GetTranslateByKey(Localize.Ok)
+                };
+
+                await contentDialog.ShowAsync();
+                return;
+            }
+
             Frame.Navigate(typeof(EditCostPage), new CostViewModel());
         }
 
@@ -67,13 +81,13 @@ namespace piggy_bank_uwp.Views.Costs
         private void StupVisible()
         {
             RefreshContainer.Visibility = Visibility.Collapsed;
-            StupTextBlock.Visibility = Visibility.Visible;
+            StubTextBlock.Visibility = Visibility.Visible;
         }
 
         private void StupCollapsed()
         {
             RefreshContainer.Visibility = Visibility.Visible;
-            StupTextBlock.Visibility = Visibility.Collapsed;
+            StubTextBlock.Visibility = Visibility.Collapsed;
         }
     }
 }

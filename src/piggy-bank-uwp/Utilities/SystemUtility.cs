@@ -20,5 +20,12 @@ namespace piggy_bank_uwp.Utilities
         {
             return Guid.NewGuid().ToString().Replace("-", "");
         }
+
+        public static string GetVersionApp()
+        {
+            Windows.ApplicationModel.Package thisPackage = Windows.ApplicationModel.Package.Current;
+            Windows.ApplicationModel.PackageVersion version = thisPackage.Id.Version;
+            return $"{version.Major}.{version.Minor}.{version.Build}.{version.Revision}";
+        }
     }
 }

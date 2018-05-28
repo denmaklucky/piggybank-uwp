@@ -31,7 +31,7 @@ namespace piggy_bank_uwp.ViewModel.Cost
             RaisePropertiesChanged();
         }
 
-        public bool IsNew { get; private set; }
+        public bool IsNew { get; set; }
 
         public string Comment
         {

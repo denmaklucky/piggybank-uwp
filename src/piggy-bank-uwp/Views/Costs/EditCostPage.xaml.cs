@@ -1,6 +1,7 @@
 ﻿using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
+using System;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -21,28 +22,29 @@ namespace piggy_bank_uwp.View.Costs
         {
             _cost = e.Parameter as CostViewModel;
             DatePicker.Date = _cost.DateOffset;
-            TagsComboBox.ItemsSource = MainViewModel.Current.Categories;
+            CategoriesComboBox.ItemsSource = MainViewModel.Current.Categories;
 
             if (_cost.IsNew)
             {
-                TagsComboBox.SelectedIndex = 0;
+                CategoriesComboBox.SelectedIndex = 0;
             }
             else
             {
-                TagsComboBox.SelectedItem = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == _cost.CategoryId);
+                CategoriesComboBox.SelectedItem = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == _cost.CategoryId);
+                CostTextBox.Text = _cost.Cost.ToString();
             }
         }
 
-        private void OnSaveClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void OnSaveClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            //TODO: double opene CostPage;
             if (_cost.IsNew)
             {
-                MainViewModel.Current.AddCost(_cost);
+                _cost.IsNew = false;
+                await MainViewModel.Current.AddCost(_cost);
             }
             else
             {
-                MainViewModel.Current.UpdateCost(_cost);
+                await MainViewModel.Current.UpdateCost(_cost);
             }
 
             if (Frame.CanGoBack)
@@ -65,9 +67,9 @@ namespace piggy_bank_uwp.View.Costs
             _cost.Category = e.AddedItems[0] as CategoryViewModel;
         }
 
-        private void OnDeleteClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void OnDeleteClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            MainViewModel.Current.DeleteCost(_cost);
+            await MainViewModel.Current.DeleteCost(_cost);
 
             if (Frame.CanGoBack)
             {
@@ -81,6 +83,24 @@ namespace piggy_bank_uwp.View.Costs
                 return;
 
             _cost.DateOffset = args.NewDate.Value;
+        }
+
+        private void OnCostTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (String.IsNullOrEmpty(CostTextBox.Text))
+                return;
+
+            int value;
+            bool canSet = Int32.TryParse(CostTextBox.Text, out value);
+
+            if (canSet)
+            {
+                _cost.Cost = value;
+            }
+            else
+            {
+                _cost.Cost = 0;
+            }
         }
     }
 }

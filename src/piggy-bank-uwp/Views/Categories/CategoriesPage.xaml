@@ -18,7 +18,7 @@
                   IsItemClickEnabled="True" SelectionMode="Single" ItemClick="OnCategoryItemClick"/>
 
         <CommandBar Grid.Row="1">
-            <AppBarButton Icon="Add" Label="Add category" Click="OnAddedCategoryClick"/>
+            <AppBarButton x:Uid="AddCategoryAppBarButton" Icon="Add" Click="OnAddedCategoryClick"/>
         </CommandBar>
     </Grid>
 </Page>

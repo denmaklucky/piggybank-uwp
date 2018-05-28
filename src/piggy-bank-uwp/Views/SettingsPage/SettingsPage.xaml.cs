@@ -1,4 +1,5 @@
-﻿using piggy_bank_uwp.Workers;
+﻿using piggy_bank_uwp.Utilities;
+using piggy_bank_uwp.Workers;
 using System;
 using Windows.System;
 using Windows.UI.Xaml;
@@ -14,7 +15,7 @@ namespace piggy_bank_uwp.Views.SettingsPage
             this.InitializeComponent();
         }
 
-        private void RadioButton_Checked(object sender, RoutedEventArgs e)
+        private void OnLitghButtonChecked(object sender, RoutedEventArgs e)
         {
             if (!_isLoaded)
                 return;
@@ -23,7 +24,7 @@ namespace piggy_bank_uwp.Views.SettingsPage
             ChangedTextBlock.Visibility = Visibility.Visible;
         }
 
-        private void RadioButton_Checked_1(object sender, RoutedEventArgs e)
+        private void OnDarkButtonChecked(object sender, RoutedEventArgs e)
         {
             if (!_isLoaded)
                 return;
@@ -43,6 +44,8 @@ namespace piggy_bank_uwp.Views.SettingsPage
                     DarkTheme.IsChecked = true;
                     break;
             }
+
+            VersionTextBlock.Text = SystemUtility.GetVersionApp();
 
             _isLoaded = true;
         }
