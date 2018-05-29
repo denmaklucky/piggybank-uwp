@@ -1,6 +1,6 @@
 <p align="center">
   <a>
-    <img src="https://github.com/denmaklucky/piggybank/blob/dev/src/piggy-bank-uwp/Assets/Square44x44Logo.scale-400.png"
+    <img src="https://github.com/denmaklucky/piggybank/blob/master/src/piggy-bank-uwp/Assets/Square44x44Logo.scale-400.png"
       width=80 height=80>
   </a>
   
