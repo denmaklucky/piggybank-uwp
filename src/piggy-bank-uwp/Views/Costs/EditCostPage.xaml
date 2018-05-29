@@ -16,8 +16,8 @@
 
         <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
             <StackPanel Orientation="Vertical">
-                <!--Tag-->
-                <ComboBox x:Name="TagsComboBox" Header="Category" Margin="15" 
+                <!--Categories-->
+                <ComboBox x:Name="CategoriesComboBox" x:Uid="CategoriesComboBox" Margin="15" 
                           HorizontalAlignment="Stretch" SelectionChanged="OnTagSelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate x:DataType="ViewModels:CategoryViewModel">
@@ -29,21 +29,21 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <!--Date-->
-                <CalendarDatePicker x:Name="DatePicker" Header="Data" FontSize="18" Margin="15" DateChanged="OnDateChanged"/>
+                <CalendarDatePicker x:Name="DatePicker" x:Uid="DatePicker" FontSize="18" Margin="15" DateChanged="OnDateChanged"/>
                 <!--Cost-->
-                <Controls:PatternTextBox Header="Cost" Text="{x:Bind _cost.Cost, Mode=TwoWay}" Pattern="0123456789"
-                                         FontSize="18" Margin="15"/>
+                <Controls:PatternTextBox x:Name="CostTextBox" x:Uid="CostTextBox" Pattern="0123456789" FontSize="18" Margin="15"
+                                         TextChanged="OnCostTextChanged"/>
                 <!--Comment-->
-                <TextBox Header="Comment" Text="{x:Bind _cost.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18"
+                <TextBox x:Uid="CommentTextBox" Text="{x:Bind _cost.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18"
                          Height="200" Margin="15" TextWrapping="Wrap"/>
 
             </StackPanel>
         </ScrollViewer>
 
         <CommandBar Grid.Row="1">
-            <AppBarButton Icon="Save" Label="Save" Click="OnSaveClick"/>
-            <AppBarButton Icon="Delete" Label="Delete" Click="OnDeleteClick"/>
-            <AppBarButton Icon="Cancel" Label="Close" Click="OnCloseClick"/>
+            <AppBarButton x:Uid="SaveAppBarButton" Icon="Save" Click="OnSaveClick"/>
+            <AppBarButton x:Uid="DeleteAppBarButton" Icon="Delete" Click="OnDeleteClick"/>
+            <AppBarButton x:Uid="CancelAppBarButton" Icon="Cancel" Click="OnCloseClick"/>
         </CommandBar>
     </Grid>
 

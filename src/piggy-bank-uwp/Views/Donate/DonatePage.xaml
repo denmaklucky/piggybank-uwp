@@ -12,8 +12,8 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0" Text="Thanks so much for willing to donate us! You are a great man!"/>
+
+        <TextBlock x:Uid="DescriptionDonateTextBlock" Grid.Row="0" TextWrapping="WrapWholeWords"/>
 
         <ListView x:Name="ListViewDonate" Grid.Row="1" Width="500"
                   ItemTemplate="{StaticResource ListViewItemDonate}" SelectionMode="Single"

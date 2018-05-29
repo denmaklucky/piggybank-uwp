@@ -14,33 +14,31 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0">
-            <TextBlock Text="Theme Mode" FontSize="25" FontWeight="Normal" Margin="0 0 0 15"/>
-            <RadioButton x:Name="LightTheme" GroupName="Theme" Content="Light" Checked="RadioButton_Checked"/>
-            <RadioButton x:Name="DarkTheme" GroupName="Theme" Content="Dark" Checked="RadioButton_Checked_1"/>
-            <TextBlock x:Name="ChangedTextBlock" Text="You'll see your change the next time you start app"
-                       Visibility="Collapsed"/>
+            <TextBlock x:Uid="ThemeTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 15"/>
+            <RadioButton x:Name="LightTheme" x:Uid="LightRadioButton" GroupName="Theme" Checked="OnLitghButtonChecked"/>
+            <RadioButton x:Name="DarkTheme" x:Uid="DarkRadioButton" GroupName="Theme" Checked="OnDarkButtonChecked"/>
+            <TextBlock x:Name="ChangedTextBlock" x:Uid="ThemeChangedTextBlock" Visibility="Collapsed"/>
         </StackPanel>
 
         <StackPanel Grid.Row="1" Margin="0 15">
-            <TextBlock Text="About" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
+            <TextBlock x:Uid="AboutTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
                 <Image Source="ms-appx:///Assets/Square44x44Logo.scale-100.png" 
                                Height="54" Width="54"/>
-                <TextBlock Text="1.0.0.1" VerticalAlignment="Center" Margin="10 0 0 0"/>
+                <TextBlock x:Name="VersionTextBlock" VerticalAlignment="Center" Margin="10 0 0 0"/>
             </StackPanel>
-            <TextBlock Text="Thank you for using PiggyBank!"/>
+            <TextBlock x:Uid="ThanksTextBlock"/>
 
-            <TextBlock Text="Support" FontSize="25" FontWeight="Normal" Margin="0 0 0 5"/>
+            <TextBlock x:Uid="SupportTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 5"/>
             <StackPanel Orientation="Horizontal">
                 <HyperlinkButton Content="GitHub" Tag="https://github.com/denmaklucky/piggybank" 
                                  Click="OnHyperlinkButtonClick"/>
             </StackPanel>
 
-            <TextBlock Text="Special thanks" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
+            <TextBlock x:Uid="SpecialThanksTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
             <StackPanel>
-                <TextBlock Text="We want to especially thank these people for their help and knowledge while building PiggyBank " TextWrapping="WrapWholeWords"/>
-                <HyperlinkButton Content="Denis Makarenko" Tag="https://github.com/denmaklucky/" Click="OnHyperlinkButtonClick"/>
-                <HyperlinkButton Content="Victoria Makarenko" Click="OnHyperlinkButtonClick"/>
+                <TextBlock x:Uid="DescriptionSpecailThanks" TextWrapping="WrapWholeWords"/>
+                <HyperlinkButton Content="Viktoria Makarenko" Tag="https://vk.com/id182187599" Click="OnHyperlinkButtonClick"/>
             </StackPanel>
         </StackPanel>
 

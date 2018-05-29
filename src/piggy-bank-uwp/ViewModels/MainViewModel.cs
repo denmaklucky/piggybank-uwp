@@ -40,7 +40,6 @@ namespace piggy_bank_uwp.ViewModel
 
             List<CategoryModel> categories = null;
 
-            //TOD: check other method a count 
             if (DbWorker.GetCategories().Count == 0)
             {
                 categories = CategoryFactory.GetCategories().ToList();
@@ -201,6 +200,8 @@ namespace piggy_bank_uwp.ViewModel
         public DbWorker DbWorker { get; }
 
         public bool CanShowToast => SettingsWorker.Current.GetNotificatinsSetting() && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER+1)> DAY_REMINDER;
+
+        public bool HaveCategories => Categories.GetEnumerator().MoveNext();
 
         public static MainViewModel Current = new MainViewModel();
     }

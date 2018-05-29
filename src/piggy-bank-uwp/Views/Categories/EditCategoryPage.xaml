@@ -14,16 +14,16 @@
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <!--Title-->
-            <TextBox Header="Title" Text="{x:Bind _category.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" Margin="15"/>
+            <TextBox x:Uid="TitleTextBox" Text="{x:Bind _category.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" Margin="15"/>
             
             <!--Description-->
-            <TextBox Header="Description" FontSize="18" Margin="15"/>
+            <TextBox x:Uid="DescriptionTextBox" FontSize="18" Margin="15"/>
 
             <GridView x:Name="ColorsGridView" SelectionMode="Single" MaxWidth="500" HorizontalAlignment="Left" 
                       Margin="20 0 0 0" Padding="10" ItemContainerStyle="{StaticResource ElipseSelectedItem}" SelectionChanged="OnColorSelectionChanged">
                 <GridView.HeaderTemplate>
                     <DataTemplate>
-                        <TextBlock Text="Color" Style="{StaticResource HeaderTextBlock}"/>
+                        <TextBlock x:Uid="ColorTextBlock" Style="{StaticResource HeaderTextBlock}"/>
                     </DataTemplate>
                 </GridView.HeaderTemplate>
                 <Ellipse Tag="#ffffb900" Height="54" Width="54" Fill="#ffffb900"/>
@@ -63,9 +63,9 @@
         </StackPanel>
 
         <CommandBar Grid.Row="1">
-            <AppBarButton Icon="Delete" Label="Delte" Click="OnDeleteClick"/>
-            <AppBarButton Icon="Save" Label="Save" Click="OnSaveClick"/>
-            <AppBarButton Icon="Cancel" Label="Close" Click="OnCloseClick"/>
+            <AppBarButton x:Uid="SaveAppBarButton" Icon="Save" Click="OnSaveClick"/>
+            <AppBarButton x:Uid="DeleteAppBarButton" Icon="Delete" Click="OnDeleteClick"/>
+            <AppBarButton x:Uid="CancelAppBarButton" Icon="Cancel" Click="OnCloseClick"/>
         </CommandBar>
     </Grid>
 </Page>

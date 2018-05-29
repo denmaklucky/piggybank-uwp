@@ -42,7 +42,7 @@
         </ListView>
 
         <CommandBar Grid.Row="2">
-            <AppBarButton Label="Filter" Icon="Filter" Click="OnFilterClick">
+            <AppBarButton x:Uid="FilterAppBarButton" Icon="Filter" Click="OnFilterClick">
                 <AppBarButton.Flyout>
                     <Flyout x:Name="FilterFlyout">
                         <Grid>
@@ -52,9 +52,9 @@
                                 <RowDefinition Height="Auto"/>
                             </Grid.RowDefinitions>
 
-                            <DatePicker x:Name="StartDatePicker" Grid.Row="0" Header="Start"/>
+                            <DatePicker x:Name="StartDatePicker" x:Uid="StartDatePicker" Grid.Row="0"/>
 
-                            <DatePicker x:Name="EndDatePicker" Grid.Row="1" Header="End"/>
+                            <DatePicker x:Name="EndDatePicker" x:Uid="EndDatePicker" Grid.Row="1"/>
 
                             <Grid Grid.Row="2">
                                 <Grid.ColumnDefinitions>

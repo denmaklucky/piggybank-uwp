@@ -117,6 +117,7 @@
     <Compile Include="Fabrics\CategoryFactory.cs" />
     <Compile Include="Fabrics\DonateFactory.cs" />
     <Compile Include="Interface\IDetailPage.cs" />
+    <Compile Include="Localize.cs" />
     <Compile Include="Models\BalanceModel.cs" />
     <Compile Include="Models\CostModel.cs" />
     <Compile Include="Models\IBaseModel.cs" />
@@ -183,6 +184,8 @@
       <SubType>Designer</SubType>
     </AppxManifest>
     <None Include="piggy-bank-uwp_TemporaryKey.pfx" />
+    <PRIResource Include="Strings\uk-UA\Resources.resw" />
+    <PRIResource Include="Strings\be-BY\Resources.resw" />
     <PRIResource Include="Strings\ru-RU\Resources.resw" />
     <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>

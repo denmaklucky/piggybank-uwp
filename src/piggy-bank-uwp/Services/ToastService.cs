@@ -17,11 +17,11 @@ namespace piggy_bank_uwp.Services
                         {
                             new AdaptiveText
                             {
-                                Text = "Напоменание"
+                                Text = Localize.GetTranslateByKey(Localize.HeaderReminderNotifi)
                             },
                             new AdaptiveText
                             {
-                                Text = "Пожалуйста синхранизируйте совю учетную запись"
+                                Text =  Localize.GetTranslateByKey(Localize.DescriptionRemiderNotifi)
                             }
                         }
                     }
