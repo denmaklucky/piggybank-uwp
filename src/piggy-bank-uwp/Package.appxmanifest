@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="784f1b97-5cf5-42cc-90f2-47541425705d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>PiggyBank</DisplayName>
-    <PublisherDisplayName>.Team</PublisherDisplayName>
+    <PublisherDisplayName>Denis Makarenko</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

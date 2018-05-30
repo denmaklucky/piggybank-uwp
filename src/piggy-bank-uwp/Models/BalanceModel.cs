@@ -6,6 +6,8 @@
 
         public string Currency { get; set; }
 
+        public string Comment { get; set; }
+
         public string Id { get; set; }
     }
 }

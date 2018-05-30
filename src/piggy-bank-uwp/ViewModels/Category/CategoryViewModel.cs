@@ -38,6 +38,21 @@ namespace piggy_bank_uwp.ViewModel.Tag
             }
         }
 
+        public string Description
+        {
+            get
+            {
+                return Model.Description;
+            }
+            set
+            {
+                if(Model.Description != value)
+                {
+                    Model.Description = value;
+                }
+            }
+        }
+
         public string Color
         {
             get

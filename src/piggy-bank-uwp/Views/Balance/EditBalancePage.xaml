@@ -25,8 +25,8 @@
                 <Controls:PatternTextBox x:Name="ChangeBalanceTextBox" x:Uid="ChangeBalanceTextBox" Pattern="-0123456789"
                                          FontSize="18" Margin="15"/>
                 <!--Comment-->
-                <TextBox x:Uid="CommentTextBox" FontSize="18"
-                         MaxHeight="200" Margin="15"/>
+                <TextBox x:Uid="CommentTextBox" Text="{x:Bind _balance.Comment, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         FontSize="18" MaxHeight="200" Margin="15"/>
 
             </StackPanel>
         </ScrollViewer>

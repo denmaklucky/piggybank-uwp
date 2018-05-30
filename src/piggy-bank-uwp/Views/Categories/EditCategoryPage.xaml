@@ -14,10 +14,12 @@
 
         <StackPanel Grid.Row="0" Orientation="Vertical">
             <!--Title-->
-            <TextBox x:Uid="TitleTextBox" Text="{x:Bind _category.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" FontSize="18" Margin="15"/>
+            <TextBox x:Uid="TitleTextBox" Text="{x:Bind _category.Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="18" Margin="15"/>
             
             <!--Description-->
-            <TextBox x:Uid="DescriptionTextBox" FontSize="18" Margin="15"/>
+            <TextBox x:Uid="DescriptionTextBox" Text="{x:Bind _category.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                     FontSize="18" Margin="15"/>
 
             <GridView x:Name="ColorsGridView" SelectionMode="Single" MaxWidth="500" HorizontalAlignment="Left" 
                       Margin="20 0 0 0" Padding="10" ItemContainerStyle="{StaticResource ElipseSelectedItem}" SelectionChanged="OnColorSelectionChanged">

@@ -65,6 +65,21 @@ namespace piggy_bank_uwp.ViewModels.Balance
             }
         }
 
+        public string Comment
+        {
+            get
+            {
+                return Model.Comment;
+            }
+            set
+            {
+                if(Model.Comment != value)
+                {
+                    Model.Comment = value;
+                }
+            }
+        }
+
         public string CurrentBalance
         {
             get
