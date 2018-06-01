@@ -1,13 +1,9 @@
-﻿using Microsoft.Toolkit.Uwp.Notifications;
-using piggy_bank_uwp.Models;
-using piggy_bank_uwp.Services;
+﻿using piggy_bank_uwp.Models;
 using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel.Tag;
 using piggy_bank_uwp.ViewModels.Interface;
-using piggy_bank_uwp.Workers;
 using System;
 using System.Linq;
-using Windows.UI.Notifications;
 
 namespace piggy_bank_uwp.ViewModel.Cost
 {
@@ -22,13 +18,20 @@ namespace piggy_bank_uwp.ViewModel.Cost
         internal CostViewModel(CostModel model)
         {
             Model = model;
-            Category = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == CategoryId);
             IsNew = false;
         }
 
         public void Update()
         {
             RaisePropertiesChanged();
+        }
+
+        public void ChangedCategory(string categoryId)
+        {
+            if (String.IsNullOrEmpty(categoryId))
+                return;
+
+            Model.CategoryId = categoryId;
         }
 
         public bool IsNew { get; set; }
@@ -114,13 +117,8 @@ namespace piggy_bank_uwp.ViewModel.Cost
             {
                 return MainViewModel.Current.Categories.FirstOrDefault(c => c.Id == CategoryId);
             }
-            set
-            {
-                Model.CategoryId = value.Id;
-            }
         }
 
         internal CostModel Model { get; }
-
     }
 }

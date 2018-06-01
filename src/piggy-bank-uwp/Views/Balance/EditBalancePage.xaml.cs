@@ -25,8 +25,13 @@ namespace piggy_bank_uwp.View.Balance
         {
             if (!String.IsNullOrEmpty(ChangeBalanceTextBox.Text))
             {
-                _balance.ChanngeBalance(Int32.Parse(ChangeBalanceTextBox.Text));
-                MainViewModel.Current.UpdateData();
+                int value;
+                bool canChange = Int32.TryParse(ChangeBalanceTextBox.Text, out value);
+
+                if (canChange)
+                {
+                    _balance.ChanngeBalance(Int32.Parse(ChangeBalanceTextBox.Text));
+                }
             }
 
             if (Frame.CanGoBack)

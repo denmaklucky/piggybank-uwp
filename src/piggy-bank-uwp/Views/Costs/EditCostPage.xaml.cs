@@ -64,7 +64,9 @@ namespace piggy_bank_uwp.View.Costs
 
         private void OnTagSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            _cost.Category = e.AddedItems[0] as CategoryViewModel;
+            var selectedCategory = e.AddedItems[0] as CategoryViewModel;
+
+            _cost.ChangedCategory(selectedCategory?.Id);
         }
 
         private async void OnDeleteClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)

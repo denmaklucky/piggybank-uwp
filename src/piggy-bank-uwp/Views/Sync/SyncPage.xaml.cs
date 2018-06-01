@@ -74,18 +74,20 @@ namespace piggy_bank_uwp.Views.Sync
             if (_oneDrive.IsAuthenticated)
             {
                 _oneDrive.SaveCacheBlod();
-                _oneDrive.SaveNotificationSetting(isOn:true);
+                _oneDrive.SaveNotificationSetting(isOn: true);
                 MainViewModel.Current.SaveLastTimeShow();
 
                 bool haveData = await _oneDrive.DonwloadData();
 
-                if(!haveData)
+                if (!haveData)
                     await _oneDrive.CreateData();
             }
 
             EditVisualMode();
 
             AuthorizationRing.IsActive = false;
+
+            MainViewModel.Current.UpdateData();
         }
 
         private async void OnLogoutClick(object sender, RoutedEventArgs e)
@@ -97,7 +99,7 @@ namespace piggy_bank_uwp.Views.Sync
             if (!_oneDrive.IsAuthenticated)
             {
                 _oneDrive.ClrearCacheBlod();
-                _oneDrive.SaveNotificationSetting(isOn:false);
+                _oneDrive.SaveNotificationSetting(isOn: false);
             }
 
             EditVisualMode();
@@ -115,12 +117,16 @@ namespace piggy_bank_uwp.Views.Sync
 
         private async void OnUploadClick(object sender, RoutedEventArgs e)
         {
-           await _oneDrive.UpdateData();
+            UpdateProgressBar.Visibility = Visibility.Visible;
+            await _oneDrive.UpdateData();
+            UpdateProgressBar.Visibility = Visibility.Collapsed;
         }
 
         private async void OnDownloadClick(object sender, RoutedEventArgs e)
         {
+            UpdateProgressBar.Visibility = Visibility.Visible;
             await _oneDrive.DonwloadData();
+            UpdateProgressBar.Visibility = Visibility.Collapsed;
         }
     }
 }

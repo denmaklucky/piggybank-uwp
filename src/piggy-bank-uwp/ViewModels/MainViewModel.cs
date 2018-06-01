@@ -85,9 +85,26 @@ namespace piggy_bank_uwp.ViewModel
             SettingsWorker.Current.SaveLastTimeShow(DateTime.UtcNow);
         }
 
-        internal void UpdateData()
+        public void UpdateData()
         {
-            RaisePropertyChanged(nameof(Balance));
+            if (!OneDrive.IsAuthenticated)
+                return;
+
+            List<CategoryModel> categories = categories = DbWorker.GetCategories();
+
+            Categories.Clear();
+
+            foreach (var category in categories)
+            {
+                Categories.Add(new CategoryViewModel(category));
+            }
+
+            foreach (var cost in DbWorker.GetCosts().Take(TOTAL_COUNT_COSTS))
+            {
+                Costs.Add(new CostViewModel(cost));
+            }
+
+            Balance.Initialization();
         }
 
         internal async Task FetchCosts()

@@ -10,7 +10,8 @@ namespace piggy_bank_uwp.Fabrics
             DonateItemViewModel item = new DonateItemViewModel
             {
                 Title = "Not bad!",
-                Price = "1$"
+                Price = "1$",
+                StoreId = "piggy_one"
             };
 
             yield return item;
@@ -18,7 +19,8 @@ namespace piggy_bank_uwp.Fabrics
             item = new DonateItemViewModel
             {
                 Title = "Good!",
-                Price = "2$"
+                Price = "2$",
+                StoreId = "piggy_two"
             };
 
             yield return item;
@@ -26,7 +28,8 @@ namespace piggy_bank_uwp.Fabrics
             item = new DonateItemViewModel
             {
                 Title = "Very good!",
-                Price = "3$"
+                Price = "3$",
+                StoreId = "piggy_three"
             };
 
             yield return item;
@@ -34,7 +37,8 @@ namespace piggy_bank_uwp.Fabrics
             item = new DonateItemViewModel
             {
                 Title = "Excellently!",
-                Price = "4$"
+                Price = "4$",
+                StoreId = "piggy_four"
             };
 
             yield return item;
@@ -42,7 +46,9 @@ namespace piggy_bank_uwp.Fabrics
             item = new DonateItemViewModel
             {
                 Title = "OMG!",
-                Price = "5$"
+                Price = "5$",
+                StoreId = "piggy_five"
+
             };
 
             yield return item;

@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="PiggyBank.Priview" Publisher="CN=dTrest" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="784f1b97-5cf5-42cc-90f2-47541425705d" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="30247DenisMakarenko.PiggyBank" Publisher="CN=4C8C5086-7764-4A35-BA02-922EBEDC19B5" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="ca9ca8d5-79b9-47d1-95ea-2b4f2198ed00" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>PiggyBank</DisplayName>
+    <DisplayName>Piggy Bank</DisplayName>
     <PublisherDisplayName>Denis Makarenko</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -18,7 +18,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="piggy_bank_uwp.App">
-      <uap:VisualElements DisplayName="PiggyBank" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="piggy-bank-uwp" BackgroundColor="transparent">
+      <uap:VisualElements DisplayName="Piggy Bank" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="piggy-bank-uwp" BackgroundColor="transparent">
         <uap:LockScreen Notification="badge" BadgeLogo="Assets\BadgeLogo.png" />
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square310x310Logo="Assets\Square310x310Logo.png" Square71x71Logo="Assets\Square71x71Logo.png">
           <uap:ShowNameOnTiles>

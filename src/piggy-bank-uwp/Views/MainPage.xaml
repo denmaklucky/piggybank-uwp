@@ -49,11 +49,11 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <NavigationViewItem Content="Donate" Tag="donate">
+            <!--<NavigationViewItem Content="Donate" Tag="donate">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE170;"/>
                 </NavigationViewItem.Icon>
-            </NavigationViewItem>
+            </NavigationViewItem>-->
         </NavigationView.MenuItems>
 
         <NavigationView.PaneFooter>

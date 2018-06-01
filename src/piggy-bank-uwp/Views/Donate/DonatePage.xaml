@@ -17,6 +17,6 @@
 
         <ListView x:Name="ListViewDonate" Grid.Row="1" Width="500"
                   ItemTemplate="{StaticResource ListViewItemDonate}" SelectionMode="Single"
-                  HorizontalContentAlignment="Center" ItemClick="OnItemClick"/>
+                  HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="OnItemClick"/>
     </Grid>
 </Page>

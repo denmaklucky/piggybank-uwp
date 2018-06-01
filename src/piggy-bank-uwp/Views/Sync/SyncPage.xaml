@@ -17,6 +17,7 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="0" MaxWidth="700" Margin="20 0 0 0" HorizontalAlignment="Left">
+            <ProgressBar x:Name="UpdateProgressBar" IsIndeterminate="True" Visibility="Collapsed"/>
             <TextBlock x:Uid="SyncTitleTextBlock" FontSize="18" TextWrapping="WrapWholeWords"/>
         </StackPanel>
 
