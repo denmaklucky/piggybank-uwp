@@ -35,7 +35,7 @@
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <Rectangle Height="15" Width="15" Fill="{Binding Path=Color}"/>
-                        <TextBlock Text="{Binding Path=Title}" Margin="5 0 0 0" TextTrimming="CharacterEllipsis"/>
+                        <TextBlock Text="{Binding Path=Title}" Margin="5 0 0 0" Width="100" TextWrapping="Wrap"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
