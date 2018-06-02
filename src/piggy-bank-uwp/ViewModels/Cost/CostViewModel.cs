@@ -13,12 +13,14 @@ namespace piggy_bank_uwp.ViewModel.Cost
         {
             Model = new CostModel { Id = SystemUtility.GetGuid() };
             IsNew = true;
+            HavePrevCost = false;
         }
 
         internal CostViewModel(CostModel model)
         {
             Model = model;
             IsNew = false;
+            HavePrevCost = false;
         }
 
         public void Update()
@@ -35,6 +37,8 @@ namespace piggy_bank_uwp.ViewModel.Cost
         }
 
         public bool IsNew { get; set; }
+
+        public bool HavePrevCost { get; set; }
 
         public string Comment
         {
@@ -61,6 +65,9 @@ namespace piggy_bank_uwp.ViewModel.Cost
             {
                 if (Model.Cost != value)
                 {
+                    if (!IsNew)
+                        HavePrevCost = true;
+
                     Model.Cost = value;
                 }
             }
@@ -70,11 +77,15 @@ namespace piggy_bank_uwp.ViewModel.Cost
         {
             get
             {
-                return DateUtility.GetDateTime(Model.Date);
+                if (Model.Date <= 0)
+                    return DateTimeOffset.UtcNow;
+
+                var localDate = DateUtility.GetLocalTimeFromUTCMilliseconds(Model.Date);
+                return DateTimeOffset.Parse(localDate.ToString());
             }
             set
             {
-                Model.Date = DateUtility.GetTimeUtc(value);
+                Model.Date = DateUtility.GetUTCMillisecondsFromDateTime(value.UtcDateTime);
             }
         }
 
@@ -82,8 +93,8 @@ namespace piggy_bank_uwp.ViewModel.Cost
         {
             get
             {
-                string format = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;                
-                return DateUtility.GetDateTime(Model.Date).Date.ToString(format);
+                string format = System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern;
+                return DateUtility.GetLocalTimeFromUTCMilliseconds(Model.Date).Date.ToString(format);
             }
         }
 

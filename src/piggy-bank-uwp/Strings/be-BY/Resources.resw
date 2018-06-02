@@ -275,4 +275,10 @@
   <data name="WarringCategoriesContent" xml:space="preserve">
     <value>Cначало создайте категорию</value>
   </data>
+  <data name="WarringCategoryContent" xml:space="preserve">
+    <value>Сначало выберете цвет</value>
+  </data>
+  <data name="WarringCostContent" xml:space="preserve">
+    <value>Сначало выберете категорию</value>
+  </data>
 </root>

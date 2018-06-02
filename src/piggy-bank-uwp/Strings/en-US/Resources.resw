@@ -267,4 +267,10 @@
   <data name="WarringCategoriesContent" xml:space="preserve">
     <value>First create a category</value>
   </data>
+  <data name="WarringCategoryContent" xml:space="preserve">
+    <value>First select a color</value>
+  </data>
+  <data name="WarringCostContent" xml:space="preserve">
+    <value>First select a category</value>
+  </data>
 </root>

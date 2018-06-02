@@ -123,6 +123,7 @@
     <Compile Include="Models\CostModel.cs" />
     <Compile Include="Models\IBaseModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
+    <Compile Include="Services\DialogService.cs" />
     <Compile Include="Services\TileService.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Utilities\DateUtility.cs" />

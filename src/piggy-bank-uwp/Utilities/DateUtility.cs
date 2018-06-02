@@ -4,17 +4,22 @@ namespace piggy_bank_uwp.Utilities
 {
     public static class DateUtility
     {
-        public static long GetTimeUtc(DateTimeOffset date)
+        private static readonly DateTime UTCStartDate = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+
+        public static long GetUTCMillisecondsFromDateTime(DateTime date)
         {
-            return date.ToFileTime();
+            DateTime utcDateTime = date.ToUniversalTime();
+            return (long)utcDateTime.Subtract(UTCStartDate).TotalMilliseconds;
         }
 
-        public static DateTimeOffset GetDateTime(long timeUtc)
+        public static DateTime GetLocalTimeFromUTCMilliseconds(long utcMelliseconds)
         {
-            if (timeUtc == 0)
-                return DateTimeOffset.Now;
+            return UTCStartDate.AddMilliseconds(utcMelliseconds).ToLocalTime();
+        }
 
-            return DateTimeOffset.FromFileTime(timeUtc);
+        public static DateTime GetUniversalFromUTCMilliseconds(long utcMelliseconds)
+        {
+            return UTCStartDate.AddMilliseconds(utcMelliseconds).ToUniversalTime();
         }
     }
 }

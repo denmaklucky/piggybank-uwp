@@ -102,8 +102,9 @@ namespace piggy_bank_uwp.ViewModels.Services
             catch { }
         }
 
-        public async Task UpdateData()
+        public async Task<bool> UpdateData()
         {
+            bool haveData = false;
             try
             {
                 StorageFile file = await ApplicationData.Current.LocalFolder.GetFileAsync("Costs.db");
@@ -115,8 +116,12 @@ namespace piggy_bank_uwp.ViewModels.Services
                         Content.Request().
                         PutAsync<Item>(contentStream);
                 }
+
+                haveData = true;
             }
             catch { }
+
+            return haveData;
         }
 
         public async Task DeleteData()
@@ -172,6 +177,10 @@ namespace piggy_bank_uwp.ViewModels.Services
         public void SaveCacheBlod() => SettingsWorker.Current.SaveCacheBlod(_credentialCache?.GetCacheBlob());
 
         public void ClrearCacheBlod() => SettingsWorker.Current.SaveCacheBlod(null);
+
+        public void SaveLastTimeShow() => SettingsWorker.Current.SaveLastTimeShow(DateTime.UtcNow);
+
+        public void ClearLastTimeShow() => SettingsWorker.Current.SaveLastTimeShow(null);
 
         public bool IsAuthenticated { get; private set; }
 

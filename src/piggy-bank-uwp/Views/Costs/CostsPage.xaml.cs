@@ -47,13 +47,10 @@ namespace piggy_bank_uwp.Views.Costs
         {
             if (!MainViewModel.Current.HaveCategories)
             {
-                ContentDialog contentDialog = new ContentDialog
-                {
-                    Content = Localize.GetTranslateByKey(Localize.WarringCategoriesContent),
-                    PrimaryButtonText = Localize.GetTranslateByKey(Localize.Ok)
-                };
+                await DialogService
+                    .GetInformationDialog(Localize.GetTranslateByKey(Localize.WarringCategoriesContent))
+                    .ShowAsync();
 
-                await contentDialog.ShowAsync();
                 return;
             }
 

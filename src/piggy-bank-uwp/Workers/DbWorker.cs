@@ -1,4 +1,5 @@
 ﻿using piggy_bank_uwp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -98,6 +99,18 @@ namespace piggy_bank_uwp.Workers
             }
 
             return costs;
+        }
+
+        internal CostModel GetCost(string id)
+        {
+            CostModel result = null;
+
+            using (Context.AppContext dbContext = new Context.AppContext())
+            {
+                result = dbContext.Costs.FirstOrDefault(c => c.Id == id);
+            }
+
+            return result;
         }
 
         public List<CategoryModel> GetCategories()

@@ -52,7 +52,7 @@ namespace piggy_bank_uwp.ViewModels.Diagram
 
         public void ApplyFilter(DateTime startDate, DateTime endDate)
         {
-            var costs = DbWorker.Current.GetCosts().Where(c => DateUtility.GetDateTime(c.Date) > startDate && DateUtility.GetDateTime(c.Date) < endDate);
+            var costs = DbWorker.Current.GetCosts().Where(c => DateUtility.GetLocalTimeFromUTCMilliseconds(c.Date) > startDate && DateUtility.GetLocalTimeFromUTCMilliseconds(c.Date) < endDate);
 
             Datas.Clear();
 

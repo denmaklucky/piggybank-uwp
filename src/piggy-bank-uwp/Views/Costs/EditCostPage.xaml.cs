@@ -1,4 +1,5 @@
-﻿using piggy_bank_uwp.ViewModel;
+﻿using piggy_bank_uwp.Services;
+using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
 using System;
@@ -12,6 +13,7 @@ namespace piggy_bank_uwp.View.Costs
     public sealed partial class EditCostPage : Page
     {
         private CostViewModel _cost;
+        private bool _isInit;
 
         public EditCostPage()
         {
@@ -24,19 +26,33 @@ namespace piggy_bank_uwp.View.Costs
             DatePicker.Date = _cost.DateOffset;
             CategoriesComboBox.ItemsSource = MainViewModel.Current.Categories;
 
-            if (_cost.IsNew)
-            {
-                CategoriesComboBox.SelectedIndex = 0;
-            }
-            else
+            if (!_cost.IsNew)
             {
                 CategoriesComboBox.SelectedItem = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == _cost.CategoryId);
                 CostTextBox.Text = _cost.Cost.ToString();
             }
+
+            _isInit = true;
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            base.OnNavigatingFrom(e);
+
+            _isInit = false;
         }
 
         private async void OnSaveClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            if(CategoriesComboBox.SelectedItem == null)
+            {
+                await DialogService
+                    .GetInformationDialog(Localize.GetTranslateByKey(Localize.WarringCostContent))
+                    .ShowAsync();
+
+                return;
+            }
+
             if (_cost.IsNew)
             {
                 _cost.IsNew = false;
@@ -64,6 +80,9 @@ namespace piggy_bank_uwp.View.Costs
 
         private void OnTagSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (!_isInit)
+                return;
+
             var selectedCategory = e.AddedItems[0] as CategoryViewModel;
 
             _cost.ChangedCategory(selectedCategory?.Id);
@@ -71,7 +90,8 @@ namespace piggy_bank_uwp.View.Costs
 
         private async void OnDeleteClick(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await MainViewModel.Current.DeleteCost(_cost);
+            if(!_cost.IsNew)
+                await MainViewModel.Current.DeleteCost(_cost);
 
             if (Frame.CanGoBack)
             {
@@ -89,7 +109,7 @@ namespace piggy_bank_uwp.View.Costs
 
         private void OnCostTextChanged(object sender, TextChangedEventArgs e)
         {
-            if (String.IsNullOrEmpty(CostTextBox.Text))
+           if (String.IsNullOrEmpty(CostTextBox.Text))
                 return;
 
             int value;

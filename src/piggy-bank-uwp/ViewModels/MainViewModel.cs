@@ -93,12 +93,12 @@ namespace piggy_bank_uwp.ViewModel
             List<CategoryModel> categories = categories = DbWorker.GetCategories();
 
             Categories.Clear();
-
             foreach (var category in categories)
             {
                 Categories.Add(new CategoryViewModel(category));
             }
 
+            Costs.Clear();
             foreach (var cost in DbWorker.GetCosts().Take(TOTAL_COUNT_COSTS))
             {
                 Costs.Add(new CostViewModel(cost));
@@ -143,6 +143,15 @@ namespace piggy_bank_uwp.ViewModel
             return Task.Factory.StartNew(() =>
             {
                 updateCost.Update();
+
+                if (updateCost.HavePrevCost)
+                {
+                    //TODO: o(n) - bad
+                    Balance.ChanngeBalance(DbWorker.GetCost(updateCost.Id).Cost);
+                    Balance.AddCost(updateCost.Cost);
+                    updateCost.HavePrevCost = false;
+                }
+
                 DbWorker.UpdateCost(updateCost.Model);
             });
         }
@@ -216,7 +225,7 @@ namespace piggy_bank_uwp.ViewModel
 
         public DbWorker DbWorker { get; }
 
-        public bool CanShowToast => SettingsWorker.Current.GetNotificatinsSetting() && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER+1)> DAY_REMINDER;
+        public bool CanShowToast => SettingsWorker.Current.GetNotificatinsSetting() && ((DateTime.UtcNow - SettingsWorker.Current.GetLastTimeShow())?.Days ?? DAY_REMINDER - 1) > DAY_REMINDER;
 
         public bool HaveCategories => Categories.GetEnumerator().MoveNext();
 

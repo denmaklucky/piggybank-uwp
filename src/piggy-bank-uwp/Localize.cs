@@ -13,6 +13,8 @@ namespace piggy_bank_uwp
         public const string HeaderReminderNotifi = "HeaderReminderNotifi";
         public const string DescriptionRemiderNotifi = "DescriptionRemiderNotifi";
         public const string WarringCategoriesContent = "WarringCategoriesContent";
+        public const string WarringCostContent = "WarringCostContent";
+        public const string WarringCategoryContent = "WarringCategoryContent";
         public const string Ok = "Ok";
 
         public static string GetTranslateByKey(string key)

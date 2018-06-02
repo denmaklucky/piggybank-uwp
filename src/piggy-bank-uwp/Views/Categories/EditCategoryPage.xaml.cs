@@ -1,4 +1,5 @@
 ﻿using piggy_bank_uwp.ExtensionMethods;
+using piggy_bank_uwp.Services;
 using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModel.Tag;
 using System.Linq;
@@ -7,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.UI.Xaml.Shapes;
+using System;
 
 namespace piggy_bank_uwp.Views.Categories
 {
@@ -32,7 +34,8 @@ namespace piggy_bank_uwp.Views.Categories
 
         private void OnDeleteClick(object sender, RoutedEventArgs e)
         {
-            MainViewModel.Current.DeleteCategory(_category);
+            if(!_category.IsNew)
+                MainViewModel.Current.DeleteCategory(_category);
 
             if (Frame.CanGoBack)
             {
@@ -40,15 +43,24 @@ namespace piggy_bank_uwp.Views.Categories
             }
         }
 
-        private void OnSaveClick(object sender, RoutedEventArgs e)
+        private async void OnSaveClick(object sender, RoutedEventArgs e)
         {
+            if(ColorsGridView.SelectedItem == null)
+            {
+                await DialogService
+                    .GetInformationDialog(Localize.GetTranslateByKey(Localize.WarringCategoryContent))
+                    .ShowAsync();
+
+                return;
+            }
+
             if (_category.IsNew)
             {
-                MainViewModel.Current.AddCategory(_category);
+                await MainViewModel.Current.AddCategory(_category);
             }
             else
             {
-                MainViewModel.Current.UpdateCategory(_category);
+               await MainViewModel.Current.UpdateCategory(_category);
             }
 
             if (Frame.CanGoBack)

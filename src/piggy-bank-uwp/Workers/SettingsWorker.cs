@@ -57,9 +57,16 @@ namespace piggy_bank_uwp.Workers
             return GetValue(FolderId) as string;
         }
 
-        public void SaveLastTimeShow(DateTime utcNow)
+        public void SaveLastTimeShow(DateTime? utcNow)
         {
-            SaveValue(LastTimeShow, DateUtility.GetTimeUtc(utcNow));
+            if(utcNow != null)
+            {
+                SaveValue(LastTimeShow, DateUtility.GetUTCMillisecondsFromDateTime(utcNow.Value));
+            }
+            else
+            {
+                SaveValue(LastTimeShow, null);
+            }
         }
 
         public DateTime? GetLastTimeShow()
@@ -71,7 +78,7 @@ namespace piggy_bank_uwp.Workers
 
             long utcTime = (long)lastTimeShow;
 
-            return DateUtility.GetDateTime(utcTime).Date;
+            return DateUtility.GetUniversalFromUTCMilliseconds(utcTime);
         }
 
         public void SaveNotificationSetting(bool isOn)
