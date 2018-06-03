@@ -37,7 +37,7 @@
                     <Ellipse Grid.Column="0" Fill="{Binding Path=Category.Color, Mode=OneWay}" Height="28" Width="28" VerticalAlignment="Center" HorizontalAlignment="Center"/>
 
                     <StackPanel Grid.Column="2">
-                        <TextBlock Text="{Binding Path=Comment}" FontSize="12" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom"/>
+                        <TextBlock Text="{Binding Path=Comment}" FontSize="12" MaxHeight="40" TextTrimming="CharacterEllipsis" VerticalAlignment="Bottom"/>
                         <TextBlock Text="{Binding Path=Category.Title}" FontSize="18" TextTrimming="CharacterEllipsis" VerticalAlignment="Center"/>
                     </StackPanel>
                 </Grid>

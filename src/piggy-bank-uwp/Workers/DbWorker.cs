@@ -95,7 +95,9 @@ namespace piggy_bank_uwp.Workers
 
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                costs = new List<CostModel>(dbContext.Costs.Skip(count).Take(COSTS_COUNT));
+                var allCost = new List<CostModel>(dbContext.Costs);
+                allCost.Reverse();
+                costs = new List<CostModel>(allCost.Skip(count).Take(COSTS_COUNT));
             }
 
             return costs;

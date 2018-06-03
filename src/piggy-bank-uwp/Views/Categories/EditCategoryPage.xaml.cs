@@ -28,7 +28,11 @@ namespace piggy_bank_uwp.Views.Categories
 
             if (!_category.IsNew)
             {
-                ColorsGridView.SelectedItem =  ColorsGridView.Items.FirstOrDefault(i => (i as Ellipse).Tag.ToString().ToLower() == _category.Color);
+                foreach (Ellipse item in ColorsGridView.Items)
+                {
+                    if (item.Tag.ToString() == _category.Color)
+                        ColorsGridView.SelectedItem = item;
+                }
             }
         }
 
@@ -56,6 +60,7 @@ namespace piggy_bank_uwp.Views.Categories
 
             if (_category.IsNew)
             {
+                _category.IsNew = false;
                 await MainViewModel.Current.AddCategory(_category);
             }
             else
