@@ -23,7 +23,7 @@
         <StackPanel Grid.Row="1" Margin="0 15">
             <TextBlock x:Uid="AboutTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
             <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
-                <Image Source="ms-appx:///Assets/Square44x44Logo.scale-100.png" 
+                <Image Source="ms-appx:///Assets/Square44x44Logo.png" 
                                Height="54" Width="54"/>
                 <TextBlock x:Name="VersionTextBlock" VerticalAlignment="Center" Margin="10 0 0 0"/>
             </StackPanel>
