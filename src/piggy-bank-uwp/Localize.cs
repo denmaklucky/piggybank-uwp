@@ -16,6 +16,8 @@ namespace piggy_bank_uwp
         public const string WarringCostContent = "WarringCostContent";
         public const string WarringCategoryContent = "WarringCategoryContent";
         public const string Ok = "Ok";
+        public const string PurchaseStatusOk = "PurchaseStatusOk";
+        public const string PurchaseStatusBad = "PurchaseStatusBad";
 
         public static string GetTranslateByKey(string key)
         {

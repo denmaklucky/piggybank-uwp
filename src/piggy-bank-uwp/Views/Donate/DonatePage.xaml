@@ -10,13 +10,16 @@
           HorizontalAlignment="Left">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock x:Uid="DescriptionDonateTextBlock" Grid.Row="0" TextWrapping="WrapWholeWords"/>
 
-        <ListView x:Name="ListViewDonate" Grid.Row="1" Width="500"
-                  ItemTemplate="{StaticResource ListViewItemDonate}" SelectionMode="Single"
-                  HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="OnItemClick"/>
+        <ProgressBar x:Name="InitProgressBar" Grid.Row="1" IsIndeterminate="True" Visibility="Collapsed"/>
+
+        <ListView x:Name="ListViewDonate" Grid.Row="2" Width="500"
+                  ItemTemplate="{StaticResource ListViewItemDonate}" ItemContainerStyle="{StaticResource ListViewStretch}"
+                  SelectionMode="Single" HorizontalContentAlignment="Center" IsItemClickEnabled="True" ItemClick="OnItemClick"/>
     </Grid>
 </Page>

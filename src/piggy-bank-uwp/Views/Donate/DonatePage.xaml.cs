@@ -1,6 +1,8 @@
-﻿using piggy_bank_uwp.ViewModels.Donate;
+﻿using piggy_bank_uwp.Services;
+using piggy_bank_uwp.ViewModels.Donate;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using System;
 
 namespace piggy_bank_uwp.View.Donate
 {
@@ -13,9 +15,12 @@ namespace piggy_bank_uwp.View.Donate
             this.InitializeComponent();
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             _donate = e.Parameter as DonateViewModel;
+            InitProgressBar.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            await _donate.InitializationAsyn();
+            InitProgressBar.Visibility = Windows.UI.Xaml.Visibility.Collapsed;
             ListViewDonate.ItemsSource = _donate.Items;
         }
 
@@ -26,7 +31,10 @@ namespace piggy_bank_uwp.View.Donate
             if (selectedItem == null)
                 return;
 
-            await _donate.BuyItem(selectedItem);
+            string status = await _donate.BuyItem(selectedItem);
+
+            if(!String.IsNullOrEmpty(status))
+                await DialogService.GetPurchaseStatusDialog(status).ShowAsync();
         }
     }
 }

@@ -35,11 +35,11 @@
                                  Click="OnHyperlinkButtonClick"/>
             </StackPanel>
 
-            <TextBlock x:Uid="SpecialThanksTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
+            <!--<TextBlock x:Uid="SpecialThanksTextBlock" FontSize="25" FontWeight="Normal" Margin="0 0 0 10"/>
             <StackPanel>
                 <TextBlock x:Uid="DescriptionSpecailThanks" TextWrapping="WrapWholeWords"/>
                 <HyperlinkButton Content="Viktoria Makarenko" Tag="https://vk.com/id182187599" Click="OnHyperlinkButtonClick"/>
-            </StackPanel>
+            </StackPanel>-->
         </StackPanel>
 
     </Grid>
