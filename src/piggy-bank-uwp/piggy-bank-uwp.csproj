@@ -127,6 +127,7 @@
     <Compile Include="Services\TileService.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Utilities\DateUtility.cs" />
+    <Compile Include="Utilities\DonateUtility.cs" />
     <Compile Include="ViewModels\Balance\BalanceViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Cost\CostViewModel.cs" />

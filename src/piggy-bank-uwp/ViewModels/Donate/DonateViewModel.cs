@@ -1,56 +1,71 @@
-﻿using piggy_bank_uwp.Fabrics;
-using piggy_bank_uwp.ViewModels.Interface;
+﻿using piggy_bank_uwp.ViewModels.Interface;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.Services.Store;
 using System;
+using piggy_bank_uwp.Utilities;
 
 namespace piggy_bank_uwp.ViewModels.Donate
 {
     public class DonateViewModel : IBaseViewModel
     {
-        private StoreContext storeContext;
+        private StoreContext _storeContext;
+        private bool _isLoaded;
         public DonateViewModel()
         {
             Items = new List<DonateItemViewModel>();
-            storeContext = StoreContext.GetDefault();
+            _storeContext = StoreContext.GetDefault();
+        }
+
+        public async Task InitializationAsyn()
+        {
+            if (_isLoaded)
+                return;
+
+            string[] productKinds = { "UnmanagedConsumable" };
+            var queryResult = await _storeContext.GetAssociatedStoreProductsAsync(productKinds);
+
+            foreach (KeyValuePair<string, StoreProduct> item in queryResult.Products)
+            {
+                DonateItemViewModel donateItem = new DonateItemViewModel
+                {
+                    Title = DonateUtility.GetValidurchaseName(item.Value.InAppOfferToken),
+                    StoreId = item.Key,
+                    Price = item.Value.Price.FormattedPrice
+                };
+                Items.Add(donateItem);
+            }
+
+            _isLoaded = true;
         }
 
         public void Initialization()
         {
-            foreach (var item in DonateFactory.GetItems())
-            {
-                Items.Add(item);
-            }
         }
 
         public void Finalization()
         {
         }
 
-        public async Task BuyItem(DonateItemViewModel item)
+        public async Task<string> BuyItem(DonateItemViewModel item)
         {
             try
             {
-                var result = await storeContext.RequestPurchaseAsync(item?.StoreId);
-
+                var result = await _storeContext.RequestPurchaseAsync(item?.StoreId);
                 switch (result.Status)
                 {
                     case StorePurchaseStatus.Succeeded:
-                        break;
-                    case StorePurchaseStatus.AlreadyPurchased:
-                        break;
+                        return Localize.GetTranslateByKey(Localize.PurchaseStatusOk);
                     case StorePurchaseStatus.NotPurchased:
-                        break;
-                    case StorePurchaseStatus.NetworkError:
-                        break;
-                    case StorePurchaseStatus.ServerError:
-                        break;
+                        return String.Empty;
                     default:
-                        break;
+                        return Localize.GetTranslateByKey(Localize.PurchaseStatusBad);
                 }
             }
-            catch { }
+            catch
+            {
+                return Localize.GetTranslateByKey(Localize.PurchaseStatusBad);
+            }
         }
 
         public List<DonateItemViewModel> Items { get; }

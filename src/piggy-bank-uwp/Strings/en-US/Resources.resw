@@ -273,4 +273,10 @@
   <data name="WarringCostContent" xml:space="preserve">
     <value>First select a category</value>
   </data>
+  <data name="PurchaseStatusBad" xml:space="preserve">
+    <value>Oops! Something went wrong!</value>
+  </data>
+  <data name="PurchaseStatusOk" xml:space="preserve">
+    <value>Thank you!</value>
+  </data>
 </root>
