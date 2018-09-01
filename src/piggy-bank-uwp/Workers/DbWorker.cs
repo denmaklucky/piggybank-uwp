@@ -1,4 +1,6 @@
-﻿using piggy_bank_uwp.Models;
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using piggy_bank_uwp.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +35,6 @@ namespace piggy_bank_uwp.Workers
         {
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                if (dbContext.Balance.Count() >= 1)
-                {
-                    dbContext.Balance.RemoveRange(dbContext.Balance);
-                    dbContext.SaveChanges();
-                }
-
                 dbContext.Balance.Add(balance);
                 dbContext.SaveChanges();
             }
@@ -53,11 +49,20 @@ namespace piggy_bank_uwp.Workers
             }
         }
 
-        public void RemoveCategory(CategoryModel tag)
+        public void RemoveCategory(CategoryModel category)
         {
             using (Context.AppContext dbContext = new Context.AppContext())
             {
-                dbContext.Categories.Remove(tag);
+                dbContext.Categories.Remove(category);
+                dbContext.SaveChanges();
+            }
+        }
+
+        public void RemoveBalance(BalanceModel balance)
+        {
+            using (Context.AppContext dbContext = new Context.AppContext())
+            {
+                dbContext.Balance.Remove(balance);
                 dbContext.SaveChanges();
             }
         }
@@ -73,10 +78,26 @@ namespace piggy_bank_uwp.Workers
         public List<CostModel> GetCosts()
         {
             List<CostModel> costs = null;
-
-            using (Context.AppContext dbContext = new Context.AppContext())
+            Context.AppContext dbContext = new Context.AppContext();
+            try
             {
-                costs = new List<CostModel>(dbContext.Costs);
+                costs = dbContext.Costs.ToList();
+            }
+            catch (SqliteException ex)
+            {
+                dbContext.Database.ExecuteSqlCommand("alter table Costs add BalanceId text null;");
+                dbContext.Database.ExecuteSqlCommand("alter table Balance add Name text null;");
+                dbContext.Database.ExecuteSqlCommand("update Balance set Name = 'My first account'");
+
+                var firstBalance = dbContext.Balance.First();
+                 dbContext.Database.ExecuteSqlCommand($"update Costs set BalanceId={firstBalance.Id};");
+
+                costs = dbContext.Costs.ToList();
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
             }
 
             costs.Reverse();
@@ -127,16 +148,48 @@ namespace piggy_bank_uwp.Workers
             return categories;
         }
 
-        public BalanceModel GetBalance()
+        public BalanceModel GetFirstBalance()
         {
             BalanceModel balance = null;
-
-            using (Context.AppContext dbContext = new Context.AppContext())
+            Context.AppContext dbContext = new Context.AppContext();
+            try
             {
                 balance = dbContext.Balance.FirstOrDefault();
             }
+            catch (SqliteException ex)
+            {
+                dbContext.Database.ExecuteSqlCommand("alter table Balance add Name text null;");
+                balance = dbContext.Balance.FirstOrDefault();
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
 
             return balance;
+        }
+
+        public List<BalanceModel> GetBalances()
+        {
+            List<BalanceModel> balances = null;
+            Context.AppContext dbContext = new Context.AppContext();
+            try
+            {
+                balances = dbContext.Balance.ToList();
+            }
+            catch (SqliteException ex)
+            {
+                dbContext.Database.ExecuteSqlCommand("alter table Balance add Name text null;");
+                dbContext.Database.ExecuteSqlCommand("update Balance set Name = 'My first account'");
+            }
+            finally
+            {
+                if (dbContext != null)
+                    dbContext.Dispose();
+            }
+
+            return balances;
         }
 
         internal void UpdateCost(CostModel updateCost)

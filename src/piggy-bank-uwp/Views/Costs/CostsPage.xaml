@@ -27,9 +27,6 @@
         <CommandBar Grid.Row="1">
             <AppBarButton x:Uid="RefreshCostsAppBarButton" Icon="Refresh" AccessKey="R" Click="OnRefreshClick"/>
             <AppBarButton x:Name="AddCostAppBarButton" x:Uid="AddCostAppBarButton" Icon="Add" Click="OnAddedCostClick"/>
-            <CommandBar.SecondaryCommands>
-                <AppBarButton x:Uid="ChangeBalanceAppBarButton" Click="OnNavigateEditBalance"/>
-            </CommandBar.SecondaryCommands>
         </CommandBar>
     </Grid>
 </Page>

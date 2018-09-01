@@ -128,6 +128,7 @@
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Utilities\DateUtility.cs" />
     <Compile Include="Utilities\DonateUtility.cs" />
+    <Compile Include="ViewModels\Balance\AccountsViewModel.cs" />
     <Compile Include="ViewModels\Balance\BalanceViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\Cost\CostViewModel.cs" />
@@ -141,6 +142,9 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryViewModel.cs" />
     <Compile Include="ViewModels\Services\OneDriveViewModel.cs" />
+    <Compile Include="Views\Balance\BalancesPage.xaml.cs">
+      <DependentUpon>BalancesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Balance\EditBalancePage.xaml.cs">
       <DependentUpon>EditBalancePage.xaml</DependentUpon>
     </Compile>
@@ -269,6 +273,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\Balance\BalancesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Balance\EditBalancePage.xaml">
       <Generator>MSBuild:Compile</Generator>

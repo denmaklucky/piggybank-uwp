@@ -57,11 +57,6 @@ namespace piggy_bank_uwp.Views.Costs
             Frame.Navigate(typeof(EditCostPage), new CostViewModel());
         }
 
-        private void OnNavigateEditBalance(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(EditBalancePage), MainViewModel.Current.Balance);
-        }
-
         private void OnRefreshClick(object sender, RoutedEventArgs e)
         {
             RefreshContainer.RequestRefresh();

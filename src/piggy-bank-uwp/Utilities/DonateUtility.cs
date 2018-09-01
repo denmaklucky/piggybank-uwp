@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace piggy_bank_uwp.Utilities
+﻿namespace piggy_bank_uwp.Utilities
 {
     public static class DonateUtility
     {
@@ -16,7 +10,7 @@ namespace piggy_bank_uwp.Utilities
                     return "Not bad!";
                 case "piggy_two":
                     return "Good!";
-                case "piggy_tree":
+                case "piggy_three":
                     return "Very good!";
                 case "piggy_four":
                     return "Excellently!";

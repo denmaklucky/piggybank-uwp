@@ -87,4 +87,20 @@
         </Grid>
     </DataTemplate>
 
+    <DataTemplate x:Name="ListViewItemBalance">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding Path=Name}" FontFamily="18" TextTrimming="CharacterEllipsis"
+                       VerticalAlignment="Center" HorizontalAlignment="Left"/>
+
+            <TextBlock Grid.Column="1" Text="{Binding Path=CurrentBalance}" FontFamily="18"
+                       VerticalAlignment="Center" HorizontalAlignment="Right"/>
+
+        </Grid>
+    </DataTemplate>
+
 </ResourceDictionary>

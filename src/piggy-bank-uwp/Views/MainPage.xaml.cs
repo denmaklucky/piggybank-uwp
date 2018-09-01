@@ -11,6 +11,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using System;
 using Windows.UI.Xaml.Navigation;
+using piggy_bank_uwp.Views.Balance;
 
 namespace piggy_bank_uwp.View
 {
@@ -57,6 +58,10 @@ namespace piggy_bank_uwp.View
         {
             switch (navigationViewItem.Tag)
             {
+                case Constants.accounts:
+                    ContentFrame.Navigate(typeof(BalancesPage));
+                    NavView.Header = Localize.GetTranslateByKey(Localize.Accounts);
+                    break;
                 case Constants.costs:
                     ContentFrame.Navigate(typeof(CostsPage));
                     NavView.Header = Localize.GetTranslateByKey(Localize.Costs);

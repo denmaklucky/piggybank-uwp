@@ -5,7 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Controls ="using:piggy_bank_uwp.Controls"
-    xmlns:ViewModels="using:piggy_bank_uwp.ViewModel.Tag"
+    xmlns:Category="using:piggy_bank_uwp.ViewModel.Tag"
+    xmlns:Balance="using:piggy_bank_uwp.ViewModels.Balance"
     mc:Ignorable="d">
     
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -20,11 +21,28 @@
                 <ComboBox x:Name="CategoriesComboBox" x:Uid="CategoriesComboBox" Margin="15" 
                           HorizontalAlignment="Stretch" SelectionChanged="OnTagSelectionChanged">
                     <ComboBox.ItemTemplate>
-                        <DataTemplate x:DataType="ViewModels:CategoryViewModel">
+                        <DataTemplate x:DataType="Category:CategoryViewModel">
                             <StackPanel Orientation="Horizontal">
                                 <Ellipse Height="18" Width="18" Fill="{x:Bind Color}"/>
                                 <TextBlock Text="{x:Bind Title}" FontSize="18" Margin="10 0 0 0"/>
                             </StackPanel>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <!--Balances-->
+                <ComboBox x:Name="BalancesComboBox" x:Uid="BalancesComboBox" Margin="15"
+                           HorizontalAlignment="Stretch" SelectionChanged="OnBalanceSelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="Balance:BalanceViewModel">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.8*"/>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{x:Bind Name}" FontSize="18"/>
+                                <TextBlock Grid.Column="2" Text="{x:Bind CurrentBalance}" FontSize="18"/>
+                            </Grid>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
