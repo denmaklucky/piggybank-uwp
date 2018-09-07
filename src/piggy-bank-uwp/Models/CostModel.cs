@@ -12,6 +12,8 @@ namespace piggy_bank_uwp.Models
 
         public string CategoryId { get; set; }
 
+        public string BalanceId { get; set; }
+
         public string Id { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace piggy_bank_uwp.ViewModel
             Costs = new ObservableCollection<CostViewModel>();
             Categories = new ObservableCollection<CategoryViewModel>();
             DbWorker = DbWorker.Current;
-            Balance = new BalanceViewModel();
+            Accounts = new AccountsViewModel();
             Diagram = new DiagramViewModel();
             OneDrive = new OneDriveViewModel();
             Donate = new DonateViewModel();
@@ -63,14 +63,13 @@ namespace piggy_bank_uwp.ViewModel
                 Costs.Add(new CostViewModel(cost));
             }
 
-            Balance.Initialization();
+            Accounts.Initialization();
 
             IsInit = true;
         }
 
         public void Finit()
         {
-            Balance.Finalization();
         }
 
         public void ShowToast()
@@ -89,7 +88,7 @@ namespace piggy_bank_uwp.ViewModel
             if (!OneDrive.IsAuthenticated)
                 return;
 
-            List<CategoryModel> categories = categories = DbWorker.GetCategories();
+            List<CategoryModel> categories = DbWorker.GetCategories();
 
             Categories.Clear();
             foreach (var category in categories)
@@ -103,7 +102,7 @@ namespace piggy_bank_uwp.ViewModel
                 Costs.Add(new CostViewModel(cost));
             }
 
-            Balance.Initialization();
+            Accounts.UpdateData();
         }
 
         internal async Task FetchCosts()
@@ -130,10 +129,17 @@ namespace piggy_bank_uwp.ViewModel
                     Costs.Insert(0, newCost);
                 });
 
-                Balance.AddCost(newCost.Cost);
+                BalanceViewModel currentBalance = Accounts.Balances.FirstOrDefault(b => b.Id == newCost.BalanceId);
+
+                if (currentBalance != null)
+                {
+                    currentBalance.AddCost(newCost.Cost);
+                    DbWorker.UpdateBalance(currentBalance.Model);
+                }
+
                 DbWorker.AddCost(newCost.Model);
 
-                RaisePropertyChanged(nameof(Balance));
+                Accounts.RaiseBalance();
             });
         }
 
@@ -146,8 +152,14 @@ namespace piggy_bank_uwp.ViewModel
                 if (updateCost.HavePrevCost)
                 {
                     //TODO: o(n) - bad
-                    Balance.ChanngeBalance(DbWorker.GetCost(updateCost.Id).Cost);
-                    Balance.AddCost(updateCost.Cost);
+                    BalanceViewModel currentBalance = Accounts.Balances.FirstOrDefault(b=> b.Id == updateCost.BalanceId);
+
+                    if(currentBalance != null)
+                    {
+                        currentBalance.ChanngeBalance(DbWorker.GetCost(updateCost.Id).Cost);
+                        currentBalance.AddCost(updateCost.Cost);
+                        DbWorker.UpdateBalance(currentBalance.Model);
+                    }
                     updateCost.HavePrevCost = false;
                 }
 
@@ -208,13 +220,54 @@ namespace piggy_bank_uwp.ViewModel
 
         #endregion
 
+        #region Balances
+
+        internal Task AddBalance(BalanceViewModel newBalance)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                App.RunUIAsync(() =>
+                {
+                    Accounts.Balances.Add(newBalance);
+                });
+
+                DbWorker.AddBalance(newBalance.Model);
+                Accounts.RaiseBalance();
+            });
+        }
+
+        internal Task UpdateBalance(BalanceViewModel updateBalance)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                updateBalance.Update();
+                DbWorker.UpdateBalance(updateBalance.Model);
+            });
+        }
+
+        internal Task DeleteBalance(BalanceViewModel balance)
+        {
+            return Task.Factory.StartNew(() =>
+            {
+                App.RunUIAsync(() =>
+                {
+                    Accounts.Balances.Remove(balance);
+                });
+
+                DbWorker.RemoveBalance(balance.Model);
+                Accounts.RaiseBalance();
+            });
+        }
+
+        #endregion
+
         public bool IsInit { get; private set; }
 
         public ObservableCollection<CostViewModel> Costs { get; }
 
         public ObservableCollection<CategoryViewModel> Categories { get; }
 
-        public BalanceViewModel Balance { get; }
+        public AccountsViewModel Accounts { get; }
 
         public OneDriveViewModel OneDrive { get; }
 

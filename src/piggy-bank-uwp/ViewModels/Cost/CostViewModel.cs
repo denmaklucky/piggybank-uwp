@@ -36,6 +36,14 @@ namespace piggy_bank_uwp.ViewModel.Cost
             Model.CategoryId = categoryId;
         }
 
+        public void ChangedBalance(string balanceId)
+        {
+            if (String.IsNullOrEmpty(balanceId))
+                return;
+
+            Model.BalanceId = balanceId;
+        }
+
         public bool IsNew { get; set; }
 
         public bool HavePrevCost { get; set; }
@@ -102,7 +110,7 @@ namespace piggy_bank_uwp.ViewModel.Cost
         {
             get
             {
-                return Model.Cost + MainViewModel.Current.Balance.Currency;
+                return Model.Cost + MainViewModel.Current.Accounts.Balances.FirstOrDefault(b => b.Id == BalanceId)?.Currency;
             }
         }
 
@@ -119,6 +127,14 @@ namespace piggy_bank_uwp.ViewModel.Cost
             get
             {
                 return Model.CategoryId;
+            }
+        }
+
+        public string BalanceId
+        {
+            get
+            {
+                return Model.BalanceId;
             }
         }
 

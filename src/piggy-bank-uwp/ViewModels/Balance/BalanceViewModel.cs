@@ -2,52 +2,59 @@
 using piggy_bank_uwp.Utilities;
 using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModels.Interface;
-using piggy_bank_uwp.Workers;
+using System;
 using System.Globalization;
 
 namespace piggy_bank_uwp.ViewModels.Balance
 {
-    public class BalanceViewModel : BaseViewModel, IBaseViewModel
+    public class BalanceViewModel : BaseViewModel, IUpdateable
     {
-        public void Initialization()
+        public BalanceViewModel()
         {
-            BalanceModel balance = DbWorker.Current.GetBalance();
-
-            if (balance == null)
+            Model = new BalanceModel
             {
-                Model = new BalanceModel
-                {
-                    Balance = 0,
-                    Currency = NumberFormatInfo.CurrentInfo.CurrencySymbol,
-                    Id = SystemUtility.GetGuid()
-                };
+                Id = SystemUtility.GetGuid(),
+                Currency = NumberFormatInfo.CurrentInfo.CurrencySymbol
+            };
 
-                DbWorker.Current.AddBalance(Model);
-            }
-            else
-            {
-                Model = balance;
-            }
+            IsNew = true;
         }
 
-        public void Finalization()
+        internal BalanceViewModel(BalanceModel model)
         {
-            DbWorker.Current.UpdateBalance(Model);
+            Model = model;
+            IsNew = false;
+        }
+
+        public void Update()
+        {
+            RaisePropertiesChanged();
         }
 
         internal void ChanngeBalance(int delta)
         {
             Balance += delta;
-
-            Finalization();
             RaisePropertyChanged(nameof(CurrentBalance));
         }
 
         internal void AddCost(int cost)
         {
             Balance -= cost;
+        }
 
-            Finalization();
+        public string Name
+        {
+            get
+            {
+                return Model.Name;
+            }
+            set
+            {
+                if (Model.Name != value)
+                {
+                    Model.Name = value;
+                }
+            }
         }
 
         public int Balance
@@ -73,12 +80,14 @@ namespace piggy_bank_uwp.ViewModels.Balance
             }
             set
             {
-                if(Model.Comment != value)
+                if (Model.Comment != value)
                 {
                     Model.Comment = value;
                 }
             }
         }
+
+        public bool IsNew { get; set; }
 
         public string CurrentBalance
         {
@@ -96,7 +105,14 @@ namespace piggy_bank_uwp.ViewModels.Balance
             }
         }
 
-        internal BalanceModel Model { get; private set; }
+        public string Id
+        {
+            get
+            {
+                return Model.Id;
+            }
+        }
 
+        internal BalanceModel Model { get; private set; }
     }
 }

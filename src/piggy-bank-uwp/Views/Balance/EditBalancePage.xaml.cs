@@ -30,9 +30,30 @@ namespace piggy_bank_uwp.View.Balance
 
                 if (canChange)
                 {
-                    _balance.ChanngeBalance(Int32.Parse(ChangeBalanceTextBox.Text));
+                    _balance.ChanngeBalance(value);
                 }
             }
+
+            if (_balance.IsNew)
+            {
+                _balance.IsNew = false;
+                MainViewModel.Current.AddBalance(_balance);
+            }
+            else
+            {
+                MainViewModel.Current.UpdateBalance(_balance);
+            }
+
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
+        }
+
+        private void OnDeleteClick(object sender, RoutedEventArgs e)
+        {
+            if (!_balance.IsNew)
+                MainViewModel.Current.DeleteBalance(_balance);
 
             if (Frame.CanGoBack)
             {
