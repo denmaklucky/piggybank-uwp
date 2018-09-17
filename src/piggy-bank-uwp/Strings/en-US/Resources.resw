@@ -294,4 +294,7 @@
   <data name="WarringBalanceCostContent" xml:space="preserve">
     <value>First select a account</value>
   </data>
+  <data name="AddBalanceAppBarButton.Label" xml:space="preserve">
+    <value>Add account</value>
+  </data>
 </root>
