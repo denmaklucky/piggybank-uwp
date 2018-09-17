@@ -302,4 +302,7 @@
   <data name="WarringBalanceCostContent" xml:space="preserve">
     <value>Сначало выберете счет</value>
   </data>
+  <data name="AddBalanceAppBarButton.Label" xml:space="preserve">
+    <value>Добавить счёт</value>
+  </data>
 </root>

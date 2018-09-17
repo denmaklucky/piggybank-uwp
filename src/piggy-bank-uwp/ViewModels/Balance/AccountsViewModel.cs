@@ -3,6 +3,7 @@ using piggy_bank_uwp.ViewModels.Interface;
 using piggy_bank_uwp.Workers;
 using System;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 
 namespace piggy_bank_uwp.ViewModels.Balance
@@ -10,11 +11,13 @@ namespace piggy_bank_uwp.ViewModels.Balance
     public class AccountsViewModel : BaseViewModel, IBaseViewModel
     {
         private DbWorker _dbWorker;
+        private string _currency;
 
         public AccountsViewModel()
         {
             _dbWorker = DbWorker.Current;
             Balances = new ObservableCollection<BalanceViewModel>();
+            _currency = NumberFormatInfo.CurrentInfo.CurrencySymbol;
         }
 
         public void Initialization()
@@ -50,9 +53,8 @@ namespace piggy_bank_uwp.ViewModels.Balance
             get
             {
                 int totalBalance = Balances.Sum(b => b.Balance);
-                string currency = Balances[0].Currency;
 
-                return $"{totalBalance} {currency}";
+                return $"{totalBalance} {_currency}";
             }
         }
 
