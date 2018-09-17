@@ -4,6 +4,7 @@ namespace piggy_bank_uwp
 {
     public static class Localize
     {
+        public const string Accounts = "Accounts";
         public const string Costs = "Costs";
         public const string Categories = "Categories";
         public const string Diagrama = "Diagrama";
@@ -15,7 +16,10 @@ namespace piggy_bank_uwp
         public const string WarringCategoriesContent = "WarringCategoriesContent";
         public const string WarringCostContent = "WarringCostContent";
         public const string WarringCategoryContent = "WarringCategoryContent";
+        public const string WarringBalanceCostContent = "WarringBalanceCostContent";
         public const string Ok = "Ok";
+        public const string PurchaseStatusOk = "PurchaseStatusOk";
+        public const string PurchaseStatusBad = "PurchaseStatusBad";
 
         public static string GetTranslateByKey(string key)
         {

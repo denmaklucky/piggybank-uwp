@@ -2,6 +2,7 @@
 using piggy_bank_uwp.ViewModel;
 using piggy_bank_uwp.ViewModel.Cost;
 using piggy_bank_uwp.ViewModel.Tag;
+using piggy_bank_uwp.ViewModels.Balance;
 using System;
 using System.Linq;
 using Windows.UI.Xaml.Controls;
@@ -25,10 +26,12 @@ namespace piggy_bank_uwp.View.Costs
             _cost = e.Parameter as CostViewModel;
             DatePicker.Date = _cost.DateOffset;
             CategoriesComboBox.ItemsSource = MainViewModel.Current.Categories;
+            BalancesComboBox.ItemsSource = MainViewModel.Current.Accounts.Balances;
 
             if (!_cost.IsNew)
             {
                 CategoriesComboBox.SelectedItem = MainViewModel.Current.Categories.FirstOrDefault(t => t.Id == _cost.CategoryId);
+                BalancesComboBox.SelectedItem = MainViewModel.Current.Accounts.Balances.FirstOrDefault(b=>b.Id == _cost.BalanceId);
                 CostTextBox.Text = _cost.Cost.ToString();
             }
 
@@ -50,6 +53,14 @@ namespace piggy_bank_uwp.View.Costs
                     .GetInformationDialog(Localize.GetTranslateByKey(Localize.WarringCostContent))
                     .ShowAsync();
 
+                return;
+            }
+
+            if(BalancesComboBox.SelectedItem == null)
+            {
+                await DialogService
+                    .GetInformationDialog(Localize.GetTranslateByKey(Localize.WarringBalanceCostContent))
+                    .ShowAsync();
                 return;
             }
 
@@ -123,6 +134,16 @@ namespace piggy_bank_uwp.View.Costs
             {
                 _cost.Cost = 0;
             }
+        }
+
+        private void OnBalanceSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (!_isInit)
+                return;
+
+            var selectedBalance = e.AddedItems[0] as BalanceViewModel;
+
+            _cost.ChangedBalance(selectedBalance?.Id);
         }
     }
 }

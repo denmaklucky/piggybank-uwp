@@ -25,6 +25,12 @@
 
         <NavigationView.MenuItems>
 
+            <NavigationViewItem x:Uid="AccountsHeader" Tag="accounts">
+                <NavigationViewItem.Icon>
+                    <FontIcon Glyph="&#xF5ED;"/>
+                </NavigationViewItem.Icon>
+            </NavigationViewItem>
+
             <NavigationViewItem x:Uid="CostsHeader" Tag="costs">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xEADF;"/>
@@ -49,11 +55,11 @@
                 </NavigationViewItem.Icon>
             </NavigationViewItem>
 
-            <!--<NavigationViewItem Content="Donate" Tag="donate">
+            <NavigationViewItem Content="Donate" Tag="donate">
                 <NavigationViewItem.Icon>
                     <FontIcon Glyph="&#xE170;"/>
                 </NavigationViewItem.Icon>
-            </NavigationViewItem>-->
+            </NavigationViewItem>
         </NavigationView.MenuItems>
 
         <NavigationView.PaneFooter>

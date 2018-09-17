@@ -20,7 +20,11 @@
                     <TextBlock x:Uid="CurrentBalanceTextBlock" Style="{StaticResource HeaderTextBlock}"/>
                     <TextBlock Text="{x:Bind _balance.CurrentBalance, Mode=OneWay}" FontSize="18"/>
                 </StackPanel>
-                
+
+                <!--Name-->
+                <TextBox x:Uid="TitleTextBox" Text="{x:Bind _balance.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                         FontSize="18" MaxHeight="200" Margin="15"/>
+
                 <!--Change balance-->
                 <Controls:PatternTextBox x:Name="ChangeBalanceTextBox" x:Uid="ChangeBalanceTextBox" Pattern="-0123456789"
                                          FontSize="18" Margin="15"/>
@@ -33,6 +37,7 @@
 
         <CommandBar Grid.Row="1">
             <AppBarButton x:Uid="SaveAppBarButton" Icon="Save" Click="OnSaveClick"/>
+            <AppBarButton x:Uid="DeleteAppBarButton" Icon="Delete" Click="OnDeleteClick"/>
             <AppBarButton x:Uid="CancelAppBarButton" Icon="Cancel" Click="OnCloseClick"/>
         </CommandBar>
     </Grid>

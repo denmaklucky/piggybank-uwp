@@ -273,4 +273,25 @@
   <data name="WarringCostContent" xml:space="preserve">
     <value>First select a category</value>
   </data>
+  <data name="PurchaseStatusBad" xml:space="preserve">
+    <value>Oops! Something went wrong!</value>
+  </data>
+  <data name="PurchaseStatusOk" xml:space="preserve">
+    <value>Thank you!</value>
+  </data>
+  <data name="AccountsHeader.Content" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Accounts</value>
+  </data>
+  <data name="BalancesComboBox.Header" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="TotalBalanceNameTextBlock.Text" xml:space="preserve">
+    <value>Total balance</value>
+  </data>
+  <data name="WarringBalanceCostContent" xml:space="preserve">
+    <value>First select a account</value>
+  </data>
 </root>

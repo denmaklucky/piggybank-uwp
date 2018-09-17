@@ -281,4 +281,25 @@
   <data name="WarringCostContent" xml:space="preserve">
     <value>Сначало выберете категорию</value>
   </data>
+  <data name="PurchaseStatusBad" xml:space="preserve">
+    <value>Уппс! Что-то пошло не так! </value>
+  </data>
+  <data name="PurchaseStatusOk" xml:space="preserve">
+    <value>Спасибо большое!</value>
+  </data>
+  <data name="AccountsHeader.Content" xml:space="preserve">
+    <value>Счета</value>
+  </data>
+  <data name="Accounts" xml:space="preserve">
+    <value>Счета</value>
+  </data>
+  <data name="BalancesComboBox.Header" xml:space="preserve">
+    <value>Счет</value>
+  </data>
+  <data name="TotalBalanceNameTextBlock.Text" xml:space="preserve">
+    <value>Общий баланс</value>
+  </data>
+  <data name="WarringBalanceCostContent" xml:space="preserve">
+    <value>Сначало выберете счет</value>
+  </data>
 </root>
